@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="XCommon" Version="1.0.56" />
+    <PackageReference Include="XCommon.CodeGenerator" Version="1.0.56" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\eWorkshop.Entity\eWorkshop.Entity.csproj" />
+  </ItemGroup>
+
+</Project>
