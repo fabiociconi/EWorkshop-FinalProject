@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { SampleService } from "../../service";
+import { ISampleTableEntity } from "../../../entity";
 
 @Component({
     selector: "home-public",
@@ -7,10 +8,16 @@ import { SampleService } from "../../service";
     styleUrls: ["./home-public.scss"]
 })
 export class HomePublicComponent implements OnInit {
+
+	public Items: ISampleTableEntity[];
+
 	constructor(private sampleService: SampleService) { }
 
 	public ngOnInit(): void {
-		this.sampleService.Load()
-			.subscribe(c => console.log(c));
+
+		setTimeout(() => {
+			this.sampleService.Load()
+				.subscribe(res => this.Items = res);
+		}, 3000);
 	}
 }

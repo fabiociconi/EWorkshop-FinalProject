@@ -1,3 +1,13 @@
 <div class="home-public">
-    home public
+    home public... 
+	<div *ngIf="!Items">
+		Loading ...
+	</div>
+	<div *ngIf="Items">
+		Items: {{Items.length}}
+
+		<div *ngFor="let item of Items">
+			{{item.Value}}
+		</div>
+	</div>
 </div>

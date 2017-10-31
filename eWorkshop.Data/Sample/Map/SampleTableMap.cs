@@ -26,6 +26,9 @@ namespace eWorkshop.Data.Sample.Map
 
                 entity.Property(e => e.Value);
 
+                entity.Property(e => e.Valid)
+                    .IsRequired();
+
             });
         }
     }

@@ -4,11 +4,13 @@ import { RouterModule, Routes } from "@angular/router";
 
 import { LayoutPublicComponent } from "../public/layout";
 import { HomePublicComponent } from "../public/home";
+import { LoginComponent } from "../public/account";
 
 const APP_ROUTES: Routes = [
     {
         path: "", component: LayoutPublicComponent, children: [
-            { path: "", component: HomePublicComponent }
+			{ path: "", component: HomePublicComponent },
+			{ path: "account/login", component: LoginComponent }
         ]
     }
 ];

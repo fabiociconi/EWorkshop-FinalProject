@@ -13,5 +13,7 @@ namespace eWorkshop.Data.Sample
 
         public string Value { get; set; }
 
+        public bool Valid { get; set; }
+
     }
 }

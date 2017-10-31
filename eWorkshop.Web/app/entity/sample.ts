@@ -7,6 +7,7 @@ import { EntityAction } from "./enum";
 export interface ISampleTableEntity {
     IdSample: string; 
     Value: string; 
+    Valid: boolean; 
     Action: EntityAction; 
 }
 

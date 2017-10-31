@@ -14,6 +14,8 @@ namespace eWorkshop.Entity.Sample
 
         public string Value { get; set; }
 
+        public bool Valid { get; set; }
+
 
         [IgnoreDataMember]
         public override Guid Key

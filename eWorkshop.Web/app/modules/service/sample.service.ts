@@ -14,8 +14,8 @@ export class SampleService {
 	constructor(private httpUtilService: HttpUtilService, private http: HttpClient) {
 	}
 
-	public Load(): Observable<ISampleTableEntity> {
+	public Load(): Observable<ISampleTableEntity[]> {
 		let url = this.httpUtilService.BuidlUrl(this.ServiceUrl);
-		return this.http.get<ISampleTableEntity>(url);
+		return this.http.get<ISampleTableEntity[]>(url);
 	}
 }
