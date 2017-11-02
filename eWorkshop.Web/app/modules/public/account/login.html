@@ -1,5 +1,24 @@
 <div class="login">
-	login...
+	<div *ngIf="!Ready">
+		Loading
+	</div>
+	<div *ngIf="Ready">
+		<form [formGroup]="LoginForm" (ngSubmit)="Save(LoginForm.value)" layout="column">
 
-	<login-social></login-social>
+			<div layout="row" flex>
+				<mat-form-field flex>
+					<input matInput formControlName="Value" placeholder="Value">
+				</mat-form-field>
+			</div>
+
+			<div layout="row" flex>
+				<mat-checkbox formControlName="Valid">Remember me</mat-checkbox>
+			</div>
+
+			<div layout="row" flex content="end">
+				<button mat-raised-button color="warn" type="button" (click)="Delete()">Delete</button>
+				<button mat-raised-button color="primary" type="submit" [disabled]="!LoginForm.valid">Login</button>
+			</div>
+		</form>
+	</div>
 </div>

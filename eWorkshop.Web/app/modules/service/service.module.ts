@@ -4,6 +4,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { XCommonModule } from "xcommon";
 
 import { SampleService } from "./sample.service";
+import { DialogService } from "./confirm-dialog.service";
+import { ConfirmDialog } from "../shared/components/confirm-dialog.component";
 
 @NgModule({
 	imports: [
@@ -11,7 +13,12 @@ import { SampleService } from "./sample.service";
 		HttpClientModule,
 		XCommonModule
 	],
+
+	entryComponents: [
+		ConfirmDialog
+	],
 	providers: [
+		DialogService,
 		SampleService
 	]
 })

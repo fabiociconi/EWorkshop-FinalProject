@@ -5,9 +5,9 @@
 	</div>
 	<div *ngIf="Items">
 		Items: {{Items.length}}
-
+		<a routerLink="/account/login">New Item</a>
 		<div *ngFor="let item of Items">
-			{{item.Value}}
+			<a [routerLink]="['/account/login', item.IdSample]">{{item.Value}}</a>
 		</div>
 	</div>
 </div>

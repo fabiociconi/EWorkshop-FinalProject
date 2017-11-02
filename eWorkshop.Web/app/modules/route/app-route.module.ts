@@ -10,7 +10,8 @@ const APP_ROUTES: Routes = [
     {
         path: "", component: LayoutPublicComponent, children: [
 			{ path: "", component: HomePublicComponent },
-			{ path: "account/login", component: LoginComponent }
+			{ path: "account/login", component: LoginComponent },
+			{ path: "account/login/:id", component: LoginComponent }
         ]
     }
 ];

@@ -15,9 +15,7 @@ export class HomePublicComponent implements OnInit {
 
 	public ngOnInit(): void {
 
-		setTimeout(() => {
-			this.sampleService.Load()
-				.subscribe(res => this.Items = res);
-		}, 3000);
+		this.sampleService.Load()
+			.subscribe(res => this.Items = res);
 	}
 }
