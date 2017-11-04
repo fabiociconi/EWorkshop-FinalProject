@@ -1,1 +1,1 @@
-export * from "./layout-customer.component";
+﻿export * from "./layout-customer.component";

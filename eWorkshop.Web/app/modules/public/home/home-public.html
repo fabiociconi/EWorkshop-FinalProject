@@ -1,13 +1,8 @@
-<div class="home-public">
-    home public... 
-	<div *ngIf="!Items">
-		Loading ...
-	</div>
-	<div *ngIf="Items">
-		Items: {{Items.length}}
-		<a routerLink="/account/login">New Item</a>
-		<div *ngFor="let item of Items">
-			<a [routerLink]="['/account/login', item.IdSample]">{{item.Value}}</a>
+<div class="home-public" layout="column" flex>
+    <div layout="row">
+		<div layout="column" flex>
+			<img class="logo" src="/assets/sample-home.jpg" />
 		</div>
+		<sign-in layout="column" flex></sign-in>
 	</div>
 </div>

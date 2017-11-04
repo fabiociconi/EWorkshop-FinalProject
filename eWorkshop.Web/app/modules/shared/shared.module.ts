@@ -2,12 +2,12 @@ import { NgModule } from "@angular/core";
 import { ConfirmDialog } from "./components/confirm-dialog.component";
 
 @NgModule({
-    imports: [
+	imports: [
 	],
 	declarations: [
 		ConfirmDialog
 	],
-    exports: [
-    ]
+	exports: [
+	]
 })
 export class SharedModule { }

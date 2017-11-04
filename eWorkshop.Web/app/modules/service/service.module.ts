@@ -3,9 +3,9 @@ import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { XCommonModule } from "xcommon";
 
-import { SampleService } from "./sample.service";
 import { DialogService } from "./confirm-dialog.service";
 import { ConfirmDialog } from "../shared/components/confirm-dialog.component";
+import { AuthService } from "./auth.service";
 
 @NgModule({
 	imports: [
@@ -19,7 +19,7 @@ import { ConfirmDialog } from "../shared/components/confirm-dialog.component";
 	],
 	providers: [
 		DialogService,
-		SampleService
+		AuthService
 	]
 })
 export class ServiceModule { }

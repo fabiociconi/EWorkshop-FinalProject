@@ -1,13 +1,6 @@
-<div class="layout-public">
-	<!--<input type="checkbox" value="Show Details" [(ngModel)]="ShowDetail" />
-	<button [disabled]="!ShowDetail" (click)="AddNumber()">Add</button>
-	<ul *ngIf="ShowDetail">
-		<li *ngFor="let item of Items">
-			{{item}} <button (click)="Log(item)">Console</button>
-		</li>
-	</ul>-->
-	
-	<a routerLink="/">Layout</a>
-	<a routerLink="/account/login">Login</a>
-	<router-outlet></router-outlet>
+<div class="layout-public" layout="column" flex>
+	<div class="title">
+		eWorkshop the better place for your car
+	</div>
+	<router-outlet root></router-outlet>
 </div>

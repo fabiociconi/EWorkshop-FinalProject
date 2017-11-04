@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,11 +8,12 @@ using System.IO;
 using XCommon.Application;
 using XCommon.Extensions.Util;
 using XCommon.Patterns.Ioc;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace eWorkshop.Web
 {
 	public class Startup
-    {
+	{
 		public IConfigurationRoot Configuration { get; }
 
 		public IApplicationSettings ApplicationSettings { get; }
@@ -30,45 +31,64 @@ namespace eWorkshop.Web
 		}
 
 		public void ConfigureServices(IServiceCollection services)
-        {
+		{
 			services
 				.AddMvc()
 				.AddJsonOptions(options =>
 				{
 					options.SerializerSettings.ContractResolver = new DefaultContractResolver();
 				});
+
+			services.AddSwaggerGen(c =>
+			{
+				c.SwaggerDoc("v1", new Info { Title = "eWorkShop API", Version = "v1" });
+				c.AddSecurityDefinition("Bearer", new ApiKeyScheme()
+				{
+					Description = "JWT Authorization header using the Bearer scheme. Example: \"Bearer {token}\"",
+					Name = "Authorization",
+					In = "header",
+					Type = "apiKey"
+				});
+			});
 		}
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+		{
 			Kernel.Map<IApplicationSettings>().To(ApplicationSettings);
 			Business.Factory.Register.Do();
 
 			if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+			{
+				app.UseDeveloperExceptionPage();
+			}
 
-            app
-                .UseAuthentication()
-                .Use(async (context, next) =>
-                {
-                    await next();
+			app
+				.UseAuthentication()
+				.Use(async (context, next) =>
+				{
+					await next();
 
-                    if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
-                    {
-                        context.Request.Path = "/index.html";
-                        await next();
-                    }
-                })
-                .UseDefaultFiles(new DefaultFilesOptions { DefaultFileNames = new List<string> { "index.html" } })
-                .UseStaticFiles()
-                .UseMvc(routes =>
-                {
-                    routes.MapRoute(
-                    name: "api",
-                    template: "api/{controller}/{action}/{id?}");
-                });
-        }
-    }
+					if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
+					{
+						context.Request.Path = "/index.html";
+						await next();
+					}
+				})
+				.UseDefaultFiles(new DefaultFilesOptions { DefaultFileNames = new List<string> { "index.html" } })
+				.UseStaticFiles()
+				.UseMvc(routes =>
+				{
+					routes.MapRoute(
+					name: "api",
+					template: "api/{controller}/{action}/{id?}");
+				});
+
+			app
+				.UseSwagger()
+				.UseSwaggerUI(c =>
+				{
+					c.SwaggerEndpoint("/swagger/v1/swagger.json", "eWorkShop API");
+				});
+		}
+	}
 }

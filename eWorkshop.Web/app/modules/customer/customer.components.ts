@@ -1,5 +1,7 @@
-﻿import { LayoutCustomerComponent } from "./layout";
+import { LayoutCustomerComponent } from "./layout";
+import { HomeCustomerComponent } from "./home";
 
 export const CustomerComponents = [
-    LayoutCustomerComponent
+	LayoutCustomerComponent,
+	HomeCustomerComponent
 ];

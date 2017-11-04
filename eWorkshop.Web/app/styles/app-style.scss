@@ -14,5 +14,5 @@ body {
 router-outlet[root] + * {
     display: flex;
     flex-direction: column;
-    flex: 100 0 auto;
+    flex: 1 0 auto;
 }

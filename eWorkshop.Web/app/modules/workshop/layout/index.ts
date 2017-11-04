@@ -1,1 +1,1 @@
-export * from "./layout-workshop.component";
+﻿export * from "./layout-workshop.component";

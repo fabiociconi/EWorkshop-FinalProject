@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -25,9 +25,9 @@ namespace eWorkshop.CodeGenerator
 
 			var config = builder.Build();
 			ApplicationSettings = config.Get<ApplicationSettings>("eWorkshop");
-
+			var x = new List<string> { "-t" };
 			var gen = new Generator(GetConfig());
-			gen.Run(args);
+			gen.Run(x.ToArray());
 		}
 
 		static GeneratorConfig GetConfig()
@@ -51,7 +51,7 @@ namespace eWorkshop.CodeGenerator
 					Entity = new TypeScriptEntityConfig
 					{
 						Path = Path.Combine(basePath, web, "app", "entity"),
-						Assemblys = new List<Assembly> { typeof(Entity.Class1).Assembly }
+						Assemblys = new List<Assembly> { typeof(Entity.Enum.RoleType).Assembly }
 					}
 				},
 				DataBase = new DataBaseConfig
@@ -100,7 +100,23 @@ namespace eWorkshop.CodeGenerator
 		{
 			return new List<CSharpDataBaseRemap>
 			{
+				 new CSharpDataBaseRemap
+				{
+					Schema = "Register",
+					Table = "PeopleAddresses",
+					Column = "Type",
+					NameSpace = "eWorkshop.Entity.Enum",
+					Type = "AddressType"
+				},
 
+				new CSharpDataBaseRemap
+				{
+					Schema = "Register",
+					Table = "Users",
+					Column = "Role",
+					NameSpace = "eWorkshop.Entity.Enum",
+					Type = "RoleType"
+				},
 			};
 		}
 	}

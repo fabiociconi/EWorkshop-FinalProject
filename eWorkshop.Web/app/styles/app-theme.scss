@@ -7,3 +7,13 @@ $candy-app-warn: mat-palette($mat-red);
 $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
 
 @include angular-material-theme($candy-app-theme);
+
+/*Material*/
+.mat-input-container {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.mat-form-field {
+	width: 100%;
+}

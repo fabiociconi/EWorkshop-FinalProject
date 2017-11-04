@@ -6,16 +6,16 @@ import { PublicComponents } from "./public.components";
 import { MaterialModule, SharedModule } from "../shared";
 
 @NgModule({
-    imports: [
+	imports: [
 		BrowserModule,
 		FormsModule,
 		ReactiveFormsModule,
 		RouterModule,
-        MaterialModule,
-        SharedModule
-    ],
-    declarations: [
-        PublicComponents
-    ]
+		MaterialModule,
+		SharedModule
+	],
+	declarations: [
+		PublicComponents
+	]
 })
 export class PublicModule { }

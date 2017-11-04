@@ -1,12 +1,11 @@
 import { LayoutPublicComponent } from "./layout";
 import { HomePublicComponent } from "./home";
-import { LoginComponent, LoginSocialComponent, ResgisterComponent } from "./account";
+import { SignInComponent, SignUpComponent } from "./account";
 
 
 export const PublicComponents = [
-    LayoutPublicComponent,
-    HomePublicComponent,
-    LoginComponent,
-    LoginSocialComponent,
-    ResgisterComponent
+	LayoutPublicComponent,
+	HomePublicComponent,
+	SignInComponent,
+	SignUpComponent
 ];

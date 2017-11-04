@@ -2,8 +2,8 @@
 /* Don't write any code in this file, because it will be rewritten on the next generation. */
 /*******************************************************************************************/
 
-using eWorkshop.Data.Sample;
-using eWorkshop.Data.Sample.Map;
+using eWorkshop.Data.Register;
+using eWorkshop.Data.Register.Map;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
@@ -17,7 +17,15 @@ namespace eWorkshop.Data
 
         private IApplicationSettings AppSettings => Kernel.Resolve<IApplicationSettings>();
 
-        public DbSet<SampleTable> SampleTable { get; set; }
+        public DbSet<Customers> Customers { get; set; }
+
+        public DbSet<People> People { get; set; }
+
+        public DbSet<PeopleAddresses> PeopleAddresses { get; set; }
+
+        public DbSet<Users> Users { get; set; }
+
+        public DbSet<WorkShops> WorkShops { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
@@ -37,7 +45,11 @@ namespace eWorkshop.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            SampleTableMap.Map(modelBuilder, AppSettings.UnitTest);
+            CustomersMap.Map(modelBuilder, AppSettings.UnitTest);
+            PeopleMap.Map(modelBuilder, AppSettings.UnitTest);
+            PeopleAddressesMap.Map(modelBuilder, AppSettings.UnitTest);
+            UsersMap.Map(modelBuilder, AppSettings.UnitTest);
+            WorkShopsMap.Map(modelBuilder, AppSettings.UnitTest);
         }
     }
 }

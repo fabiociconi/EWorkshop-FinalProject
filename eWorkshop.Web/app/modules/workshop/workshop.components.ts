@@ -1,5 +1,7 @@
-﻿import { LayoutWorkshopComponent } from "./layout";
+import { LayoutWorkshopComponent } from "./layout";
+import { HomeWorkshopComponent } from "./home";
 
 export const WorkshopComponents = [
-    LayoutWorkshopComponent
+	LayoutWorkshopComponent,
+	HomeWorkshopComponent
 ];

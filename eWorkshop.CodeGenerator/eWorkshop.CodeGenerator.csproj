@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="XCommon" Version="1.0.56" />
-    <PackageReference Include="XCommon.CodeGenerator" Version="1.0.56" />
+    <PackageReference Include="XCommon" Version="1.0.57" />
+    <PackageReference Include="XCommon.CodeGenerator" Version="1.0.57" />
   </ItemGroup>
 
   <ItemGroup>

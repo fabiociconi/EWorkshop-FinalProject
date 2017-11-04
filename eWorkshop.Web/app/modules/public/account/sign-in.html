@@ -1,0 +1,26 @@
+<div class="sign-in" layout="column" flex>
+	<form *ngIf="Ready" [formGroup]="SignInForm" (ngSubmit)="SignIn(SignInForm.value)" layout="column">
+		<mat-form-field>
+			<input matInput formControlName="Email" type="email" placeholder="Email">
+		</mat-form-field>
+
+		<mat-form-field>
+			<input matInput formControlName="Password" type="password" placeholder="Passoword">
+		</mat-form-field>
+
+		<div layout="row" flex>
+			<mat-checkbox formControlName="RememberMe">Remember me</mat-checkbox>
+		</div>
+
+		<div layout="row" flex content="end">
+			<button mat-raised-button color="primary" type="submit" [disabled]="!SignInForm.valid">Sign In</button>
+		</div>
+
+		<div *ngIf="ShowMessage" class="error-message">
+			{{Message}}
+		</div>
+	</form>
+	<div>
+		<a routerLink="/account/sign-up">Create your account</a>
+	</div>
+</div>
