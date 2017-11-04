@@ -1,3 +1,53 @@
-﻿<div class="sign-up">
-    <h1>Hey! I"m sign-up</h1>
+<div class="sign-up"  layout="column" flex>
+	<form *ngIf="Ready" [formGroup]="SignUpForm" (ngSubmit)="SignUp(SignUpForm.value)" layout="column">
+		<div class="form-viewer">
+			<div class="form-title">
+				<div class="form-title-space">Register Form</div>
+			</div>
+			<mat-form-field>
+				<input matInput formControlName="FirstName" placeholder="First name">
+			</mat-form-field>
+		
+
+			<mat-form-field>
+				<input matInput formControlName="LastName" placeholder="Last Name">
+			</mat-form-field>
+
+
+			<mat-form-field>
+				<input matInput formControlName="Telephone" placeholder="Telephone">
+			</mat-form-field>
+
+			<mat-form-field>
+				<input matInput formControlName="Email" placeholder="Email">
+			</mat-form-field>
+
+			<mat-form-field>
+				<input matInput formControlName="Password" type="password" placeholder="Passoword">
+			</mat-form-field>
+
+			<mat-form-field>
+				<input matInput formControlName="PasswordConfirm" type="password" placeholder="Passoword">
+			</mat-form-field>
+
+			<div>
+				<div layout="row" flex content="end">
+					<button mat-raised-button color="primary" type="submit" [disabled]="!SignUpForm.valid">
+						Sign Up
+
+					</button>
+				</div>
+				<div layout="row" flex content="end">
+					<button mat-raised-button color="primary" type="reset">
+						Clear
+					</button>
+				</div>
+
+			</div>
+			<div *ngIf="ShowMessage" class="error-message">
+				{{Message}}
+			</div>
+
+		</div>
+		</form>
 </div>
