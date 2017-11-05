@@ -1,4 +1,4 @@
-<div class="sign-up"  layout="column" flex>
+<div class="sign-up" layout="column" flex>
 	<form *ngIf="Ready" [formGroup]="SignUpForm" (ngSubmit)="SignUp(SignUpForm.value)" layout="column">
 		<div class="form-viewer">
 			<div class="form-title">
@@ -6,13 +6,12 @@
 			</div>
 			<mat-form-field>
 				<input matInput formControlName="FirstName" placeholder="First name">
+
 			</mat-form-field>
-		
 
 			<mat-form-field>
 				<input matInput formControlName="LastName" placeholder="Last Name">
 			</mat-form-field>
-
 
 			<mat-form-field>
 				<input matInput formControlName="Telephone" placeholder="Telephone">
@@ -30,24 +29,20 @@
 				<input matInput formControlName="PasswordConfirm" type="password" placeholder="Passoword">
 			</mat-form-field>
 
-			<div>
-				<div layout="row" flex content="end">
-					<button mat-raised-button color="primary" type="submit" [disabled]="!SignUpForm.valid">
-						Sign Up
-
-					</button>
+			<div class="form-footer">
+				<div class="bt-signup">
+					<button mat-raised-button color="primary" type="submit" [disabled]="!SignUpForm.valid">Sign Up</button>
 				</div>
-				<div layout="row" flex content="end">
-					<button mat-raised-button color="primary" type="reset">
+				<div class="bt-reset">
+					<button mat-raised-button color="warn" type="reset">
 						Clear
 					</button>
 				</div>
-
 			</div>
 			<div *ngIf="ShowMessage" class="error-message">
 				{{Message}}
 			</div>
 
 		</div>
-		</form>
+	</form>
 </div>
