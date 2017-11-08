@@ -1,4 +1,4 @@
-<div class="sign-in" layout="column" flex>
+<!--<div class="sign-in" layout="column" flex>
 	<form *ngIf="Ready" [formGroup]="SignInForm" (ngSubmit)="SignIn(SignInForm.value)" layout="column">
 		<mat-form-field>
 			<input matInput formControlName="Email" type="email" placeholder="Email">
@@ -22,5 +22,40 @@
 	</form>
 	<div>
 		<a routerLink="/account/sign-up">Create your account</a>
+	</div>
+</div>-->
+<div class="sign-in">
+	<div class="backgroundContainer">
+		<img src="/assets/bgLogin.jpg" class="background" />
+	</div>
+	<div class="container">
+		<div id="login" class="login">
+			<form *ngIf="Ready" [formGroup]="SignInForm" (ngSubmit)="SignIn(SignInForm.value)" layout="column">
+				<div class="login-icon-field">
+					<img src="/assets/car.png" style="margin-left: 15px;" />
+				</div>
+				<div class="login-form">
+					<mat-form-field>
+						<input matInput formControlName="Email" type="email" placeholder="Email">
+					</mat-form-field>
+
+					<mat-form-field>
+						<input matInput formControlName="Password" type="password" placeholder="Passoword">
+					</mat-form-field>
+
+					<div layout="row" flex>
+						<mat-checkbox formControlName="RememberMe">Remember me</mat-checkbox>
+					</div>
+
+					<div layout="row" flex content="end">
+						<button mat-raised-button color="primary" type="submit" [disabled]="!SignInForm.valid">Sign In</button>
+					</div>
+
+					<div layout="row" flex style="display: block; position: relative; text-align: center;">
+						<a routerLink="/account/sign-up">Create your account</a>
+					</div>
+				</div>
+			</form>
+		</div>
 	</div>
 </div>
