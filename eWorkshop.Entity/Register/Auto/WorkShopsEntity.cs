@@ -8,26 +8,26 @@ using XCommon.Patterns.Repository.Entity;
 
 namespace eWorkshop.Entity.Register
 {
-    public partial class WorkShopsEntity: EntityBase
-    {
-        public Guid IdWorkShop { get; set; }
+	public partial class WorkshopsEntity: EntityBase
+	{
+		public Guid IdWorkshop { get; set; }
 
-        public Guid IdPerson { get; set; }
+		public Guid IdPerson { get; set; }
 
-        public string Description { get; set; }
+		public string Description { get; set; }
 
 
-        [IgnoreDataMember]
-        public override Guid Key
-        {
-            get
-            {
-                return IdWorkShop;
-            }
-            set
-            {
-                IdWorkShop = value;
-            }
-        }
-    }
+		[IgnoreDataMember]
+		public override Guid Key
+		{
+			get
+			{
+				return IdWorkshop;
+			}
+			set
+			{
+				IdWorkshop = value;
+			}
+		}
+	}
 }

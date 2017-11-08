@@ -62,21 +62,24 @@
     <Folder Include="Register\Tables\" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
+    <Folder Include="Service\" />
+    <Folder Include="Service\Tables\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\WorkshopServices.sql" />
-    <Build Include="dbo\Tables\Workshops.sql" />
-    <Build Include="dbo\Tables\Users.sql" />
-    <Build Include="dbo\Tables\Services.sql" />
-    <Build Include="dbo\Tables\Employees.sql" />
-    <Build Include="dbo\Tables\Customers.sql" />
-    <Build Include="dbo\Tables\CustomerRatings.sql" />
-    <Build Include="dbo\Tables\Cars.sql" />
-    <Build Include="dbo\Tables\CarReportHistories.sql" />
-    <Build Include="dbo\Tables\AppointmentServices.sql" />
-    <Build Include="dbo\Tables\Appointments.sql" />
-    <Build Include="dbo\Tables\Addresses.sql" />
     <Build Include="Security\Sample.sql" />
-    <Build Include="dbo\Tables\People.sql" />
+    <Build Include="Service\Tables\AppointmentsRatings.sql" />
+    <Build Include="Service\Tables\Services.sql" />
+    <Build Include="Service\Tables\AppointmentsServices.sql" />
+    <Build Include="Service\Tables\Appointments.sql" />
+    <Build Include="Register\Tables\Customers.sql" />
+    <Build Include="Register\Tables\Users.sql" />
+    <Build Include="Register\Tables\People.sql" />
+    <Build Include="Register\Tables\CarsHistories.sql" />
+    <Build Include="Register\Tables\WorkshopServices.sql" />
+    <Build Include="Register\Tables\Addresses.sql" />
+    <Build Include="Register\Tables\Cars.sql" />
+    <Build Include="Register\Tables\Workshops.sql" />
+    <Build Include="Security\Service.sql" />
+    <Build Include="Security\Register.sql" />
   </ItemGroup>
 </Project>

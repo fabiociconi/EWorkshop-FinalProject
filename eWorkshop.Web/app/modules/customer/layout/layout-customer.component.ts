@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { AuthService } from "../../service";
 
 @Component({
 	selector: "layout-customer",
@@ -7,7 +8,14 @@ import { Component, OnInit } from "@angular/core";
 })
 export class LayoutCustomerComponent implements OnInit {
 
-	constructor() { }
+	public SideNavMode = "side";
+	public SideNavOpen = true;
+
+	constructor(private authService: AuthService) { }
 
 	public ngOnInit(): void { }
+
+	public SignOut(): void {
+		this.authService.SignOut();
+	}
 }

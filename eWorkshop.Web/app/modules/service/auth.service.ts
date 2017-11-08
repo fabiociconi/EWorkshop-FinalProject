@@ -56,14 +56,8 @@ export class AuthService {
 
 	public SignOut(): void {
 		this.SetKeys(null);
+		this.router.navigate(["/"]);
 
-		if (this.router.url.toLowerCase().indexOf("dashboard") >= 0) {
-			this.router.navigate(["/"]);
-		}
-
-		if (this.router.url.toLowerCase().indexOf("profile") >= 0) {
-			this.router.navigate(["/"]);
-		}
 	}
 
 	public SignIn(signIn: ISignInEntity): Observable<IExecute<ITokenEntity>> {

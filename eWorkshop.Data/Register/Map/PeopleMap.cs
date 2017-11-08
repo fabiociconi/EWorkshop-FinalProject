@@ -7,39 +7,45 @@ using System;
 
 namespace eWorkshop.Data.Register.Map
 {
-    internal class PeopleMap
-    {
-        internal static void Map(ModelBuilder modelBuilder, bool unitTest)
-        {
-            modelBuilder.Entity<People>(entity =>
-            {
-                entity.HasKey(e => e.IdPerson);
+	internal class PeopleMap
+	{
+		internal static void Map(ModelBuilder modelBuilder, bool unitTest)
+		{
+			modelBuilder.Entity<People>(entity =>
+			{
+				entity.HasKey(e => e.IdPerson);
 
-                if (!unitTest)
-                    entity.ToTable("People", "Register");
-                else
-                    entity.ToTable("RegisterPeople");
+				if (!unitTest)
+					entity.ToTable("People", "Register");
+				else
+					entity.ToTable("RegisterPeople");
 
-                entity.Property(e => e.IdPerson)
-                    .IsRequired()
-                    .ValueGeneratedNever();
+				entity.Property(e => e.IdPerson)
+					.IsRequired()
+					.ValueGeneratedNever();
 
-                entity.Property(e => e.FirstName)
-                    .IsRequired()
-                    .HasMaxLength(200);
+				entity.Property(e => e.FirstName)
+					.IsRequired()
+					.HasMaxLength(200);
 
-                entity.Property(e => e.LastName)
-                    .IsRequired()
-                    .HasMaxLength(200);
+				entity.Property(e => e.LastName)
+					.IsRequired()
+					.HasMaxLength(200);
 
-                entity.Property(e => e.Telephone)
-                    .HasMaxLength(200);
+				entity.Property(e => e.Telephone)
+					.HasMaxLength(200);
 
-                entity.Property(e => e.Email)
-                    .IsRequired()
-                    .HasMaxLength(200);
+				entity.Property(e => e.Email)
+					.IsRequired()
+					.HasMaxLength(200);
 
-            });
-        }
-    }
+				entity.Property(e => e.CreateDate)
+					.IsRequired();
+
+				entity.Property(e => e.ChangeDate)
+					.IsRequired();
+
+			});
+		}
+	}
 }

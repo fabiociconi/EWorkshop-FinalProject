@@ -2,34 +2,72 @@
 /* Don't write any code in this file, because it will be rewritten on the next generation. */
 /*******************************************************************************************/
 
-import { EntityAction, AddressType, RoleType } from "./enum";
+import { EntityAction, RoleType } from "./enum";
 
-export interface ICustomersEntity {
-	IdCustomer: string; 
+export interface IAddressesEntity {
+	IdAddress: string; 
 	IdPerson: string; 
+	Street: string; 
+	StreetNumber: string; 
+	City: string; 
+	PostalCode: string; 
+	Type: number; 
+	Longitude: number; 
+	Latitude: number; 
 	Action: EntityAction; 
 }
 
-export interface ICustomersFilter {
+export interface IAddressesFilter {
 	Key?: string; 
 	Keys?: Array<string>; 
 	PageNumber?: number; 
 	PageSize?: number; 
 }
 
-export interface IPeopleAddressesEntity {
-	IdAddress: string; 
+export interface ICarsEntity {
+	IdCar: string; 
 	IdPerson: string; 
-	Street: string; 
-	City: string; 
-	ZipCode: string; 
-	Type: AddressType; 
-	Longitude: number; 
-	Latitude: number; 
+	Brand: string; 
+	Color: string; 
+	Year: number; 
+	Trasmission: number; 
+	LicensePlate: string; 
+	FuelType: number; 
+	CreateDate: Date; 
 	Action: EntityAction; 
 }
 
-export interface IPeopleAddressesFilter {
+export interface ICarsFilter {
+	Key?: string; 
+	Keys?: Array<string>; 
+	PageNumber?: number; 
+	PageSize?: number; 
+}
+
+export interface ICarsHistoriesEntity {
+	IdCarReportHistory: string; 
+	IdCar: string; 
+	Type: number; 
+	CreateDate: Date; 
+	Decription: string; 
+	Action: EntityAction; 
+}
+
+export interface ICarsHistoriesFilter {
+	Key?: string; 
+	Keys?: Array<string>; 
+	PageNumber?: number; 
+	PageSize?: number; 
+}
+
+export interface ICustomersEntity {
+	IdCustomer: string; 
+	IdPerson: string; 
+	Birthday?: Date; 
+	Action: EntityAction; 
+}
+
+export interface ICustomersFilter {
 	Key?: string; 
 	Keys?: Array<string>; 
 	PageNumber?: number; 
@@ -42,6 +80,8 @@ export interface IPeopleEntity {
 	LastName: string; 
 	Telephone: string; 
 	Email: string; 
+	CreateDate: Date; 
+	ChangeDate: Date; 
 	Action: EntityAction; 
 }
 
@@ -72,6 +112,8 @@ export interface ISignUpEntity {
 	LastName: string; 
 	Telephone: string; 
 	Email: string; 
+	CreateDate: Date; 
+	ChangeDate: Date; 
 	Action: EntityAction; 
 }
 
@@ -98,14 +140,29 @@ export interface IUsersFilter {
 	PageSize?: number; 
 }
 
-export interface IWorkShopsEntity {
-	IdWorkShop: string; 
+export interface IWorkshopsEntity {
+	IdWorkshop: string; 
 	IdPerson: string; 
 	Description: string; 
 	Action: EntityAction; 
 }
 
-export interface IWorkShopsFilter {
+export interface IWorkshopServicesEntity {
+	IdWorkshopService: string; 
+	IdWorkshop: string; 
+	IdService: string; 
+	Price: number; 
+	Action: EntityAction; 
+}
+
+export interface IWorkshopServicesFilter {
+	Key?: string; 
+	Keys?: Array<string>; 
+	PageNumber?: number; 
+	PageSize?: number; 
+}
+
+export interface IWorkshopsFilter {
 	Key?: string; 
 	Keys?: Array<string>; 
 	PageNumber?: number; 

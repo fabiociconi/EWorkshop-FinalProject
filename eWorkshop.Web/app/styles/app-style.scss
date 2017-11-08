@@ -16,3 +16,7 @@ router-outlet[root] + * {
     flex-direction: column;
     flex: 1 0 auto;
 }
+
+a {
+	cursor: pointer;
+}
