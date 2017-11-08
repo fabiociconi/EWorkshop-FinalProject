@@ -1,2 +1,43 @@
 .layout-workshop {
+	width: 100%;
+
+	.header {
+		height: 55px;
+		width: 100%;
+		position: fixed;
+		z-index: 2;
+		color: #fff;
+		background-color: #328bd3;
+		height: 55px;
+		line-height: 55px;
+		padding-left: 10px;
+
+		.logo {
+			height: 55px;
+			line-height: 55px;
+			width: 200px;
+
+			img {
+				height: 50px;
+			}
+		}
+	}
+
+	.container {
+		margin-top: 55px;
+		width: 100%;
+
+		mat-sidenav {
+			width: 233px;
+			top: 55px;
+		}
+
+		.fixed {
+			top: 5px !important;
+		}
+
+		.content {
+			width: 100%;
+		}
+	}
 }

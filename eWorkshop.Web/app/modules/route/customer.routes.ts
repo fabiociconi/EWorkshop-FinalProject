@@ -1,7 +1,15 @@
 import { Routes } from "@angular/router";
 
 import { HomeCustomerComponent } from "../customer/home";
+import { CustomerCarDetailComponent, CustomerCarListComponent, CustomerProfileDetailComponent } from "../customer/profile";
+import { CustomerAppointmentDetailComponent, CustomerAppointmentListComponent, SearchComponent } from "../customer/service";
 
 export const CUSTOMER_ROUTES: Routes = [
-	{ path: "", component: HomeCustomerComponent }
+	{ path: "", component: HomeCustomerComponent },
+	{ path: "profile", component: CustomerProfileDetailComponent },
+	{ path: "profile/car", component: CustomerCarListComponent },
+	{ path: "profile/car/:id", component: CustomerCarDetailComponent },
+	{ path: "search", component: SearchComponent },
+	{ path: "appointment", component: CustomerAppointmentListComponent },
+	{ path: "appointment/:id", component: CustomerAppointmentDetailComponent }
 ];

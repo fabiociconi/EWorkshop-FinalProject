@@ -25,9 +25,9 @@ namespace eWorkshop.CodeGenerator
 
 			var config = builder.Build();
 			ApplicationSettings = config.Get<ApplicationSettings>("eWorkshop");
-			var x = new List<string> { "-t" };
+			//var x = new List<string> { "-t" };
 			var gen = new Generator(GetConfig());
-			gen.Run(x.ToArray());
+			gen.Run(args);
 		}
 
 		static GeneratorConfig GetConfig()

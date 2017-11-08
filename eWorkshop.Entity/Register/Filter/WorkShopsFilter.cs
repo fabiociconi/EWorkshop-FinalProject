@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using XCommon.Patterns.Repository.Entity;
 
 namespace eWorkshop.Entity.Register.Filter
 {
-    public class WorkShopsFilter: FilterBase
+    public class WorkshopsFilter: FilterBase
     {
     }
 }

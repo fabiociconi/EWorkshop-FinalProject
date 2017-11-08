@@ -4,3 +4,4 @@ export * from "./enum";
 export * from "./executes";
 export * from "./register";
 export * from "./sample";
+export * from "./service";

@@ -1,4 +1,30 @@
-<div class="layout-workshop">
-	Layout WorkShop
-    <router-outlet></router-outlet>
+<div class="layout-workshop" layout="column" flex>
+	<div class="header" shadow="2" layout="row">
+		<a class="logo" routerLink="/">
+			<img src="/assets/favicon.png" />
+		</a>
+	</div>
+	<mat-sidenav-container class="container" layout="row" flex>
+		<mat-sidenav [mode]="SideNavMode" [opened]="SideNavOpen" #sidenav shadow="2" fixedInViewport="true" fixedTopGap="55">
+			<ul layout="column">
+				<li>
+					<a routerLink="profile">Profile</a>
+				</li>
+				<li>
+					<a routerLink="profile/pricetable">Price table</a>
+				</li>
+				<li>
+					<a routerLink="appointment">Appoinments</a>
+				</li>
+				<li>
+					<a (click)="SignOut()">Log off</a>
+				</li>
+			</ul>
+		</mat-sidenav>
+
+		<div class="content" layout="column">
+			<router-outlet></router-outlet>
+		</div>
+
+	</mat-sidenav-container>
 </div>

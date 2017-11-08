@@ -7,34 +7,34 @@ using System;
 
 namespace eWorkshop.Data.Register.Map
 {
-    internal class WorkShopsMap
-    {
-        internal static void Map(ModelBuilder modelBuilder, bool unitTest)
-        {
-            modelBuilder.Entity<WorkShops>(entity =>
-            {
-                entity.HasKey(e => e.IdWorkShop);
+	internal class WorkshopsMap
+	{
+		internal static void Map(ModelBuilder modelBuilder, bool unitTest)
+		{
+			modelBuilder.Entity<Workshops>(entity =>
+			{
+				entity.HasKey(e => e.IdWorkshop);
 
-                if (!unitTest)
-                    entity.ToTable("WorkShops", "Register");
-                else
-                    entity.ToTable("RegisterWorkShops");
+				if (!unitTest)
+					entity.ToTable("Workshops", "Register");
+				else
+					entity.ToTable("RegisterWorkshops");
 
-                entity.Property(e => e.IdWorkShop)
-                    .IsRequired()
-                    .ValueGeneratedNever();
+				entity.Property(e => e.IdWorkshop)
+					.IsRequired()
+					.ValueGeneratedNever();
 
-                entity.Property(e => e.IdPerson)
-                    .IsRequired();
+				entity.Property(e => e.IdPerson)
+					.IsRequired();
 
-                entity.Property(e => e.Description);
+				entity.Property(e => e.Description);
 
-                entity
-                    .HasOne(d => d.People)
-                    .WithMany(p => p.WorkShops)
-                    .HasForeignKey(d => d.IdPerson);
+				entity
+					.HasOne(d => d.People)
+					.WithMany(p => p.Workshops)
+					.HasForeignKey(d => d.IdPerson);
 
-            });
-        }
-    }
+			});
+		}
+	}
 }

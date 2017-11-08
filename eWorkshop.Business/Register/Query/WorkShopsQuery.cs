@@ -1,4 +1,4 @@
-﻿using eWorkshop.Data.Register;
+using eWorkshop.Data.Register;
 using eWorkshop.Entity.Register.Filter;
 using System;
 using System.Collections.Generic;
@@ -10,14 +10,14 @@ using XCommon.Patterns.Specification.Query.Extensions;
 
 namespace eWorkshop.Business.Register.Query
 {
-    public class WorkShopsQuery: SpecificationQuery<WorkShops, WorkShopsFilter>
+    public class WorkshopsQuery: SpecificationQuery<Workshops, WorkshopsFilter>
     {
-        public override IQueryable<WorkShops> Build(IQueryable<WorkShops> source, WorkShopsFilter filter)
+        public override IQueryable<Workshops> Build(IQueryable<Workshops> source, WorkshopsFilter filter)
         {
             var spefications = NewSpecificationList()
-                .And(e => e.IdWorkShop == filter.Key, f => f.Key.HasValue)
-                .And(e => filter.Keys.Contains(e.IdWorkShop), f => f.Keys.IsValidList())
-                .OrderBy(e => e.IdWorkShop)
+                .And(e => e.IdWorkshop == filter.Key, f => f.Key.HasValue)
+                .And(e => filter.Keys.Contains(e.IdWorkshop), f => f.Keys.IsValidList())
+                .OrderBy(e => e.IdWorkshop)
                 .Take(filter.PageNumber, filter.PageSize);
 
             return CheckSpecifications(spefications, source, filter);
