@@ -66,15 +66,15 @@ export class SignUpComponent implements OnInit {
 			.subscribe(res => {
 
 				if (res.HasErro) {
-					this.snackBar.open("Fabio, use mensagens em ingles!!!", "", {
-						duration: 2000,
+					this.snackBar.open("Your browser did something unexpected.Please contact us if the problem persists.", "", {
+						duration: 3000,
 					});
 
 					return;
 				}
 
-				this.snackBar.open("Aqui tbm!", "", {
-					duration: 2000,
+				this.snackBar.open("Thank you! You are now registred in our system ", "", {
+					duration: 3000,
 				});
 			});
 	}

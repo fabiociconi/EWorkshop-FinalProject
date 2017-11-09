@@ -1,15 +1,15 @@
 .sign-up {
-	min-width: 150px;
-	max-width: 500px;
-	width: auto;
-	align-content: center;
-	background-color: #263238;
+	width: 100%;
+	height: 100%;
+	min-height: 560px;
 
 	.error-message {
 		color: #ff0000;
 	}
 }
-
+body {
+	margin: 0;
+}
 
 .bt-reset{
 	float:left;
@@ -21,73 +21,28 @@
 .form-viewer {
 	border: 1px solid rgba(0,0,0,.03);
 	box-shadow: 0 2px 2px rgba(0,0,0,.24),0 0 2px rgba(0,0,0,.12);
-	margin: 4px;
 	padding: 10px;
+	margin: 10px;
+	position: absolute;	
+	font-family: "Comfortaa", "Helvetica", sans-serif;
 }
+
 .form-title {
-	color: rgba(0,0,0,.54);
-	background: rgba(0,0,0,.03)
+	background: #3f51b5;
+	padding: 10px;
+
 }
 .form-title-space {
+	font-size: x-large;
 	padding: 8px 20px;
-	color: rgba(0, 0, 0, 0.54);
+	color: #fafafa;
 	display: block;
 	flex-basis: auto;
 	flex-grow: 1;
 	flex-shrink: 1;
-	font-family: Roboto, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-family: "Comfortaa", "Helvetica", sans-serif;
 	font-weight: normal;
 	height: 21px;
 	width: 416px;
-	-webkit-box-direction: normal;
-	-webkit-box-flex: 1;
 }
 
-/*[_nghost-c16] {
-	display: block;
-	padding: 20px 0
-}
-
-.docs-example-viewer-wrapper[_ngcontent-c16] h3[_ngcontent-c16] {
-	margin-top: 10px
-}
-
-.docs-example-viewer-title[_ngcontent-c16] {
-	-ms-flex-line-pack: center;
-	align-content: center;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-pack: center;
-	-ms-flex-pack: center;
-	justify-content: center;
-	padding: 8px 20px
-}
-
-.docs-example-viewer-title-spacer[_ngcontent-c16] {
-	-webkit-box-flex: 1;
-	-ms-flex: 1 1 auto;
-	flex: 1 1 auto
-}
-
-.docs-example-source-copy[_ngcontent-c16] {
-	position: absolute;
-	top: 8px;
-	display: none
-}
-
-.docs-example-source-wrapper[_ngcontent-c16]:hover .docs-example-source-copy[_ngcontent-c16] {
-	display: inline-block
-}
-
-.docs-example-source[_ngcontent-c16] {
-	padding: 0 30px 10px 30px;
-	min-height: 150px
-}
-
-.docs-example-viewer-body[_ngcontent-c16] {
-	padding: 30px
-}*/

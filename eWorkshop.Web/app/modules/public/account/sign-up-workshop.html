@@ -1,3 +1,50 @@
-﻿<div class="sign-up-workshop">
-	<h1>Hey! I"m sign-up-workshop</h1>
+<div class="sign-up-workshop"  layout="column" flex>
+	<form *ngIf="Ready" [formGroup]="SignUpWorkshopForm" (ngSubmit)="SignUp(SignUpWorkshopForm.value)" layout="column">
+		
+			<div class="form-viewer">
+				<div class="form-title">
+					<div class="form-title-space">Workshop Register Form</div>
+				</div>
+
+				<mat-form-field>
+					<input matInput formControlName="FirstName" placeholder="First name">
+
+				</mat-form-field>
+
+				<mat-form-field>
+					<input matInput formControlName="LastName" placeholder="Last Name">
+				</mat-form-field>
+
+				<mat-form-field>
+					<input matInput formControlName="Telephone" placeholder="Telephone">
+				</mat-form-field>
+
+				<mat-form-field>
+					<input matInput formControlName="Email" placeholder="Email">
+				</mat-form-field>
+
+				<mat-form-field>
+					<input matInput formControlName="Password" type="password" placeholder="Password">
+				</mat-form-field>
+
+				<mat-form-field>
+					<input matInput formControlName="PasswordConfirm" type="password" placeholder="Password">
+				</mat-form-field>
+				<!--<span *ngIf="SignUpForm.errors?.mismatchedFields">Passwords do not match</span>-->
+				<div class="form-footer">
+					<div class="bt-signup">
+						<button mat-raised-button color="primary" type="submit" [disabled]="!SignUpWorkshopForm.valid">Sign Up</button>
+					</div>
+					<div class="bt-reset">
+						<button mat-raised-button color="warn" type="reset">
+							Reset
+						</button>
+					</div>
+				</div>
+				<div *ngIf="ShowMessage" class="error-message">
+					{{Message}}
+				</div>
+
+			</div>
+		</form>
 </div>

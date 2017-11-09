@@ -1,9 +1,13 @@
 <div class="sign-up" layout="column" flex>
+
+
 	<form *ngIf="Ready" [formGroup]="SignUpForm" (ngSubmit)="SignUp(SignUpForm.value)" layout="column">
+				
 		<div class="form-viewer">
 			<div class="form-title">
 				<div class="form-title-space">Register Form</div>
 			</div>
+
 			<mat-form-field>
 				<input matInput formControlName="FirstName" placeholder="First name">
 
@@ -22,20 +26,24 @@
 			</mat-form-field>
 
 			<mat-form-field>
-				<input matInput formControlName="Password" type="password" placeholder="Passoword">
+				<input matInput formControlName="Password" type="password" placeholder="Password" required validateEqual="confirmPassword" reverse="true">
 			</mat-form-field>
 
 			<mat-form-field>
-				<input matInput formControlName="PasswordConfirm" type="password" placeholder="Passoword">
+				<input matInput formControlName="PasswordConfirm" type="password" placeholder="Password" [(ngModel)]="SignUpForm.confirmPassword" 
+					   required validateEqual="password" />
+			
 			</mat-form-field>
-
+			<!--<small [hidden]="confirmPassword.valid || (confirmPassword.pristine && !f.submitted)">
+				Password mismatch
+			</small>-->
 			<div class="form-footer">
 				<div class="bt-signup">
 					<button mat-raised-button color="primary" type="submit" [disabled]="!SignUpForm.valid">Sign Up</button>
 				</div>
 				<div class="bt-reset">
 					<button mat-raised-button color="warn" type="reset">
-						Clear
+						Reset
 					</button>
 				</div>
 			</div>
