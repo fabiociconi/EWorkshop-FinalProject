@@ -1,4 +1,7 @@
-﻿import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+
+import { CustomerService } from "../../service";
+import { IPeopleEntity } from "../../../entity";
 
 @Component({
 	selector: "customer-profile-detail",
@@ -6,7 +9,16 @@
 	styleUrls: ["./customer-profile-detail.scss"]
 })
 export class CustomerProfileDetailComponent implements OnInit {
-	constructor() { }
 
-	public ngOnInit(): void { }
+	public Person: IPeopleEntity;
+
+	constructor(private customerService: CustomerService) { }
+
+	public ngOnInit(): void {
+		this.customerService.GetProfile()
+			.subscribe(res => {
+				this.Person = res;
+				console.log(res);
+			});
+	}
 }

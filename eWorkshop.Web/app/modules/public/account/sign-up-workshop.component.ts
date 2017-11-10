@@ -61,7 +61,10 @@ export class SignUpWorkshopComponent implements OnInit
 			Action: EntityAction.New,
 			RoleType: RoleType.Workshop,
 			ChangeDate: today,
-			CreateDate: today
+			CreateDate: today,
+			Role: RoleType.Workshop,
+			Customer: null,
+			Workshop: null
 		});
 	}
 

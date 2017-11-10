@@ -57,7 +57,10 @@ export class SignUpComponent implements OnInit {
 			Action: EntityAction.New,
 			RoleType: RoleType.Customer,
 			ChangeDate: today,
-			CreateDate: today
+			CreateDate: today,
+			Role: RoleType.Customer,
+			Customer: null,
+			Workshop: null
 		});
 	}
 

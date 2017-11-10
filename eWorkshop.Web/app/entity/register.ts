@@ -18,6 +18,7 @@ export interface IAddressesEntity {
 }
 
 export interface IAddressesFilter {
+	IdPerson?: string; 
 	Key?: string; 
 	Keys?: Array<string>; 
 	PageNumber?: number; 
@@ -38,6 +39,7 @@ export interface ICarsEntity {
 }
 
 export interface ICarsFilter {
+	IdPerson?: string; 
 	Key?: string; 
 	Keys?: Array<string>; 
 	PageNumber?: number; 
@@ -82,6 +84,9 @@ export interface IPeopleEntity {
 	Email: string; 
 	CreateDate: Date; 
 	ChangeDate: Date; 
+	Role: RoleType; 
+	Customer: ICustomersEntity; 
+	Workshop: IWorkshopsEntity; 
 	Action: EntityAction; 
 }
 
@@ -91,6 +96,7 @@ export interface IPeopleFilter {
 	Email?: string; 
 	Telephone?: string; 
 	RoleType?: RoleType; 
+	LoadDetails?: boolean; 
 	Key?: string; 
 	Keys?: Array<string>; 
 	PageNumber?: number; 
@@ -114,6 +120,9 @@ export interface ISignUpEntity {
 	Email: string; 
 	CreateDate: Date; 
 	ChangeDate: Date; 
+	Role: RoleType; 
+	Customer: ICustomersEntity; 
+	Workshop: IWorkshopsEntity; 
 	Action: EntityAction; 
 }
 

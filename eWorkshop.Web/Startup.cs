@@ -9,6 +9,9 @@ using XCommon.Application;
 using XCommon.Extensions.Util;
 using XCommon.Patterns.Ioc;
 using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace eWorkshop.Web
 {
@@ -37,6 +40,21 @@ namespace eWorkshop.Web
 				.AddJsonOptions(options =>
 				{
 					options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+				});
+
+			services
+				.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+				.AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, cfg =>
+				{
+					cfg.RequireHttpsMetadata = false;
+					cfg.SaveToken = true;
+
+					cfg.TokenValidationParameters = new TokenValidationParameters()
+					{
+						ValidIssuer = AppConstants.TokenAudience,
+						ValidAudience = AppConstants.TokenAudience,
+						IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AppConstants.TokenKey))
+					};
 				});
 
 			services.AddSwaggerGen(c =>
@@ -87,6 +105,7 @@ namespace eWorkshop.Web
 				.UseSwagger()
 				.UseSwaggerUI(c =>
 				{
+					c.ShowJsonEditor();
 					c.SwaggerEndpoint("/swagger/v1/swagger.json", "eWorkShop API");
 				});
 		}

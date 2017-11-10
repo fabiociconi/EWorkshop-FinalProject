@@ -14,6 +14,8 @@ namespace eWorkshop.Entity.Register.Filter
 
 		public string Telephone { get; set; }
 
-		public RoleType RoleType { get; set; }
+		public RoleType? RoleType { get; set; }
+
+		public bool LoadDetails { get; set; }
 	}
 }
