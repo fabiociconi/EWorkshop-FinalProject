@@ -75,7 +75,10 @@ button:active {
 	background-color: #1eaa7a;
 }
 
-/deep/.mat-focused .mat-form-field-placeholder {
+//Renato Comentei aqui pq se nao as outras paginas vem com esta configuracao e depois muda.
+//se fomos manter essa, vamos alterar os outros scss.
+
+/*/deep/.mat-focused .mat-form-field-placeholder {
 	color: white;
 }
 
@@ -90,4 +93,4 @@ button:active {
 /deep/.mat-raised-button.mat-primary[disabled] {
 	background-color: #000;
 	color: #fff;
-}
+}*/

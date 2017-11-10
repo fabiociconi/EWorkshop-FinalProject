@@ -12,6 +12,8 @@ import { MaterialModule, SharedModule } from "./shared";
 
 import { AppComponent } from "./app.component";
 import "./app.files";
+import { EqualValidator } from "./public/account/EqualValidator";
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
 	imports: [
@@ -24,10 +26,12 @@ import "./app.files";
 		PublicModule,
 		AdminModule,
 		WorkshopModule,
-		CustomerModule
+		CustomerModule,
+		FormsModule
 	],
 	declarations: [
-		AppComponent
+		AppComponent,
+		EqualValidator 
 	],
 	bootstrap: [AppComponent]
 })
