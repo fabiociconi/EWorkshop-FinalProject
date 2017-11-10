@@ -2,10 +2,6 @@
 	<form *ngIf="Ready" [formGroup]="SignUpWorkshopForm" (ngSubmit)="SignUp(SignUpWorkshopForm.value)" layout="column">
 		
 			<div class="form-viewer">
-				<div class="form-title">
-					<div class="form-title-space">Workshop Register Form</div>
-				</div>
-
 				<mat-form-field>
 					<input matInput formControlName="FirstName" placeholder="First name">
 

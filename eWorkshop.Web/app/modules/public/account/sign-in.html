@@ -24,8 +24,12 @@
 					<div layout="row" flex content="end">
 						<button mat-raised-button color="primary" type="submit" [disabled]="!SignInForm.valid">Sign In</button>
 					</div>
-
-				
+					<div layout="row" flex content="end">
+						<button mat-raised-button color="secundary" routerLink="/account/sign-up">Create your account</button>
+					</div>
+					<div layout="row" flex content="end">
+						<button mat-raised-button color="secundary" routerLink="/account/sign-up-workshop">Workshop New Account</button>
+					</div>
 
 					<div *ngIf="ShowMessage" class="error-message">
 						{{Message}}
@@ -34,13 +38,7 @@
 			</form>
 
 		</div>
-		<div layout="row" flex style="display: block; position: relative; text-align: center;">
-			<button mat-raised-button color="secundary" routerLink="/account/sign-up">Create your account</button>
-		</div>
-
-		<div layout="row" flex style="display: block; position: relative; text-align: center;">
-			<button mat-raised-button color="secundary" routerLink="/account/sign-up-workshop">Workshop New Account</button>
-		</div>
+		
 	</div>
 
 </div>
