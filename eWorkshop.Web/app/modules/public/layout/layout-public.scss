@@ -8,6 +8,21 @@
 	min-height: 560px;
 }
 
-.backgroundContainer{
-	position: relative;
+.backgroundContainer {
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	width: 100%;
+	overflow: none;
+}
+
+div > img {
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	min-height: 100%;
+	min-width: 100%;
+	transform: translate(-50%, -50%);
 }
