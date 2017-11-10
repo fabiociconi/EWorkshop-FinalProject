@@ -1,9 +1,6 @@
 <div class="sign-up" layout="column" flex>
 	<form *ngIf="Ready" [formGroup]="SignUpForm" (ngSubmit)="SignUp(SignUpForm.value)" layout="column">
 		<div class="form-viewer">
-			<div class="form-title">
-				<div class="form-title-space">Register Form</div>
-			</div>
 			<mat-form-field>
 				<input matInput formControlName="FirstName" placeholder="First name">
 
@@ -22,18 +19,18 @@
 			</mat-form-field>
 
 			<mat-form-field>
-				<input matInput formControlName="Password" type="password" placeholder="Passoword">
+				<input matInput formControlName="Password" type="password" placeholder="Password">
 			</mat-form-field>
 
 			<mat-form-field>
-				<input matInput formControlName="PasswordConfirm" type="password" placeholder="Passoword">
+				<input matInput formControlName="PasswordConfirm" type="password" placeholder="Confirm password">
 			</mat-form-field>
 
 			<div class="form-footer">
-				<div class="bt-signup">
+				<div>
 					<button mat-raised-button color="primary" type="submit" [disabled]="!SignUpForm.valid">Sign Up</button>
 				</div>
-				<div class="bt-reset">
+				<div>
 					<button mat-raised-button color="warn" type="reset">
 						Clear
 					</button>
