@@ -64,6 +64,7 @@ export class SignUpComponent implements OnInit {
 		});
 	}
 
+
 	public SignUp(entity: ISignUpEntity): void {
 		this.authService.SignUp(entity)
 			.subscribe(res => {
@@ -72,7 +73,8 @@ export class SignUpComponent implements OnInit {
 					this.snackBar.open("Your browser did something unexpected.Please contact us if the problem persists.", "", {
 						duration: 3000,
 					});
-
+					console.log(res.Messages);
+					console.log(res);
 					return;
 				}
 

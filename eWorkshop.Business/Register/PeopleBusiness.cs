@@ -17,8 +17,8 @@ using XCommon.Util;
 
 namespace eWorkshop.Business.Register
 {
-	public class PeopleBusiness: RepositoryEFBase<PeopleEntity, PeopleFilter, People, eWorkConext>
-    {
+	public class PeopleBusiness : RepositoryEFBase<PeopleEntity, PeopleFilter, People, eWorkConext>
+	{
 		[Inject]
 		private UsersBusiness UsersBusiness { get; set; }
 
@@ -32,7 +32,7 @@ namespace eWorkshop.Business.Register
 		{
 			var result = new Execute();
 
-			entitys.ForEach(e => 
+			entitys.ForEach(e =>
 			{
 				if (e.Customer != null)
 				{
@@ -45,14 +45,22 @@ namespace eWorkshop.Business.Register
 				}
 			});
 
-			var customers = entitys.Select(c => c.Customer).ToList();
-			var workshops = entitys.Select(c => c.Workshop).ToList();
+			var customers = entitys.Where(c => c.Customer != null).Select(c => c.Customer).ToList();
+			var workshops = entitys.Where(c => c.Workshop != null).Select(c => c.Workshop).ToList();
 
 			using (var transaction = context.Database.BeginTransaction())
 			{
 				result.AddMessage(await base.SaveAsync(entitys, context));
-				result.AddMessage(await CustomersBusiness.SaveManyAsync(customers, context));
-				result.AddMessage(await WorkshopsBusiness.SaveManyAsync(workshops, context));
+
+				if (customers.Any())
+				{
+					result.AddMessage(await CustomersBusiness.SaveManyAsync(customers, context));
+				}
+
+				if (workshops.Any())
+				{
+					result.AddMessage(await WorkshopsBusiness.SaveManyAsync(workshops, context));
+				}
 
 				if (!result.HasErro)
 				{
@@ -80,7 +88,7 @@ namespace eWorkshop.Business.Register
 				var customers = await CustomersBusiness.GetByFilterAsync(new CustomersFilter { Keys = idPeople });
 				var workshops = await WorkshopsBusiness.GetByFilterAsync(new WorkshopsFilter { Keys = idPeople });
 
-				result.ForEach(person => 
+				result.ForEach(person =>
 				{
 					var user = users.FirstOrDefault(u => u.IdPerson == person.IdPerson);
 
@@ -115,7 +123,7 @@ namespace eWorkshop.Business.Register
 					{
 						Action = EntityAction.New,
 						IdWorkshop = signUp.Key,
-						IdPerson = signUp.Key						
+						IdPerson = signUp.Key
 					};
 				}
 
@@ -124,18 +132,8 @@ namespace eWorkshop.Business.Register
 
 				using (var db = new eWorkConext())
 				{
-					using (var transaction = db.Database.BeginTransaction())
-					{
-						result.AddMessage(await SaveAsync(signUp, db));
-						result.AddMessage(await UsersBusiness.SaveAsync(userEntity, db));
-
-						db.SaveChanges();
-
-						if (!result.HasErro)
-						{
-							transaction.Commit();
-						}
-					}
+					result.AddMessage(await SaveAsync(signUp, db));
+					result.AddMessage(await UsersBusiness.SaveAsync(userEntity, db));
 
 					result.Entity.IdPerson = signUp.IdPerson;
 					result.Entity.RoleType = signUp.RoleType;

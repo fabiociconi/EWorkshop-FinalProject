@@ -1,44 +1,4 @@
-<div class="home-customer" layout="column" flex>
-	<h1>Your Information:</h1>
-	<br />
-	<hr />
-	<h2>Personal Information</h2>
-	<br />
-		<form *ngIf="Ready" [formGroup]="CustomerProfileForm" (ngSubmit)="SaveChanges(CustomerProfileForm.value)" layout="column">
-			<div class="form-viewer">
-				<mat-form-field>
-					<input 
-						   matInput 
-						   formControlName="FirstName" 
-						   placeholder="First name">
-				</mat-form-field>
+<div class="home-customer">
 
-				<mat-form-field>
-					<input 
-						   matInput formControlName="LastName" placeholder="Last Name">
-				</mat-form-field>
-
-				<mat-form-field>
-					<input matInput formControlName="Telephone" placeholder="Telephone">
-				</mat-form-field>
-
-				<mat-form-field>
-					<input matInput formControlName="Email" placeholder="Email">
-				</mat-form-field>
-				<div class="form-footer">
-					<div>
-						<button mat-raised-button color="primary" type="submit" [disabled]="!CustomerProfileForm.valid">Confirm</button>
-					</div>
-					<div>
-						<button mat-raised-button color="warn">
-							Cancel
-						</button>
-					</div>
-				</div>
-				<div *ngIf="ShowMessage" class="error-message">
-					{{Message}}
-				</div>
-			</div>
-		</form>
-	</div>
+</div>
 

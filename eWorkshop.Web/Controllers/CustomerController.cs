@@ -33,7 +33,7 @@ namespace eWorkshop.Web.Controllers
 		}
 
 		[HttpPost]
-		public async Task<Execute<PeopleEntity>> SetProfile(PeopleEntity entity)
+		public async Task<Execute<PeopleEntity>> SetProfile([FromBody] PeopleEntity entity)
 		{
 			return await PeopleBusiness.SaveAsync(entity);
 		}
@@ -45,7 +45,7 @@ namespace eWorkshop.Web.Controllers
 		}
 
 		[HttpPost("address")]
-		public async Task<Execute<AddressesEntity>> SetAddress(AddressesEntity entity)
+		public async Task<Execute<AddressesEntity>> SetAddress([FromBody] AddressesEntity entity)
 		{
 			entity.IdPerson = UserKey;
 			return await AddressesBusiness.SaveAsync(entity);
@@ -64,7 +64,7 @@ namespace eWorkshop.Web.Controllers
 		}
 
 		[HttpPost("car")]
-		public async Task<Execute<CarsEntity>> SetCar(CarsEntity entity)
+		public async Task<Execute<CarsEntity>> SetCar([FromBody] CarsEntity entity)
 		{
 			entity.IdPerson = UserKey;
 			return await CarsBusiness.SaveAsync(entity);

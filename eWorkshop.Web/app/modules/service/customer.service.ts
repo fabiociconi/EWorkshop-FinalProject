@@ -17,7 +17,8 @@ export class CustomerService {
 		return this.http.get<IPeopleEntity>(url);
 	}
 
-	public SetProfile(entity: IPeopleEntity): Observable<IExecute<IPeopleEntity>> {
+	public SetProfile(entity: IPeopleEntity): Observable<IExecute<IPeopleEntity>>
+	{
 		const url = this.utilService.BuidlUrl(this.ServiceUrl);
 		return this.http.post<IExecute<IPeopleEntity>>(url, entity);
 	}

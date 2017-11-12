@@ -1,4 +1,37 @@
 <div class="customer-profile-detail">
-	<h1>Hey! I"m customer-profile-detail = )</h1>
+
+
+
+	<form *ngIf="Ready" [formGroup]="CustomerProfileForm" (ngSubmit)="SaveChanges(CustomerProfileForm.getRawValue())" layout="column">
+		<mat-form-field>
+			<input matInput formControlName="FirstName" placeholder="First name">
+		</mat-form-field>
+
+		<mat-form-field>
+			<input matInput formControlName="LastName" placeholder="Last Name">
+		</mat-form-field>
+
+		<mat-form-field>
+			<input matInput formControlName="Telephone" placeholder="Telephone">
+		</mat-form-field>
+
+		<mat-form-field>
+			<input matInput formControlName="Email" placeholder="Email">
+		</mat-form-field>
+		<div class="form-footer">
+			<div>
+				<button mat-raised-button color="primary" type="submit" [disabled]="!CustomerProfileForm.valid">Confirm</button>
+			</div>
+			<div>
+				<button mat-raised-button color="warn">
+					Cancel
+				</button>
+			</div>
+		</div>
+		<div *ngIf="ShowMessage" class="error-message">
+			{{Message}}
+		</div>
+	</form>
+
 	<pre>{{Person | json}}</pre>
 </div>
