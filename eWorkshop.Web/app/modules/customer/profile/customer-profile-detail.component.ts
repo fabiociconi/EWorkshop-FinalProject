@@ -1,54 +1,38 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators } from "@angular/forms";
-import { AutoFormService } from "xcommon";
+import { AutoFormService, EntityAction } from "xcommon";
 import { MatSnackBar } from "@angular/material";
 import { Router } from "@angular/router";
 
-
-
 import { CustomerService, DialogService } from "../../service";
 import { IPeopleEntity } from "../../../entity";
-import { EntityAction } from "xcommon/dist/entity/entity";
-
-
-
 
 @Component({
 	selector: "customer-profile-detail",
 	templateUrl: "./customer-profile-detail.html",
 	styleUrls: ["./customer-profile-detail.scss"]
 })
-export class CustomerProfileDetailComponent implements OnInit {
-
-
-
-	
+export class CustomerProfileDetailComponent implements OnInit
+{
 
 	public Person: IPeopleEntity;
 	public Message = "";
 	public CustomerProfileForm: FormGroup;
 	public Ready = false;
 	public ShowMessage = false;
-	
 
+	constructor(private customerService: CustomerService, private autoFormService: AutoFormService,
+				private snackBar: MatSnackBar, private dialogService: DialogService, private router: Router) { }
 
-
-	constructor(private customerService: CustomerService,
-				private autoFormService: AutoFormService,
-				private snackBar: MatSnackBar,
-				private dialogService: DialogService,
-				private router: Router) { }
-
+	public ngOnInit(): void
+	{
+		this.LoadProfile();
+	}
 
 	private BuildForm(entity: IPeopleEntity): void
 	{
+
 		const autoForm = this.autoFormService.createNew<IPeopleEntity>();
-
-
-		//console.log(JSON.stringify("Build antes validacao"));
-		//console.log(JSON.stringify(this.Person));
-		//console.log(JSON.stringify(entity));
-
 		this.CustomerProfileForm = autoForm
 			//.AddValidator(c => c.FirstName, Validators.required)
 			//.AddValidator(c => c.LastName, Validators.required)
@@ -59,28 +43,15 @@ export class CustomerProfileDetailComponent implements OnInit {
 
 		this.Person = entity;
 		this.Ready = true;
-
-		//console.log(JSON.stringify(entity));
-
-	}
-
-
-	public ngOnInit(): void
-	{
-		this.LoadProfile();
-		
 	}
 
 	private LoadProfile(): void
 	{
 		this.customerService.GetProfile()
-			.subscribe(res =>
-			{
+			.subscribe(res => {
 				this.BuildForm(res);
-				console.log(res);
 			});
 	}
-
 
 	private Back(): void
 	{
@@ -90,12 +61,10 @@ export class CustomerProfileDetailComponent implements OnInit {
 
 	private DeleteProfile(): void
 	{
+
 		this.dialogService.confirm("Warnning", "Do you like to delete your Account?")
-			.subscribe(res =>
-			{
-				if (res)
-				{
-					//debugger
+			.subscribe(res => {
+				if (res) {
 					this.Person.Action = EntityAction.Delete;
 					this.SaveChanges(this.Person);
 				}
@@ -107,32 +76,24 @@ export class CustomerProfileDetailComponent implements OnInit {
 		const today = new Date();
 		entity.ChangeDate = today;
 
-		console.log(JSON.stringify(entity));
-		this.customerService.SetProfile(entity)		
-			.subscribe(res =>
-			{				
+		// Esse linha abaixo não é necessaria. Ela não deve estar aqui ...
+		// Mas por algum motivo esse valor esta se perdendo no form
+		entity.Customer = this.Person.Customer;
+
+		this.customerService.SetProfile(entity)
+			.subscribe(res => {
 				if (res.HasErro) {
-					this.snackBar.open("Your browser did something unexpected.Please contact us if the problem persists.", "", {
-						duration: 3000,
-					});
-					console.log(res.Messages);
-					console.log(res);
+					this.snackBar.open("Your browser did something unexpected.Please contact us if the problem persists.", "", { duration: 3000 });
 					return;
 				}
-				this.snackBar.open("Thank you! You are profile was Updated", "", {
-					duration: 3000,
-				});
+				this.snackBar.open("Thank you! You are profile was Updated", "", { duration: 3000 });
 
-
-				if (entity.Action === EntityAction.Delete)
-				{
+				if (entity.Action === EntityAction.Delete) {
 					this.router.navigate(["/"]);
 					return;
 
 				}
 				this.BuildForm(res.Entity);
 			});
-
 	}
-
 }
