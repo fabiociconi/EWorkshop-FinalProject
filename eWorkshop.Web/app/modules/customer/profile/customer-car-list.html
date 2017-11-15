@@ -1,7 +1,22 @@
 <div class="customer-car-list">
-	<h1>Hey! I"m customer-car-list</h1>
+	<h1>Your Cars</h1>
+	<div *ngIf="!Cars">
+		Loading...
+	</div>
+	<div *ngIf="Cars">
+		Cars: {{Cars.length}}
+		<a [routerLink]="['/customer/profile/car/', 'newcar']">New Car</a>
+		<div *ngFor="let car of Cars">
+			<a [routerLink]="['/customer/profile/car/', car.IdCar]">{{car.Brand}}</a>
+		</div>
+	</div>
 
 	{{ Cars | json }}
 
-
 </div>
+
+
+
+
+
+

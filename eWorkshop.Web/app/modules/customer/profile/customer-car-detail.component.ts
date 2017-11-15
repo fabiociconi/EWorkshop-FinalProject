@@ -1,4 +1,12 @@
-﻿import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { MatSnackBar } from "@angular/material";
+import { AutoFormService } from "xcommon";
+
+import { CustomerService, DialogService } from "../../service";
+import { ICarsEntity, IPeopleEntity, EntityAction } from "../../../entity";
+import { Guid } from "../../../entity/entity-util";
 
 @Component({
 	selector: "customer-car-detail",
@@ -6,7 +14,107 @@
 	styleUrls: ["./customer-car-detail.scss"]
 })
 export class CustomerCarDetailComponent implements OnInit {
-	constructor() { }
 
-	public ngOnInit(): void { }
+    public Ready = false;
+    public idPerson = "";
+    public CarDetailForm: FormGroup;
+    private Entity: ICarsEntity;
+    public Person: IPeopleEntity;
+    
+
+    constructor(
+        private customerService: CustomerService,
+        private activatedRoute: ActivatedRoute,
+        private router: Router,
+        private dialogService: DialogService,
+        private snackBar: MatSnackBar,
+        private autoFormService: AutoFormService) { }
+
+    public ngOnInit(): void {
+        this.customerService.GetProfile()
+            .subscribe(res => {
+                console.log(res.IdPerson);
+                this.GetIdPerson(res.IdPerson);
+            });		
+		
+        const id = this.activatedRoute.snapshot.params.id;
+        console.log(this.idPerson);
+        if (id == "newcar") {
+            this.New();
+            return;
+        }
+
+        if (id) {
+            this.Load(id);
+            return;
+        }
+
+        //this.New();
+    }
+
+    private GetIdPerson(idPerson: string): void {
+        this.idPerson = idPerson;
+    }
+
+    private BuildForm(entity: ICarsEntity): void {
+        this.CarDetailForm = this.autoFormService.createNew<ICarsEntity>()
+            .AddValidator(c => c.Brand, Validators.required)
+            .AddValidator(c => c.Color, Validators.required)
+            .AddValidator(c => c.Year, Validators.required)
+            .AddValidator(c => c.Trasmission, Validators.required)
+            .AddValidator(c => c.LicensePlate, Validators.required)
+            .AddValidator(c => c.FuelType, Validators.required)
+            .Build(entity);
+
+        this.Entity = entity;
+        this.Ready = true;
+    }
+
+    private Load(id: string): void {
+        this.customerService.GetCar(id)
+            .subscribe(res => this.BuildForm(res));
+    }
+
+    public Save(entity: ICarsEntity): void {
+
+        entity.IdPerson = this.idPerson;
+
+        this.customerService.SetCar(entity)
+            .subscribe(res => {
+
+                if (res.HasErro) {
+                    this.snackBar.open("A problem has occurred. Please, try again!", "", {
+                        duration: 2000,
+                    });
+
+                    return;
+                }
+
+                this.snackBar.open("Car saved successfully!", "", {
+                    duration: 2000,
+                });
+
+                if (entity.Action === EntityAction.Delete) {
+                    this.router.navigate(["/"]);
+                    return;
+                }
+
+                this.BuildForm(res.Entity);
+            });
+    }
+
+    private New(): void {
+        this.BuildForm({
+            Action: EntityAction.New,
+            IdCar: Guid.NewGuid(),
+            IdPerson: this.idPerson,
+            Brand: "",
+            Color: "",
+            Year: 2017,			
+            Trasmission: 1,
+			LicensePlate: "", 
+            FuelType: 1, 
+            CreateDate: (new Date())
+        });
+    }
 }
