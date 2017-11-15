@@ -1,19 +1,19 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators } from "@angular/forms";
-import { AutoFormService, EntityAction } from "xcommon";
+import { AutoFormService } from "xcommon";
 import { MatSnackBar } from "@angular/material";
 import { Router } from "@angular/router";
 
 import { CustomerService, DialogService } from "../../service";
 import { IPeopleEntity } from "../../../entity";
+import { EntityAction } from "xcommon/dist/entity/entity";
 
 @Component({
 	selector: "customer-profile-detail",
 	templateUrl: "./customer-profile-detail.html",
 	styleUrls: ["./customer-profile-detail.scss"]
 })
-export class CustomerProfileDetailComponent implements OnInit
-{
+export class CustomerProfileDetailComponent implements OnInit {
 
 	public Person: IPeopleEntity;
 	public Message = "";
@@ -21,18 +21,20 @@ export class CustomerProfileDetailComponent implements OnInit
 	public Ready = false;
 	public ShowMessage = false;
 
-	constructor(private customerService: CustomerService, private autoFormService: AutoFormService,
-				private snackBar: MatSnackBar, private dialogService: DialogService, private router: Router) { }
+	constructor(
+		private customerService: CustomerService,
+		private autoFormService: AutoFormService,
+		private snackBar: MatSnackBar,
+		private dialogService: DialogService,
+		private router: Router) { }
 
-	public ngOnInit(): void
-	{
+	public ngOnInit(): void {
 		this.LoadProfile();
 	}
 
-	private BuildForm(entity: IPeopleEntity): void
-	{
-
+	private BuildForm(entity: IPeopleEntity): void {
 		const autoForm = this.autoFormService.createNew<IPeopleEntity>();
+
 		this.CustomerProfileForm = autoForm
 			//.AddValidator(c => c.FirstName, Validators.required)
 			//.AddValidator(c => c.LastName, Validators.required)
@@ -45,22 +47,19 @@ export class CustomerProfileDetailComponent implements OnInit
 		this.Ready = true;
 	}
 
-	private LoadProfile(): void
-	{
+	private LoadProfile(): void {
 		this.customerService.GetProfile()
 			.subscribe(res => {
 				this.BuildForm(res);
 			});
 	}
 
-	private Back(): void
-	{
+	private Back(): void {
 		this.router.navigate(["/customer"]);
 		return;
 	}
 
-	private DeleteProfile(): void
-	{
+	private DeleteProfile(): void {
 
 		this.dialogService.confirm("Warnning", "Do you like to delete your Account?")
 			.subscribe(res => {
@@ -68,17 +67,12 @@ export class CustomerProfileDetailComponent implements OnInit
 					this.Person.Action = EntityAction.Delete;
 					this.SaveChanges(this.Person);
 				}
-			})
+			});
 	}
 
-	private SaveChanges(entity: IPeopleEntity): void
-	{
-		const today = new Date();
-		entity.ChangeDate = today;
+	private SaveChanges(entity: IPeopleEntity): void {
 
-		// Esse linha abaixo não é necessaria. Ela não deve estar aqui ...
-		// Mas por algum motivo esse valor esta se perdendo no form
-		entity.Customer = this.Person.Customer;
+		entity.ChangeDate = new Date();
 
 		this.customerService.SetProfile(entity)
 			.subscribe(res => {

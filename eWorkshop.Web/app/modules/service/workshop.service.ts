@@ -17,8 +17,7 @@ export class WorkshopService {
 		return this.http.get<IPeopleEntity>(url);
 	}
 
-	public SetProfile(entity: IPeopleEntity): Observable<IExecute<IPeopleEntity>>
-	{
+	public SetProfile(entity: IPeopleEntity): Observable<IExecute<IPeopleEntity>> {
 		const url = this.utilService.BuidlUrl(this.ServiceUrl);
 		return this.http.post<IExecute<IPeopleEntity>>(url, entity);
 	}
@@ -36,5 +35,5 @@ export class WorkshopService {
 	public SetAddress(entity: IAddressesEntity): Observable<IExecute<IAddressesEntity>> {
 		const url = this.utilService.BuidlUrl(this.ServiceUrl, "address");
 		return this.http.post<IExecute<IAddressesEntity>>(url, entity);
-	}	
+	}
 }

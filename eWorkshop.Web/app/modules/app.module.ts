@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { FormsModule } from "@angular/forms";
 
 import { AppRouteModule } from "./route";
 import { AdminModule } from "./admin";
@@ -12,7 +13,6 @@ import { MaterialModule, SharedModule } from "./shared";
 
 import { AppComponent } from "./app.component";
 import "./app.files";
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
 	imports: [
@@ -30,7 +30,7 @@ import { FormsModule } from '@angular/forms';
 	],
 	declarations: [
 		AppComponent
- 
+
 	],
 	bootstrap: [AppComponent]
 })

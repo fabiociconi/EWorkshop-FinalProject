@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators } from "@angular/forms";
-import { AutoFormService, EntityAction } from "xcommon";
+import { AutoFormService } from "xcommon";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
-import { ISignUpEntity, Guid, RoleType } from "../../../entity";
+import { ISignUpEntity, Guid, RoleType, EntityAction } from "../../../entity";
 import { AuthService } from "../../service";
 
 @Component({

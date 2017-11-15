@@ -5,14 +5,14 @@ import { Observable } from "rxjs/observable";
 import { Subject } from "rxjs/Subject";
 import { HttpUtilService } from "xcommon";
 
-const jwt_decode = require("jwt-decode");
+const JwtDecode = require("jwt-decode");
 
 import { ISignInEntity, ISignUpEntity, IExecute, ITokenEntity, RoleType } from "../../entity";
 
 interface IKeys {
-	Token: string,
-	FirstName: string,
-	LastName: string
+	Token: string;
+	FirstName: string;
+	LastName: string;
 }
 
 @Injectable()
@@ -32,7 +32,6 @@ export class AuthService {
 	public LoginChange = this.LoginChangeSubject.asObservable();
 	public get Role(): RoleType { return this._Role; }
 
-
 	constructor(private utilService: HttpUtilService, private http: HttpClient, private router: Router) {
 		this.Token = localStorage.getItem(this.Keys.Token);
 		this.LoadRole();
@@ -47,7 +46,7 @@ export class AuthService {
 			FirstName: localStorage.getItem(this.Keys.FirstName),
 			LastName: localStorage.getItem(this.Keys.LastName),
 			Token: localStorage.getItem(this.Keys.Token)
-		}
+		};
 	}
 
 	public GetAuthorizationHeader(): string {
@@ -133,7 +132,7 @@ export class AuthService {
 
 		if (this.Token) {
 
-			const token = jwt_decode(this.Token);
+			const token = JwtDecode(this.Token);
 			const role = token["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 
 			switch (role) {
