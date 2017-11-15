@@ -21,12 +21,24 @@ export class SignUpWorkshopComponent implements OnInit
 
 	constructor(private autoFormService: AutoFormService, private authService: AuthService, private snackBar: MatSnackBar) { }
 
-
-
-
 	public ngOnInit(): void
 	{
 		this.NewSignUpWorkshopForm();
+	}
+
+	public SignUp(entity: ISignUpEntity): void
+	{
+		this.authService.SignUp(entity)
+			.subscribe(res =>
+			{
+
+				if (res.HasErro) {
+					this.snackBar.open("Your browser did something unexpected. Please contact us if the problem persists.", "", { duration: 3000 });
+					return;
+				}
+
+				this.snackBar.open("Thank you! You are now registred in our system ", "", { duration: 3000 });
+			});
 	}
 
 	public BuildForm(entity: ISignUpEntity): void
@@ -46,8 +58,10 @@ export class SignUpWorkshopComponent implements OnInit
 
 		this.Ready = true;
 	}
+
 	private NewSignUpWorkshopForm(): void
 	{
+
 		const today = new Date();
 
 		this.BuildForm({
@@ -68,23 +82,5 @@ export class SignUpWorkshopComponent implements OnInit
 		});
 	}
 
-	public SignUp(entity: ISignUpEntity): void
-	{
-		this.authService.SignUp(entity)
-			.subscribe(res =>
-			{
 
-				if (res.HasErro) {
-					this.snackBar.open("Your browser did something unexpected. Please contact us if the problem persists.", "", {
-						duration: 3000,
-					});
-
-					return;
-				}
-
-				this.snackBar.open("Thank you! You are now registred in our system ", "", {
-					duration: 3000,
-				});
-			});
-	}
 }

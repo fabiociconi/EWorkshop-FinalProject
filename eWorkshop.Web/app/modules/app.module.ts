@@ -12,7 +12,6 @@ import { MaterialModule, SharedModule } from "./shared";
 
 import { AppComponent } from "./app.component";
 import "./app.files";
-import { EqualValidator } from "./public/account/EqualValidator";
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -30,8 +29,8 @@ import { FormsModule } from '@angular/forms';
 		FormsModule
 	],
 	declarations: [
-		AppComponent,
-		EqualValidator 
+		AppComponent
+ 
 	],
 	bootstrap: [AppComponent]
 })
