@@ -100,6 +100,14 @@ export class CustomerCarDetailComponent implements OnInit {
                     return;
                 }
 
+                if (entity.Action === EntityAction.New) {
+                    this.snackBar.open("Car added successfully!", "", {
+                        duration: 2000,
+                    });
+                    this.BuildForm(res.Entity);
+                    return;
+                }
+
                 this.snackBar.open("Car saved successfully!", "", {
                     duration: 2000,
                 });
