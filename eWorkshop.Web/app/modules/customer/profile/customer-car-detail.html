@@ -1,3 +1,49 @@
-﻿<div class="customer-car-detail">
+<div class="customer-car-detail">
 	<h1>Hey! I"m customer-car-detail</h1>
+	<div *ngIf="!Ready">
+		Loading...
+	</div>
+	<div *ngIf="Ready">
+		<form [formGroup]="CarDetailForm" (ngSubmit)="Save(CarDetailForm.value)" layout="column">
+
+			<div layout="row" flex>
+				<mat-form-field flex>
+					<input matInput formControlName="Brand" placeholder="Brand">
+				</mat-form-field>
+			</div>
+			<div layout="row" flex>
+				<mat-form-field flex>
+					<input matInput formControlName="Color" placeholder="Color">
+				</mat-form-field>
+			</div>
+			<div layout="row" flex>
+				<mat-form-field flex>
+					<input matInput formControlName="Year" placeholder="Year">
+				</mat-form-field>
+			</div>
+			<div layout="row" flex>
+				<mat-form-field flex>
+					<input matInput formControlName="Trasmission" placeholder="Transmission">
+				</mat-form-field>
+			</div>
+			<div layout="row" flex>
+				<mat-form-field flex>
+					<input matInput formControlName="LicensePlate" placeholder="License Plate">
+				</mat-form-field>
+			</div>
+			<div layout="row" flex>
+				<mat-form-field flex>
+					<input matInput formControlName="FuelType" placeholder="Fuel Type">
+				</mat-form-field>
+			</div>
+
+			
+
+			<div layout="row" flex content="end">
+				<!--<button mat-raised-button color="warn" type="button" (click)="Delete()">Delete</button>-->
+				<button mat-raised-button color="primary" type="submit" [disabled]="!CarDetailForm.valid">Save</button>
+			</div>
+		</form>
+		
+	</div>	
 </div>
