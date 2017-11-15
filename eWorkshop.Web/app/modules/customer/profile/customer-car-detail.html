@@ -1,10 +1,10 @@
 <div class="customer-car-detail">
-	<h1>Hey! I"m customer-car-detail</h1>
+	<h1>Car Detail</h1>
 	<div *ngIf="!Ready">
 		Loading...
 	</div>
 	<div *ngIf="Ready">
-		<form [formGroup]="CarDetailForm" (ngSubmit)="Save(CarDetailForm.value)" layout="column">
+		<form  class="form-viewer" [formGroup]="CarDetailForm" (ngSubmit)="Save(CarDetailForm.value)" layout="column">
 
 			<div layout="row" flex>
 				<mat-form-field flex>
@@ -20,27 +20,35 @@
 				<mat-form-field flex>
 					<input matInput formControlName="Year" placeholder="Year">
 				</mat-form-field>
-			</div>
+			</div>			
+
 			<div layout="row" flex>
 				<mat-form-field flex>
-					<input matInput formControlName="Trasmission" placeholder="Transmission">
+					<mat-select formControlName="Trasmission" placeholder="Transmission">
+						<mat-option value="0">Automatic</mat-option>
+						<mat-option value="1">Manual</mat-option>
+					</mat-select>
 				</mat-form-field>
 			</div>
+			
 			<div layout="row" flex>
 				<mat-form-field flex>
 					<input matInput formControlName="LicensePlate" placeholder="License Plate">
 				</mat-form-field>
 			</div>
+
 			<div layout="row" flex>
 				<mat-form-field flex>
-					<input matInput formControlName="FuelType" placeholder="Fuel Type">
+					<mat-select formControlName="FuelType" placeholder="Fuel Type">
+						<mat-option value="0">Gasoline</mat-option>
+						<mat-option value="1">Diesel</mat-option>
+					</mat-select>
 				</mat-form-field>
 			</div>
 
-			
-
 			<div layout="row" flex content="end">
-				<!--<button mat-raised-button color="warn" type="button" (click)="Delete()">Delete</button>-->
+				<button mat-raised-button color="secundary" type="button" (click)="Back()">Back</button>
+				<button mat-raised-button color="warn" type="button" (click)="Delete()">Delete</button>
 				<button mat-raised-button color="primary" type="submit" [disabled]="!CarDetailForm.valid">Save</button>
 			</div>
 		</form>

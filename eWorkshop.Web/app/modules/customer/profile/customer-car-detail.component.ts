@@ -5,7 +5,7 @@ import { MatSnackBar } from "@angular/material";
 import { AutoFormService } from "xcommon";
 
 import { CustomerService, DialogService } from "../../service";
-import { ICarsEntity, IPeopleEntity, EntityAction } from "../../../entity";
+import { ICarsEntity, EntityAction } from "../../../entity";
 import { Guid } from "../../../entity/entity-util";
 
 @Component({
@@ -19,7 +19,6 @@ export class CustomerCarDetailComponent implements OnInit {
     public idPerson = "";
     public CarDetailForm: FormGroup;
     private Entity: ICarsEntity;
-    public Person: IPeopleEntity;
     
 
     constructor(
@@ -59,8 +58,11 @@ export class CustomerCarDetailComponent implements OnInit {
     private BuildForm(entity: ICarsEntity): void {
         this.CarDetailForm = this.autoFormService.createNew<ICarsEntity>()
             .AddValidator(c => c.Brand, Validators.required)
+            .AddValidator(c => c.Brand, Validators.maxLength(50))
             .AddValidator(c => c.Color, Validators.required)
+            .AddValidator(c => c.Color, Validators.maxLength(50))
             .AddValidator(c => c.Year, Validators.required)
+            .AddValidator(c => c.Year, Validators.maxLength(4))
             .AddValidator(c => c.Trasmission, Validators.required)
             .AddValidator(c => c.LicensePlate, Validators.required)
             .AddValidator(c => c.FuelType, Validators.required)
@@ -88,19 +90,36 @@ export class CustomerCarDetailComponent implements OnInit {
                     });
 
                     return;
+                }                
+
+                if (entity.Action === EntityAction.Delete) {
+                    this.snackBar.open("Car deleted successfully!", "", {
+                        duration: 2000,
+                    });
+                    this.Back();
+                    return;
                 }
 
                 this.snackBar.open("Car saved successfully!", "", {
                     duration: 2000,
                 });
-
-                if (entity.Action === EntityAction.Delete) {
-                    this.router.navigate(["/"]);
-                    return;
-                }
-
                 this.BuildForm(res.Entity);
             });
+    }
+
+    public Delete(): void {
+        if (this.Entity.Action === EntityAction.New) {
+            return;
+        }
+
+        this.dialogService.confirm("Warning", "Would you like to delete this car?")
+            .subscribe(res => {
+                if (res) {
+                    this.Entity.Action = EntityAction.Delete;
+                    this.Save(this.Entity);
+                }
+            });
+		
     }
 
     private New(): void {
@@ -111,10 +130,15 @@ export class CustomerCarDetailComponent implements OnInit {
             Brand: "",
             Color: "",
             Year: 2017,			
-            Trasmission: 1,
+            Trasmission: 0,
 			LicensePlate: "", 
-            FuelType: 1, 
+            FuelType: 0, 
             CreateDate: (new Date())
         });
+    }
+
+    private Back(): void {
+        this.router.navigate(["/customer/profile/car"]);
+        return;
     }
 }

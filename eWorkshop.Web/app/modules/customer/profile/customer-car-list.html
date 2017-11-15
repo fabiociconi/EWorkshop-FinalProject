@@ -1,22 +1,22 @@
 <div class="customer-car-list">
 	<h1>Your Cars</h1>
-	<div *ngIf="!Cars">
+	<div class="form-viewer" *ngIf="!Cars">
 		Loading...
 	</div>
-	<div *ngIf="Cars">
-		Cars: {{Cars.length}}
-		<a [routerLink]="['/customer/profile/car/', 'newcar']">New Car</a>
-		<div *ngFor="let car of Cars">
-			<a [routerLink]="['/customer/profile/car/', car.IdCar]">{{car.Brand}}</a>
-		</div>
+	<div class="form-viewer list" *ngIf="Cars">
+		<h2># Cars: {{Cars.length}}</h2>
+		<br />
+		<ul>
+			<li>				
+				<div layout="row" *ngFor="let car of Cars">
+					<button [routerLink]="['/customer/profile/car/', car.IdCar]">Edit</button>
+					<div class="row">
+						{{car.Brand}}
+					</div>
+				</div>				
+			</li>
+		</ul>
+		<br />
+		<h2><button [routerLink]="['/customer/profile/car/', 'newcar']">New Car</button></h2>
 	</div>
-
-	{{ Cars | json }}
-
 </div>
-
-
-
-
-
-
