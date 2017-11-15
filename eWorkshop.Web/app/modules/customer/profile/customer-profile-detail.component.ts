@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators } from "@angular/forms";
-import { AutoFormService, EntityAction } from "xcommon";
+import { AutoFormService } from "xcommon";
 import { MatSnackBar } from "@angular/material";
 import { Router } from "@angular/router";
 
@@ -8,6 +8,7 @@ import { Router } from "@angular/router";
 
 import { CustomerService, DialogService } from "../../service";
 import { IPeopleEntity } from "../../../entity";
+import { EntityAction } from "xcommon/dist/entity/entity";
 
 
 
@@ -41,7 +42,6 @@ export class CustomerProfileDetailComponent implements OnInit {
 
 	private BuildForm(entity: IPeopleEntity): void
 	{
-		
 		const autoForm = this.autoFormService.createNew<IPeopleEntity>();
 
 
@@ -55,7 +55,6 @@ export class CustomerProfileDetailComponent implements OnInit {
 			//.AddValidator(c => c.Telephone, Validators.required)
 			//.AddValidator(c => c.Email, Validators.email)
 			//.AddValidator(c => c.Email, Validators.required)
-
 			.Build(entity);
 
 		this.Person = entity;
@@ -88,6 +87,7 @@ export class CustomerProfileDetailComponent implements OnInit {
 		this.router.navigate(["/customer"]);
 		return;
 	}
+
 	private DeleteProfile(): void
 	{
 		this.dialogService.confirm("Warnning", "Do you like to delete your Account?")
@@ -106,11 +106,6 @@ export class CustomerProfileDetailComponent implements OnInit {
 	{
 		const today = new Date();
 		entity.ChangeDate = today;
-
-		// Esse linha abaixo não é necessaria. Ela não deve estar aqui ...
-		// Mas por algum motivo esse valor esta se perdendo no form
-		entity.Customer = this.Person.Customer;
-
 
 		console.log(JSON.stringify(entity));
 		this.customerService.SetProfile(entity)		

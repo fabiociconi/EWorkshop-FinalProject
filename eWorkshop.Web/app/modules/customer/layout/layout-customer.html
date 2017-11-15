@@ -1,4 +1,4 @@
-<div class="layout-customer">
+<div class="layout-customer" layout="column" flex>
 	<div class="header" shadow="2" layout="row">
 		<a class="logo" routerLink="/">
 			<img src="/assets/favicon.png" />
@@ -28,8 +28,8 @@
 				</li>
 			</ul>
 		</mat-sidenav>
-		<div class="content" layout="column">
-			<router-outlet></router-outlet>
+		<div class="content" layout="column" flex>
+			<router-outlet root></router-outlet>
 		</div>
 		
 	</mat-sidenav-container>

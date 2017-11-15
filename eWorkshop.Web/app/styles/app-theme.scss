@@ -17,3 +17,12 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
 .mat-form-field {
 	width: 100%;
 }
+
+.mat-drawer-content {
+	width: 100% !important;
+	max-width: 100% !important;
+	min-width: 0;
+	display: flex !important;
+	flex: 1 0 0;
+	height: initial !important;
+}

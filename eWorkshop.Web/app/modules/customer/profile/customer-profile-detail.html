@@ -1,43 +1,40 @@
-<div class="customer-profile-detail">
-
-	<h1>Profile</h1>
-
-	<form *ngIf="Ready" [formGroup]="CustomerProfileForm" (ngSubmit)="SaveChanges(CustomerProfileForm.getRawValue())" layout="column">
-		<div class="form-viewer">
+<div class="customer-profile-detail" layout="column" flex>
+	<div class="title">
+		My Profile
+	</div>
+	<form *ngIf="Ready" [formGroup]="CustomerProfileForm" (ngSubmit)="SaveChanges(CustomerProfileForm.value)" layout="column" flex>
+		<div layout="row">
 			<mat-form-field>
-				<input matInput formControlName="FirstName" placeholder="First name" >
+				<input matInput formControlName="FirstName" placeholder="First name">
 			</mat-form-field>
 
 			<mat-form-field>
-				<input matInput formControlName="LastName" placeholder="Last Name" >
+				<input matInput formControlName="LastName" placeholder="Last Name">
+			</mat-form-field>
+		</div>	
+
+		<div layout="row">
+			<mat-form-field>
+				<input matInput formControlName="Telephone" placeholder="Telephone">
 			</mat-form-field>
 
 			<mat-form-field>
-				<input matInput formControlName="Telephone" placeholder="Telephone" >
+				<input matInput formControlName="Email" placeholder="Email">
 			</mat-form-field>
-
-			<mat-form-field>
-				<input matInput formControlName="Email" placeholder="Email" >
-			</mat-form-field>
-			<div class="form-footer">
-				
-					<button mat-raised-button color="primary" type="submit" [disabled]="!CustomerProfileForm.valid || CustomerProfileForm.untouched ">Confirm</button>
-							
-					<button mat-raised-button color="warn" (click)="DeleteProfile()" type="button">	Delete Account 	</button>
-				
-					<button mat-raised-button color="accent" (click)="LoadProfile()" 
-							[disabled]="CustomerProfileForm.untouched "type="button" >Cancel</button>
-
-				<button mat-raised-button color="secundary" (click)="Back()"  type="button">
-					Back
-				</button>
-			
-			</div>
-			<div *ngIf="ShowMessage" class="error-message">
-				{{Message}}
-			</div>
-
 		</div>
+		<div flex></div>
+		<div layout="row" content="end">
+			<button mat-raised-button color="primary" type="submit" [disabled]="!CustomerProfileForm.valid || CustomerProfileForm.untouched">Save</button>
+			<button mat-raised-button color="accent" (click)="LoadProfile()" [disabled]="CustomerProfileForm.untouched " type="button">
+				Cancel
+			</button>
+			<button mat-raised-button color="secundary" (click)="Back()" type="button">
+				Back
+			</button>
+		</div>
+		<div *ngIf="ShowMessage" class="error-message">
+			{{Message}}
+		</div>
+
 	</form>
-	<pre>{{Person | json}}</pre>
 </div>
