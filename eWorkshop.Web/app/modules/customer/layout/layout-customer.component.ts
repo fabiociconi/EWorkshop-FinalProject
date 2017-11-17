@@ -7,7 +7,7 @@ import { AuthService } from "../../service";
 	styleUrls: ["./layout-customer.scss"]
 })
 export class LayoutCustomerComponent implements OnInit {
-
+	public UserName = localStorage.FirstName + " " + localStorage.LastName;
 	public SideNavMode = "side";
 	public SideNavOpen = true;
 

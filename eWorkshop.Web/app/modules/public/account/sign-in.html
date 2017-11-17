@@ -1,7 +1,4 @@
 <div class="sign-in">
-	<!--<div class="backgroundContainer">
-		<img src="/assets/bgLogin.jpg" class="background" />
-	</div>-->
 	<div class="container">
 		<div id="login" class="login">
 			<form *ngIf="Ready" [formGroup]="SignInForm" (ngSubmit)="SignIn(SignInForm.value)" layout="column">
@@ -24,9 +21,11 @@
 					<div layout="row" flex content="end">
 						<button mat-raised-button color="primary" type="submit" [disabled]="!SignInForm.valid">Sign In</button>
 					</div>
+
 					<div layout="row" flex content="end">
 						<button mat-raised-button color="secundary" routerLink="/account/sign-up">Create your account</button>
 					</div>
+
 					<div layout="row" flex content="end">
 						<button mat-raised-button color="secundary" routerLink="/account/sign-up-workshop">Workshop New Account</button>
 					</div>
@@ -36,9 +35,6 @@
 					</div>
 				</div>
 			</form>
-
 		</div>
-		
 	</div>
-
 </div>

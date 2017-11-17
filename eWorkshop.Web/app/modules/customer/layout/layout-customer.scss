@@ -7,19 +7,26 @@
 		position: fixed;
 		z-index: 2;
 		color: #fff;
-		background-color: #328bd3;
+		background-color: rgba(10,10,10,.68);
 		height: 55px;
 		line-height: 55px;
-		padding-left: 10px;
 
 		.logo {
 			height: 55px;
 			line-height: 55px;
-			width: 200px;
+			width: 233px;
+			color: rgba(10,10,10,.68);
+			font-weight: 900;
+			font-size: 25px;
+			background-color: #c50101;
+			text-align: center;
+		}
 
-			img {
-				height: 50px;
-			}
+		.logOffButton {
+			z-index: 10;
+			position: absolute;
+			right: 0;
+			top: 0;
 		}
 	}
 
@@ -36,8 +43,61 @@
 		flex: 1 0 auto;
 
 		mat-sidenav {
+			background-color: #202020;
 			width: 233px;
 			top: 55px;
+
+			.user {
+				img {
+					margin: 15px 50px;
+				}
+			}
+
+			.welcomeText{
+				color: white;
+				text-align: center;
+				margin-bottom: 10px;
+			}
+
+			.menu {
+				margin: 0;
+				padding: 0;
+				width: 300px;
+				list-style: none;
+				background: rgb(255,255,255);
+			}
+
+			.menu li {
+				padding: 0;
+				margin: 0 0 1px 0;
+				height: 40px;
+				display: block;
+			}
+
+			.menu li a {
+				text-align: left;
+				height: 40px;
+				padding: 0px 25px;
+				font: 16px Verdana, Arial, Helvetica, sans-serif;
+				color: rgb(255,255,255);
+				display: block;
+				background: url('/assets/verMenuImages.png') 0px 0px no-repeat;
+				text-decoration: none;
+			}
+
+			.menu li a:hover {
+				background: url('/assets/verMenuImages.png') 0px -40px no-repeat;
+				color: rgb(255,255,255);
+			}
+
+			.menu li a.active, .menu li a.active:hover {
+				background: url('/assets/verMenuImages.png') 0px -80px no-repeat;
+				color: rgb(255,255,255);
+			}
+
+			.menu li a span {
+				line-height: 40px;
+			}
 		}
 
 		.fixed {
