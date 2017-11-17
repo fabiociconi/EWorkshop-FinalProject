@@ -9,16 +9,19 @@ import { ICarsEntity } from "../../../entity";
 	styleUrls: ["./customer-car-list.scss"]
 })
 export class CustomerCarListComponent implements OnInit {
-
+	public Ready = false;
 	public Cars: ICarsEntity[];
 
-	constructor(private customerService: CustomerService) { }
+	constructor(private customerService: CustomerService) {
+		this.Cars = new Array<ICarsEntity>();
+	}
 
 	public ngOnInit(): void {
 		this.customerService.GetCars()
 			.subscribe(res => {
 				this.Cars = res;
-				console.log(res);
 			});
+
+		this.Ready = true;
 	}
 }

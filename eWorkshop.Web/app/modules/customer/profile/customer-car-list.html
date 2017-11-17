@@ -2,10 +2,10 @@
 	<div class="title">
 		Your cars
 	</div>
-	<div class="form-viewer" *ngIf="!Cars">
+	<div class="form-viewer" *ngIf="!Ready">
 		Loading...
 	</div>
-	<div class="form-viewer list" *ngIf="Cars">
+	<div class="form-viewer list" *ngIf="Ready">
 		<h2>Cars registered: {{Cars.length}}</h2>
 		<br />
 		<ul class="carList">
