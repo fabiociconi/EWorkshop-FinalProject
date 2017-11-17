@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using eWorkshop.Business.Register;
+using eWorkshop.Business.Service;
 using eWorkshop.Entity.Enum;
 using eWorkshop.Entity.Register;
 using eWorkshop.Entity.Register.Filter;
+using eWorkshop.Entity.Service;
+using eWorkshop.Entity.Service.Filter;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using XCommon.Application.Executes;
@@ -23,8 +26,14 @@ namespace eWorkshop.Web.Controllers
 		private AddressesBusiness AddressesBusiness { get; set; }
 
 		[Inject]
+		private WorkshopServicesBusiness WorkshopServicesBusiness { get; set; }
+
+		[Inject]
 		private CarsBusiness CarsBusiness { get; set; }
 
+		[Inject]
+		private ServicesBusiness ServicesBusiness { get; set; }
+		
 		[HttpGet]
 		public async Task<PeopleEntity> GetProfile()
 		{
@@ -55,5 +64,21 @@ namespace eWorkshop.Web.Controllers
 		{
 			return await AddressesBusiness.GetFirstByFilterAsync(new AddressesFilter { IdPerson = UserKey, Key = id });
 		}
+
+		[HttpGet("workshopservice")]
+		public async Task<List<WorkshopServicesEntity>> GetWorkshopServices()
+		{
+			return await WorkshopServicesBusiness.GetByFilterAsync(new WorkshopServicesFilter { IdWorkshop = UserKey });
+		}
+
+		[HttpGet("service/{id}")]
+		public async Task<ServicesEntity> GetService(Guid id)
+		{
+			return await ServicesBusiness.GetFirstByFilterAsync(new ServicesFilter { IdService = UserKey, Key = id });
+		}
+
+
+
+
 	}
 }
