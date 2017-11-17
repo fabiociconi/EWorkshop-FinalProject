@@ -28,6 +28,8 @@ namespace eWorkshop.Entity.Register
 
 		public DateTime CreateDate { get; set; }
 
+		public string Model { get; set; }
+
 
 		[IgnoreDataMember]
 		public override Guid Key

@@ -35,6 +35,7 @@ export interface ICarsEntity {
 	LicensePlate: string; 
 	FuelType: number; 
 	CreateDate: Date; 
+	Model: string; 
 	Action: EntityAction; 
 }
 
