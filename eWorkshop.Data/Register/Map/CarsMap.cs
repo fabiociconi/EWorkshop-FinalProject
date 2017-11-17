@@ -51,6 +51,9 @@ namespace eWorkshop.Data.Register.Map
 				entity.Property(e => e.CreateDate)
 					.IsRequired();
 
+				entity.Property(e => e.Model)
+					.HasMaxLength(100);
+
 				entity
 					.HasOne(d => d.People)
 					.WithMany(p => p.Cars)

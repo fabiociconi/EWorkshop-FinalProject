@@ -11,8 +11,7 @@ import { AuthService } from "../../service";
 	templateUrl: "./sign-up.html",
 	styleUrls: ["./sign-up.scss"]
 })
-export class SignUpComponent implements OnInit
-{
+export class SignUpComponent implements OnInit {
 
 	public Ready = false;
 	public ShowMessage = false;
@@ -21,11 +20,9 @@ export class SignUpComponent implements OnInit
 
 	constructor(private autoFormService: AutoFormService, private authService: AuthService, private snackBar: MatSnackBar) { }
 
-	public SignUp(entity: ISignUpEntity): void
-	{
+	public SignUp(entity: ISignUpEntity): void {
 		this.authService.SignUp(entity)
-			.subscribe(res =>
-			{
+			.subscribe(res => {
 
 				if (res.HasErro) {
 					this.snackBar.open("Your browser did something unexpected.Please contact us if the problem persists.", "", { duration: 3000 });
@@ -36,14 +33,12 @@ export class SignUpComponent implements OnInit
 			});
 	}
 
-	public ngOnInit(): void
-	{
+	public ngOnInit(): void {
 		this.NewSignUpForm();
 
 	}
 
-	public BuildForm(entity: ISignUpEntity): void
-	{
+	public BuildForm(entity: ISignUpEntity): void {
 
 		const autoForm = this.autoFormService.createNew<ISignUpEntity>();
 
@@ -60,8 +55,7 @@ export class SignUpComponent implements OnInit
 		this.Ready = true;
 	}
 
-	private NewSignUpForm(): void
-	{
+	private NewSignUpForm(): void {
 		const today = new Date();
 
 		this.BuildForm({

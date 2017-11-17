@@ -2,7 +2,9 @@
 	<div class="title">
 		My Profile
 	</div>
-	<form *ngIf="Ready" [formGroup]="CustomerProfileForm" (ngSubmit)="SaveChanges(CustomerProfileForm.value)" layout="column" flex>
+	<form *ngIf="Ready" [formGroup]="CustomerProfileForm"
+	 (ngSubmit)="SaveChanges(CustomerProfileForm.value)" layout="column"
+	 flex>
 		<div layout="row">
 			<mat-form-field>
 				<input matInput formControlName="FirstName" placeholder="First name">
@@ -11,7 +13,7 @@
 			<mat-form-field>
 				<input matInput formControlName="LastName" placeholder="Last Name">
 			</mat-form-field>
-		</div>	
+		</div>
 
 		<div layout="row">
 			<mat-form-field>

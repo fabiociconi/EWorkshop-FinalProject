@@ -26,3 +26,7 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
 	flex: 1 0 0;
 	height: initial !important;
 }
+
+button {
+	margin-left: 5px !important;
+}

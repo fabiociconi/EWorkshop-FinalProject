@@ -1,12 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators } from "@angular/forms";
-import { AutoFormService } from "xcommon";
+import { AutoFormService, EntityAction } from "xcommon";
 import { MatSnackBar } from "@angular/material";
 import { Router } from "@angular/router";
 
 import { CustomerService, DialogService } from "../../service";
 import { IPeopleEntity } from "../../../entity";
-import { EntityAction } from "xcommon/dist/entity/entity";
 
 @Component({
 	selector: "customer-profile-detail",
@@ -85,7 +84,6 @@ export class CustomerProfileDetailComponent implements OnInit {
 				if (entity.Action === EntityAction.Delete) {
 					this.router.navigate(["/"]);
 					return;
-
 				}
 				this.BuildForm(res.Entity);
 			});

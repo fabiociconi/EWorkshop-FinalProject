@@ -28,6 +28,8 @@ namespace eWorkshop.Data.Register
 
 		public DateTime CreateDate { get; set; }
 
+		public string Model { get; set; }
+
 		public virtual People People { get; set; }
 
 		public virtual ICollection<CarsHistories> CarsHistories { get; set; }

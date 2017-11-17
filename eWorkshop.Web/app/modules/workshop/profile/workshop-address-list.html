@@ -1,0 +1,43 @@
+<div class="workshop-address-list" layout="column" flex>
+    <div class="title">Workshop Addresses </div>
+    <!-- <div class="test">
+       <table class="table">
+            <thead class="header">
+                <th>#</th>
+                <th>Street</th>
+                <th>Number</th>
+                <th>City</th>
+                <th>Zip Code</th>
+                <th>Type</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of WorkShopAddress; let i = index" class="table-body">
+                        <th>item.key()</th>
+                    <td>{{i + 1}}</td>
+                    <td>{{item.Street}}</td>
+                    <td>{{item.Number}}</td>
+                    <td>{{item.City}}</td>
+                    <td>{{item.PostalCode}}</td>
+                    <td>{{item.Type}}</td>
+                </tr>
+            </tbody>
+        </table> 
+    </div> -->
+    <div layout="row">
+        <ul class="addresses">
+            <li *ngFor="let item of WorkShopAddress; let i = index" 
+            [class.selected]="item === selectedAdress">
+                <span class="badge">{{i + 1}}</span>
+                {{item.Number}} {{item.Street}} {{item.City}} {{item.PostalCode}} {{item.Type}}
+            </li>
+        </ul>
+    </div>
+    <div flex> </div>
+    <div layout="row" content="end">
+        <button mat-raised-button color="primary" type="submit">Edit</button>
+        <button mat-raised-button color="secundary" (click)="Back()" type="button"> Back </button>
+    </div>
+    <div *ngIf="ShowMessage" class="error-message">
+        {{Message}}
+    </div>
+</div>

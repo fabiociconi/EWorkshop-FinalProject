@@ -33,7 +33,7 @@
     "jwt-decode": "^2.2.0",
     "ngx-uploader": "^4.0.0",
     "rxjs": "^5.4.3",
-    "xcommon": "0.0.17",
+    "xcommon": "0.0.18",
     "zone.js": "^0.8.18"
   },
   "devDependencies": {

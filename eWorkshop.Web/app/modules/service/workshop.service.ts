@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/observable";
 import { HttpUtilService } from "xcommon";
 
-import { IPeopleEntity, IAddressesEntity, ICarsEntity, IExecute } from "../../entity";
+import { IPeopleEntity, IAddressesEntity, ICarsEntity, IExecute, IWorkshopsEntity, IWorkshopServicesEntity, IServicesEntity } from "../../entity";
 
 @Injectable()
 export class WorkshopService {
@@ -35,5 +35,17 @@ export class WorkshopService {
 	public SetAddress(entity: IAddressesEntity): Observable<IExecute<IAddressesEntity>> {
 		const url = this.utilService.BuidlUrl(this.ServiceUrl, "address");
 		return this.http.post<IExecute<IAddressesEntity>>(url, entity);
-	}
+    }
+
+    public GetWorkshopServices(): Observable<IWorkshopServicesEntity[]> {
+        const url = this.utilService.BuidlUrl(this.ServiceUrl, "workshopservice");
+        return this.http.get<IWorkshopServicesEntity[]>(url);
+    }
+
+    public GetService(id: string): Observable<IServicesEntity> {
+        const url = this.utilService.BuidlUrl(this.ServiceUrl, "service", id);
+        return this.http.get<IServicesEntity>(url);
+    }
+
+
 }
