@@ -1,3 +1,26 @@
-﻿<div class="workshop-price-table">
-	<h1>Hey! I"m workshop-price-table</h1>
+<div class="workshop-price-table">
+	<h1>Price Table</h1>
+	<div class="form-viewer" *ngIf="!Services">
+		Loading...
+	</div>
+	<div class="form-viewer list" *ngIf="Services">
+		<h2># Services: {{Services.length}}</h2>
+		<br />
+			  
+  
+		<ul>
+			<li>
+				<div layout="row" *ngFor="let service of Services">
+					<button [routerLink]="['/workshop/profile/pricetable/', service.IdWorkshop]">Edit</button>
+					<div class="row">	
+						{{service.Price}}
+					</div>
+				</div>
+			</li>
+		</ul>
+		<br />
+		<h2><button [routerLink]="['/workshop/profile/pricetable/', 'newservice']">New Service</button></h2>
+
+	
+	</div>
 </div>
