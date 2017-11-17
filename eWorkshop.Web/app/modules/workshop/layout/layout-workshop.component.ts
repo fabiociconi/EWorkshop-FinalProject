@@ -7,7 +7,7 @@ import { AuthService } from "../../service";
 	styleUrls: ["./layout-workshop.scss"]
 })
 export class LayoutWorkshopComponent implements OnInit {
-
+	public UserName = localStorage.FirstName + " " + localStorage.LastName;
 	public SideNavMode = "side";
 	public SideNavOpen = true;
 
