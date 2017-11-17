@@ -10,6 +10,7 @@ import { ConfirmDialog } from "../shared/components/confirm-dialog.component";
 import { AuthService } from "./auth.service";
 import { IconService } from "./icon.service";
 import { CustomerService } from "./customer.service";
+import { WorkshopService } from "./workshop.service";
 
 @NgModule({
 	imports: [
@@ -25,6 +26,7 @@ import { CustomerService } from "./customer.service";
 		AuthService,
 		IconService,
 		CustomerService,
+		WorkshopService,
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: AuthInterceptor,
