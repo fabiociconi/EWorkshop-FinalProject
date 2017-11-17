@@ -20,7 +20,6 @@ export class SignInComponent implements OnInit {
 	constructor(private autoFormService: AutoFormService, private authService: AuthService) { }
 
 	public SignIn(entity: ISignInEntity): void {
-
 		this.authService.SignIn(entity)
 			.subscribe(res => {
 				if (res.HasErro) {

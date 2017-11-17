@@ -1,23 +1,5 @@
 //Page CSS
 
-/*.container {
-	position: absolute;
-	left: 0;
-	top: 0;
-	padding: 1px 0;
-	height: 100%;
-	width: 100%;
-	color: #fff;
-	font-family: "Comfortaa", "Helvetica", sans-serif;
-}
-
-.login {
-	max-width: 280px;
-	min-height: 500px;
-	margin: 30px auto;
-	background-color: rgba(10,10,10,.68);
-}*/
-
 .login-icon-field {
 	height: 250px;
 	width: 100%;
@@ -51,7 +33,15 @@ form {
 	max-width: 280px;
 	min-height: 600px;
 	margin: 30px auto;
-	background-color: rgba(10,10,10,.68);
+	background-color: rgba(255,255,255,.68);
+	border-radius: 20px;
+}
+
+form span{
+	font-weight: 900;
+	font-size: 30px;
+	color: black;
+	text-align: center;
 }
 
 button {
@@ -74,23 +64,3 @@ button:hover {
 button:active {
 	background-color: #1eaa7a;
 }
-
-//Renato Comentei aqui pq se nao as outras paginas vem com esta configuracao e depois muda.
-//se fomos manter essa, vamos alterar os outros scss.
-
-/*/deep/.mat-focused .mat-form-field-placeholder {
-	color: white;
-}
-
-/deep/.mat-form-field-placeholder {
-	color: rgba(255,255,255,0.5);
-}
-
-/deep/.mat-form-field-ripple {
-	background-color: #fff;
-}
-
-/deep/.mat-raised-button.mat-primary[disabled] {
-	background-color: #000;
-	color: #fff;
-}*/

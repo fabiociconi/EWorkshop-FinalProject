@@ -3,7 +3,10 @@
 		<div id="login" class="login">
 			<form *ngIf="Ready" [formGroup]="SignInForm" (ngSubmit)="SignIn(SignInForm.value)" layout="column">
 				<div class="login-icon-field">
-					<img src="/assets/car.png" style="margin-left: 15px;" />
+					<img src="/assets/carBlack.png" style="margin-left: 15px;" />
+					<div style="text-align: center;">
+						<span>EWorkshop</span>
+					</div>
 				</div>
 				<div class="login-form">
 					<mat-form-field>

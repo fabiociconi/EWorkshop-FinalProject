@@ -9,5 +9,7 @@ import { Component, OnInit } from "@angular/core";
 export class HomeCustomerComponent implements OnInit {
 	constructor() { }
 
-	public ngOnInit(): void { }
+	public ngOnInit(): void {
+		
+	}
 }
