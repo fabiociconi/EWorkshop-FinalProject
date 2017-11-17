@@ -5,7 +5,15 @@
 		margin-left: 5px;
 	}
 
-	form {
+	.carList {
 		max-width: 500px;
+
+		.carItem {
+			margin-top: 10px;
+
+			span {
+				margin: 8px 10px;
+			}
+		}
 	}
 }

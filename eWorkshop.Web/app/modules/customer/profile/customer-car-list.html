@@ -8,14 +8,12 @@
 	<div class="form-viewer list" *ngIf="Cars">
 		<h2>Cars registered: {{Cars.length}}</h2>
 		<br />
-		<ul>
-			<li>				
-				<div layout="row" *ngFor="let car of Cars">
-					<button [routerLink]="['/customer/profile/car/', car.IdCar]">Edit</button>
-					<div class="row">
-						{{car.Brand}}
-					</div>
-				</div>				
+		<ul class="carList">
+			<li class="carItem" *ngFor="let car of Cars" layout="row">
+				<icon icon="car"></icon>
+				<span>{{car.Brand}} {{car.Model}} {{car.Year}}</span>
+				<button mat-raised-button color="accent" [routerLink]="['/customer/profile/car/', car.IdCar]">Edit</button>
+				<button mat-raised-button color="warn" [routerLink]="['/customer/profile/car/', car.IdCar]">Delete</button>	
 			</li>
 		</ul>
 		<br />
