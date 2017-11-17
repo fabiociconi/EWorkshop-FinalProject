@@ -47,8 +47,6 @@ export class CustomerCarDetailComponent implements OnInit {
             this.Load(id);
             return;
         }
-
-        //this.New();
     }
 
     private GetIdPerson(idPerson: string): void {
@@ -59,6 +57,7 @@ export class CustomerCarDetailComponent implements OnInit {
         this.CarDetailForm = this.autoFormService.createNew<ICarsEntity>()
             .AddValidator(c => c.Brand, Validators.required)
             .AddValidator(c => c.Brand, Validators.maxLength(50))
+            .AddValidator(c => c.Model, Validators.maxLength(100))
             .AddValidator(c => c.Color, Validators.required)
             .AddValidator(c => c.Color, Validators.maxLength(50))
             .AddValidator(c => c.Year, Validators.required)
@@ -136,6 +135,7 @@ export class CustomerCarDetailComponent implements OnInit {
             IdCar: Guid.NewGuid(),
             IdPerson: this.idPerson,
             Brand: "",
+            Model: "",
             Color: "",
             Year: 2017,			
             Trasmission: 0,
