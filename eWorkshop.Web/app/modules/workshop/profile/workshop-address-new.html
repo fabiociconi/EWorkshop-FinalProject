@@ -1,0 +1,50 @@
+<div class="workshop-address-new"  layout="column" flex>
+        <form *ngIf="Ready" [formGroup]="WorkshopAddressForm" (ngSubmit)="SaveChanges(WorkshopAddressForm.value)" layout="column">
+            
+                <div class="form-viewer">
+                    <mat-form-field>
+                        <input matInput formControlName="StreetNumber" placeholder="Street Number" type="number" min="0">
+
+                    </mat-form-field>   
+                    
+                    <mat-form-field>
+                        <input matInput formControlName="Street" placeholder="Street">
+                    </mat-form-field>
+    
+                    <mat-form-field>
+                        <input matInput formControlName="City" placeholder="City">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                            <input matInput formControlName="PostalCode"  placeholder="Postal Code" >
+                        </mat-form-field>    
+    
+                    <mat-form-field>
+                        <input matInput formControlName="Longitude"  placeholder="0" type="number">
+                    </mat-form-field>
+    
+                    <mat-form-field>
+                        <input matInput formControlName="Latitude" placeholder="0" type="number" >
+                    </mat-form-field>
+                
+                    <div class="form-footer">
+                        <div class="bt-signup">
+                            <button mat-raised-button color="primary" type="submit" [disabled]="!WorkshopAddressForm.valid">Save</button>
+                        </div>
+                        <div class="bt-reset">
+                            <button mat-raised-button color="warn" type="reset">
+                                Reset
+                            </button>
+                            <button mat-raised-button color="secundary" type="button"(click)="Back()">
+                                    Back
+                                </button>
+                        </div>
+                    </div>
+                    <div *ngIf="ShowMessage" class="error-message">
+                        {{Message}}
+                    </div>
+    
+                </div>
+            </form>
+    </div>
+    

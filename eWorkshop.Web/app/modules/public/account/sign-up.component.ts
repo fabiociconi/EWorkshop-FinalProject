@@ -13,32 +13,30 @@ import { AuthService } from "../../service";
 })
 export class SignUpComponent implements OnInit {
 
-	public Ready = false;
-	public ShowMessage = false;
-	public Message = "";
+	public Ready: boolean = false;
+	public ShowMessage: boolean = false;
+	public Message: string = "";
 	public SignUpForm: FormGroup;
 
-	constructor(private autoFormService: AutoFormService, private authService: AuthService, private snackBar: MatSnackBar) { }
+	constructor(
+		private autoFormService: AutoFormService,
+		private authService: AuthService,
+		private snackBar: MatSnackBar) { }
 
-	public SignUp(entity: ISignUpEntity): void {
+	public ngOnInit(): void {
+		this.NewSignUpForm();
+	}
+	private SignUp(entity: ISignUpEntity): void {
 		this.authService.SignUp(entity)
 			.subscribe(res => {
-
 				if (res.HasErro) {
 					this.snackBar.open("Your browser did something unexpected.Please contact us if the problem persists.", "", { duration: 3000 });
 					return;
 				}
-
 				this.snackBar.open("Thank you! You are now registred in our system ", "", { duration: 3000 });
 			});
 	}
-
-	public ngOnInit(): void {
-		this.NewSignUpForm();
-
-	}
-
-	public BuildForm(entity: ISignUpEntity): void {
+	private BuildForm(entity: ISignUpEntity): void {
 
 		const autoForm = this.autoFormService.createNew<ISignUpEntity>();
 
@@ -56,6 +54,7 @@ export class SignUpComponent implements OnInit {
 	}
 
 	private NewSignUpForm(): void {
+
 		const today = new Date();
 
 		this.BuildForm({

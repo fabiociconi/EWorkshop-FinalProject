@@ -13,12 +13,15 @@ import { AuthService } from "../../service";
 })
 export class SignUpWorkshopComponent implements OnInit {
 
-	public Ready = false;
-	public ShowMessage = false;
-	public Message = "";
+	public Ready: boolean = false;
+	public ShowMessage: boolean = false;
+	public Message: string = "";
 	public SignUpWorkshopForm: FormGroup;
 
-	constructor(private autoFormService: AutoFormService, private authService: AuthService, private snackBar: MatSnackBar) { }
+	constructor(
+		private autoFormService: AutoFormService, 
+		private authService: AuthService, 
+		private snackBar: MatSnackBar) { }
 
 	public ngOnInit(): void {
 		this.NewSignUpWorkshopForm();

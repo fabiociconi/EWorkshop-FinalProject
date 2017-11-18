@@ -1,7 +1,7 @@
 import { LayoutWorkshopComponent } from "./layout";
 import { HomeWorkshopComponent } from "./home";
-import { WorkshopPriceTableComponent, WorkshopProfileDetailComponent, WorkshopAddressListComponent } from "./profile";
-import { WorkshopAppointmentDetailComponent, WorkshopAppointmentListComponent } from "./service";
+import { WorkshopPriceTableComponent, WorkshopProfileDetailComponent, WorkshopAddressListComponent, WorkshopAddressDetailComponent, WorkshopAddressNewComponent } from "./profile";
+import { WorkshopAppointmentDetailComponent, WorkshopAppointmentListComponent, } from "./service";
 
 
 export const WorkshopComponents = [
@@ -11,5 +11,7 @@ export const WorkshopComponents = [
 	HomeWorkshopComponent,
 	WorkshopAppointmentDetailComponent,
 	WorkshopAppointmentListComponent,
-	WorkshopAddressListComponent
+	WorkshopAddressListComponent,
+	WorkshopAddressDetailComponent,
+	WorkshopAddressNewComponent
 ];

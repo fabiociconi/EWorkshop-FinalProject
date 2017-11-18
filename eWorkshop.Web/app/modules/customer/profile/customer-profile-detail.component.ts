@@ -15,10 +15,10 @@ import { IPeopleEntity } from "../../../entity";
 export class CustomerProfileDetailComponent implements OnInit {
 
 	public Person: IPeopleEntity;
-	public Message = "";
+	public Message: string = "";
 	public CustomerProfileForm: FormGroup;
-	public Ready = false;
-	public ShowMessage = false;
+	public Ready: boolean = false;
+	public ShowMessage: boolean = false;
 
 	constructor(
 		private customerService: CustomerService,

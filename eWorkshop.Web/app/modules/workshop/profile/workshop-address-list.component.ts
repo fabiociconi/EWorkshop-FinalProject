@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { AutoFormService, EntityAction } from "xcommon";
 import { FormGroup, Validators } from "@angular/forms";
 import { MatSnackBar } from "@angular/material";
@@ -14,62 +14,46 @@ import { IAddressesEntity } from "../../../entity";
 })
 export class WorkshopAddressListComponent implements OnInit {
 
-	public WorkShopAddress: IAddressesEntity[];
+	@Input() public id: string;
+
+	public WorkShopAddress: IAddressesEntity[] = [];
 	public Message: string = "";
 	public Ready: boolean = false;
-	public WorkShopProfileForm: FormGroup;
 	public ShowMessage: boolean = false;
 
 	constructor(
 		private workshopService: WorkshopService,
 		private autoFormService: AutoFormService,
-		private snackBar: MatSnackBar,
-		private dialogService: DialogService,
 		private router: Router) { }
 
 	public ngOnInit(): void {
-		this.LoadProfile();
+		this.LoadList();
+		return;
 	}
 
-	private BuildFormProfile(entity: IAddressesEntity[]): void {
-		const autoForm =
-			this.autoFormService.createNew<IAddressesEntity[]>();
-
-		this.WorkShopProfileForm = autoForm
-			.Build(entity);
-
-		this.WorkShopAddress = entity;
-		// tslint:disable-next-line:no-debugger
-		debugger;
-		this.Ready = true;
-	}
-
-	private LoadProfile(): void {
-
+	private LoadList(): void {
 		this.workshopService.GetAddresses()
 			.subscribe(res => {
-				this.BuildFormProfile(res);
-
+				this.WorkShopAddress = res;
 			});
-
-		// this.workshopService.GetAddresses()
-		// 	.subscribe((res: IAddressesEntity[]) => {
-		// 		this.BuildFormAddress(res);
-
-		// 		JSON.stringify(res);
-		// 		console.log(res);
-
-		// 	});
-		// this.workshopService.GetAddresses()
-		// 	.subscribe(
-		// 	res => {
-		// 		this.BuildFormAddress(res:this.workshopService[]);
-
-
-		// 	});
+		this.Ready = true;
+		return;
 	}
+
 	private Back(): void {
 		this.router.navigate(["/workshop"]);
+		return;
+
+	}
+
+	private Edit(): void {
+		this.router.navigate(["/workshop/profile/addresslist/detail"]);
+		return;
+
+	}
+
+	private NewAddress(): void {
+		this.router.navigate(["/workshop/profile/address/new"]);
 		return;
 
 	}
