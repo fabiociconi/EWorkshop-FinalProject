@@ -7,16 +7,14 @@ import {
 	WorkshopProfileDetailComponent,
 	WorkshopAddressListComponent,
 	WorkshopAddressDetailComponent,
-	WorkshopAddressNewComponent
 } from "../workshop/profile";
 import { WorkshopAppointmentDetailComponent, WorkshopAppointmentListComponent } from "../workshop/service";
 
 export const WORKSHOP_ROUTES: Routes = [
 	{ path: "", component: HomeWorkshopComponent },
 	{ path: "profile", component: WorkshopProfileDetailComponent },
-	{ path: "profile/addresslist", component: WorkshopAddressListComponent },
-	{ path: "profile/address/new", component: WorkshopAddressNewComponent },
-	{ path: "profile/addresslist/detail", component: WorkshopAddressDetailComponent },
+	{ path: "address", component: WorkshopAddressListComponent },
+	{ path: "address/:id", component: WorkshopAddressDetailComponent },
 	{ path: "profile/pricetable", component: WorkshopPriceTableComponent },
 	{ path: "appointment", component: WorkshopAppointmentListComponent },
 	{ path: "appointment/:id", component: WorkshopProfileDetailComponent }
