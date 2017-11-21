@@ -49,6 +49,6 @@
 	</agm-map> -->
 
 	<agm-map [latitude]="lat" [longitude]="lng">
-		<agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+		<agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true" (dragEnd)="markerDragEnd(m, $event)"></agm-marker>
 	  </agm-map>
 </div>

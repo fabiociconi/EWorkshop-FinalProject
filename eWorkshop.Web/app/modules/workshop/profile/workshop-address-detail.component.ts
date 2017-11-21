@@ -128,4 +128,9 @@ export class WorkshopAddressDetailComponent implements OnInit {
 				this.BuildForm(res.Entity);
 			});
 	}
+
+	public markerDragEnd(m: marker, $event: MouseEvent) {
+		this.lat = $event.coords.lat;
+		this.lng = $event.coords.lng;
+	}
 }
