@@ -16,11 +16,11 @@
 			</mat-form-field>
 
 			<mat-form-field>
-				<input matInput formControlName="Longitude" placeholder="Longitude">
+				<input matInput formControlName="Longitude" placeholder="Longitude" value="{{lng}}">
 			</mat-form-field>
 
 			<mat-form-field>
-				<input matInput formControlName="Latitude" placeholder="Latitude">
+				<input matInput formControlName="Latitude" placeholder="Latitude" value="{{lat}}">
 			</mat-form-field>
 			
 			<div class="form-footer">
@@ -49,6 +49,6 @@
 	</agm-map> -->
 
 	<agm-map [latitude]="lat" [longitude]="lng">
-		<agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+		<agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true" (dragEnd)="markerDragEnd(m, $event)"></agm-marker>
 	  </agm-map>
 </div>
