@@ -2,6 +2,8 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule } from "@angular/forms";
+import { AgmCoreModule } from "@agm/core";
+
 
 import { AppRouteModule } from "./route";
 import { AdminModule } from "./admin";
@@ -26,8 +28,10 @@ import "./app.files";
 		AdminModule,
 		WorkshopModule,
 		CustomerModule,
-		FormsModule
-	],
+		FormsModule,
+		AgmCoreModule.forRoot({
+			apiKey: "AIzaSyCRrpXHG-pFw0Aj0d1clbtqFX8SQlDauYo"
+		})],
 	declarations: [
 		AppComponent
 

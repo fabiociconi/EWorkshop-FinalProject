@@ -1,12 +1,14 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, NgZone, ElementRef, ViewChild } from "@angular/core";
 import { FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material";
 import { AutoFormService } from "xcommon";
+import { AgmCoreModule, MapsAPILoader } from "@agm/core";
 
 import { WorkshopService, DialogService } from "../../service";
 import { IAddressesEntity, EntityAction, IPeopleEntity, AddressType } from "../../../entity";
 import { Guid } from "../../../entity/entity-util";
+import { google } from "@agm/core/services/google-maps-types";
 
 @Component({
 	selector: "workshop-address-detail",
@@ -22,17 +24,27 @@ export class WorkshopAddressDetailComponent implements OnInit {
 	public Ready: boolean = false;
 	public ShowMessage: boolean = false;
 
+	//googleMaps
+	public lat: number;
+	public lng: number;
+	public zoom: number;
+
 	constructor(
 		private workshopService: WorkshopService,
 		private autoFormService: AutoFormService,
 		private snackBar: MatSnackBar,
 		private dialogService: DialogService,
 		private activatedRoute: ActivatedRoute,
-		private router: Router) { }
+		private router: Router,
+		private mapsAPILoader: MapsAPILoader,
+		private ngZone: NgZone) { }
 
 	public ngOnInit(): void {
-		const id = this.activatedRoute.snapshot.params.id;
 
+		//google Maps
+		this.setCurrentPosition();
+
+		const id = this.activatedRoute.snapshot.params.id;
 		if (id === "new" || !id) {
 			this.NewAddress();
 			return;
@@ -40,7 +52,6 @@ export class WorkshopAddressDetailComponent implements OnInit {
 
 		this.LoadAddress(id);
 	}
-
 	private NewAddress(): void {
 		this.BuildForm({
 			Action: EntityAction.New,
@@ -54,6 +65,20 @@ export class WorkshopAddressDetailComponent implements OnInit {
 			StreetNumber: "",
 			Type: AddressType.WorkShop
 		});
+	}
+
+	private setCurrentPosition() {
+		if ("geolocation" in navigator) {
+			navigator.geolocation.getCurrentPosition(position => {
+				this.lat = position.coords.latitude;
+				this.lng = position.coords.longitude;
+				this.zoom = 4;
+			});
+		}
+	}
+	private WorkshopAddressOnGoogle() {
+
+
 	}
 
 	private BuildForm(entity: IAddressesEntity): void {
@@ -87,7 +112,6 @@ export class WorkshopAddressDetailComponent implements OnInit {
 	}
 
 	private SaveChanges(entity: IAddressesEntity): void {
-		debugger;
 		this.workshopService.SetAddress(entity)
 			.subscribe(res => {
 				if (res.HasErro) {
