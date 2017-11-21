@@ -2,4 +2,3 @@
 export * from "./workshop-profile-detail.component";
 export * from "./workshop-address-list.component";
 export * from "./workshop-address-detail.component";
-export * from "./workshop-address-new.component";
