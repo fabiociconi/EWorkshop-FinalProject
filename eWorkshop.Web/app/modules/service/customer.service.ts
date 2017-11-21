@@ -9,16 +9,14 @@ import { IPeopleEntity, IAddressesEntity, ICarsEntity, IExecute } from "../../en
 export class CustomerService {
 	private ServiceUrl = "Customer";
 
-	constructor(private utilService: HttpUtilService, private http: HttpClient) {
-	}
+	constructor(private utilService: HttpUtilService, private http: HttpClient) { }
 
 	public GetProfile(): Observable<IPeopleEntity> {
 		const url = this.utilService.BuidlUrl(this.ServiceUrl);
 		return this.http.get<IPeopleEntity>(url);
 	}
 
-	public SetProfile(entity: IPeopleEntity): Observable<IExecute<IPeopleEntity>>
-	{
+	public SetProfile(entity: IPeopleEntity): Observable<IExecute<IPeopleEntity>> {
 		const url = this.utilService.BuidlUrl(this.ServiceUrl);
 		return this.http.post<IExecute<IPeopleEntity>>(url, entity);
 	}

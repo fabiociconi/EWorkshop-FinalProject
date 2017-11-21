@@ -46,14 +46,8 @@ export class WorkshopAddressListComponent implements OnInit {
 
 	}
 
-	private Edit(): void {
-		this.router.navigate(["/workshop/profile/addresslist/detail"]);
-		return;
-
-	}
-
 	private NewAddress(): void {
-		this.router.navigate(["/workshop/profile/address/new"]);
+		this.router.navigate(["/workshop/address/new"]);
 		return;
 
 	}

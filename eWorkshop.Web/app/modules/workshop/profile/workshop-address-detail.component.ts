@@ -1,12 +1,14 @@
-import { Component, OnInit, Input  } from "@angular/core";
+import { Component, OnInit, Input, NgZone, ElementRef, ViewChild } from "@angular/core";
 import { FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material";
 import { AutoFormService } from "xcommon";
+import { AgmCoreModule, MapsAPILoader } from "@agm/core";
 
 import { WorkshopService, DialogService } from "../../service";
 import { IAddressesEntity, EntityAction, IPeopleEntity, AddressType } from "../../../entity";
 import { Guid } from "../../../entity/entity-util";
+import { google } from "@agm/core/services/google-maps-types";
 
 @Component({
 	selector: "workshop-address-detail",
@@ -16,24 +18,67 @@ import { Guid } from "../../../entity/entity-util";
 
 export class WorkshopAddressDetailComponent implements OnInit {
 
-	@Input() public idAddress: string;
-
 	public Workshop: IAddressesEntity;
 	public Message: string = "";
 	public WorkshopAddressForm: FormGroup;
 	public Ready: boolean = false;
 	public ShowMessage: boolean = false;
-	//public idAddress: string;
+
+	//googleMaps
+	public lat: number;
+	public lng: number;
+	public zoom: number;
 
 	constructor(
 		private workshopService: WorkshopService,
 		private autoFormService: AutoFormService,
 		private snackBar: MatSnackBar,
 		private dialogService: DialogService,
-		private router: Router) { }
+		private activatedRoute: ActivatedRoute,
+		private router: Router,
+		private mapsAPILoader: MapsAPILoader,
+		private ngZone: NgZone) { }
 
 	public ngOnInit(): void {
-		this.LoadAddress();
+
+		//google Maps
+		this.setCurrentPosition();
+
+		const id = this.activatedRoute.snapshot.params.id;
+		if (id === "new" || !id) {
+			this.NewAddress();
+			return;
+		}
+
+		this.LoadAddress(id);
+	}
+	private NewAddress(): void {
+		this.BuildForm({
+			Action: EntityAction.New,
+			IdAddress: Guid.NewGuid(),
+			IdPerson: Guid.Empty(),
+			City: "",
+			Latitude: 0,
+			Longitude: 0,
+			PostalCode: "",
+			Street: "",
+			StreetNumber: "",
+			Type: AddressType.WorkShop
+		});
+	}
+
+	private setCurrentPosition() {
+		if ("geolocation" in navigator) {
+			navigator.geolocation.getCurrentPosition(position => {
+				this.lat = position.coords.latitude;
+				this.lng = position.coords.longitude;
+				this.zoom = 4;
+			});
+		}
+	}
+	private WorkshopAddressOnGoogle() {
+
+
 	}
 
 	private BuildForm(entity: IAddressesEntity): void {
@@ -43,16 +88,19 @@ export class WorkshopAddressDetailComponent implements OnInit {
 		this.Workshop = entity;
 		this.Ready = true;
 	}
-	private LoadAddress(): void {
-		this.workshopService.GetAddress(this.idAddress)
+
+	private LoadAddress(id: string): void {
+		this.workshopService.GetAddress(id)
 			.subscribe(res => {
 				this.BuildForm(res);
 			});
 	}
+
 	private Back(): void {
-		this.router.navigate(["/workshop/addresslist"]);
+		this.router.navigate(["/workshop/address"]);
 		return;
 	}
+
 	private DeleteAddress(): void {
 		this.dialogService.confirm("Warnning", "Do you like to delete this Address ?")
 			.subscribe(res => {
@@ -62,6 +110,7 @@ export class WorkshopAddressDetailComponent implements OnInit {
 				}
 			});
 	}
+
 	private SaveChanges(entity: IAddressesEntity): void {
 		this.workshopService.SetAddress(entity)
 			.subscribe(res => {
@@ -69,10 +118,11 @@ export class WorkshopAddressDetailComponent implements OnInit {
 					this.snackBar.open("Your browser did something unexpected.Please contact us if the problem persists.", "", { duration: 3000 });
 					return;
 				}
+
 				this.snackBar.open("Thank you! You are address was Updated", "", { duration: 3000 });
 
 				if (entity.Action === EntityAction.Delete) {
-					this.router.navigate(["/workshop/addresslist"]);
+					this.router.navigate(["/workshop/address"]);
 					return;
 				}
 				this.BuildForm(res.Entity);

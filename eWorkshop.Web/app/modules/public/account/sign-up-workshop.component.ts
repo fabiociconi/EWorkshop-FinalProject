@@ -19,8 +19,8 @@ export class SignUpWorkshopComponent implements OnInit {
 	public SignUpWorkshopForm: FormGroup;
 
 	constructor(
-		private autoFormService: AutoFormService, 
-		private authService: AuthService, 
+		private autoFormService: AutoFormService,
+		private authService: AuthService,
 		private snackBar: MatSnackBar) { }
 
 	public ngOnInit(): void {
@@ -78,6 +78,4 @@ export class SignUpWorkshopComponent implements OnInit {
 			Workshop: null
 		});
 	}
-
-
 }
