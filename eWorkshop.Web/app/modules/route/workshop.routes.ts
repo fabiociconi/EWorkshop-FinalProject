@@ -7,7 +7,8 @@ import {
 	WorkshopProfileDetailComponent,
 	WorkshopAddressListComponent,
 	WorkshopAddressDetailComponent,
-	WorkshopAddressNewComponent
+    WorkshopAddressNewComponent,
+    WorkshopServiceDetailComponent
 } from "../workshop/profile";
 import { WorkshopAppointmentDetailComponent, WorkshopAppointmentListComponent } from "../workshop/service";
 
@@ -17,7 +18,8 @@ export const WORKSHOP_ROUTES: Routes = [
 	{ path: "profile/addresslist", component: WorkshopAddressListComponent },
 	{ path: "profile/address/new", component: WorkshopAddressNewComponent },
 	{ path: "profile/addresslist/detail", component: WorkshopAddressDetailComponent },
-	{ path: "profile/pricetable", component: WorkshopPriceTableComponent },
+    { path: "profile/pricetable", component: WorkshopPriceTableComponent },
+    { path: "profile/service/:id", component: WorkshopServiceDetailComponent },
 	{ path: "appointment", component: WorkshopAppointmentListComponent },
 	{ path: "appointment/:id", component: WorkshopProfileDetailComponent }
 ];
