@@ -76,6 +76,29 @@ namespace eWorkshop.Web.Controllers
 			return await WorkshopServicesBusiness.GetByFilterAsync(new WorkshopServicesFilter { IdWorkshop = UserKey });
 		}
 
+		[HttpGet("workshopservice/{id}")]
+		[Authorize(Roles = AppConstants.Workshop)]
+		public async Task<WorkshopServicesEntity> GetWorkshopService(Guid id)
+		{
+			return await WorkshopServicesBusiness.GetFirstByFilterAsync(new WorkshopServicesFilter { IdWorkshopService = UserKey, Key = id });
+		}
+
+
+		[HttpPost("workshopservice")]
+		[Authorize(Roles = AppConstants.Workshop)]
+		public async Task<Execute<WorkshopServicesEntity>> SetWorkshopService([FromBody] WorkshopServicesEntity entity)
+		{
+			entity.IdWorkshop = UserKey;
+			return await WorkshopServicesBusiness.SaveAsync(entity);
+		}
+
+		[HttpGet("service")]
+		[Authorize(Roles = AppConstants.Workshop)]
+		public async Task<List<ServicesEntity>> GetServices()
+		{
+			return await ServicesBusiness.GetByFilterAsync(new ServicesFilter { IdService = UserKey });
+		}
+
 		[HttpGet("service/{id}")]
 		[Authorize(Roles = AppConstants.Workshop)]
 		public async Task<ServicesEntity> GetService(Guid id)

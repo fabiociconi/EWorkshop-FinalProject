@@ -11,9 +11,9 @@
 		<ul>
 			<li>
 				<div layout="row" *ngFor="let service of Services">
-					<!--
-					<button [routerLink]="['/workshop/profile/pricetable/', service.IdWorkshop]">Edit</button>
-						-->
+					
+					<button [routerLink]="['/workshop/profile/pricetable/', service.IdWorkshopService]">Edit</button>
+
 					<div class="row">	
 						{{service.Price}}
 					</div>
@@ -21,11 +21,8 @@
 			</li>
 		</ul>
 		<br />
-		<!--
+		
 		<h2><button [routerLink]="['/workshop/profile/pricetable/', 'newservice']">New Service</button></h2>
-
-			-->
-
 	
 	</div>
 </div>

@@ -42,10 +42,24 @@ export class WorkshopService {
         return this.http.get<IWorkshopServicesEntity[]>(url);
     }
 
+    public GetWorkshopService(id: string): Observable<IWorkshopServicesEntity> {
+        const url = this.utilService.BuidlUrl(this.ServiceUrl, "workshopservice", id);
+        return this.http.get<IWorkshopServicesEntity>(url);
+    }
+
+    public SetWorkshopService(entity: IWorkshopServicesEntity): Observable<IExecute<IWorkshopServicesEntity>> {
+        const url = this.utilService.BuidlUrl(this.ServiceUrl, "workshopservice");
+        return this.http.post<IExecute<IWorkshopServicesEntity>>(url, entity);
+    }
+
+    public GetServices(): Observable<IServicesEntity[]> {
+        const url = this.utilService.BuidlUrl(this.ServiceUrl, "service");
+        return this.http.get<IServicesEntity[]>(url);
+    }
+
     public GetService(id: string): Observable<IServicesEntity> {
         const url = this.utilService.BuidlUrl(this.ServiceUrl, "service", id);
         return this.http.get<IServicesEntity>(url);
     }
-
 
 }
