@@ -18,7 +18,8 @@ export class WorkshopPriceDetailComponent implements OnInit {
 	public Ready = false;
 	public ServiceDetailForm: FormGroup;
 	private Entity: IWorkshopServicesEntity;
-	public Services: IServicesEntity[];
+    public Services: IServicesEntity[];
+    public Service: IServicesEntity;
 
 	constructor(
 		private workshopService: WorkshopService,
@@ -71,14 +72,18 @@ export class WorkshopPriceDetailComponent implements OnInit {
 					return;
 				}
 
-				if (entity.Action === EntityAction.New) {
-					this.snackBar.open("Service added successfully!", "", {
-						duration: 2000,
-					});
+                if (entity.Action === EntityAction.New) {
+                    this.snackBar.open("Service added successfully!", "", {
+                        duration: 2000,
+                    });
+                    this.BuildForm(res.Entity);
+                    return;
+                }
 
-					this.router.navigate(["/workshop/pricetable/", entity.IdWorkshopService]);
-					return;
-				}
+                this.snackBar.open("Service saved successfully!", "", {
+                    duration: 2000,
+                });
+                this.BuildForm(res.Entity);
 			});
 	}
 
@@ -102,7 +107,8 @@ export class WorkshopPriceDetailComponent implements OnInit {
 			Action: EntityAction.New,
 			IdWorkshopService: Guid.NewGuid(),
 			IdWorkshop: Guid.Empty(),
-			IdService: null,
+            IdService: null,
+			Service: null,
 			Price: 0
 		});
 	}
@@ -112,12 +118,10 @@ export class WorkshopPriceDetailComponent implements OnInit {
 		return;
 	}
 
-	private BuildForm(entity: IWorkshopServicesEntity): void {
+    private BuildForm(entity: IWorkshopServicesEntity): void {
 		this.ServiceDetailForm = this.autoFormService.createNew<IWorkshopServicesEntity>()
-			.AddValidator(c => c.IdService, Validators.required)
-			.AddValidator(c => c.Price, Validators.required)
 			.Build(entity);
-
+        
 		this.Entity = entity;
 		this.Ready = true;
 	}
@@ -132,7 +136,5 @@ export class WorkshopPriceDetailComponent implements OnInit {
 		this.workshopService.GetServices()
 			.subscribe(res => {
 				this.Services = res;
-			});
-	}
+			});    
 }
-
