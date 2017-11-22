@@ -3,6 +3,7 @@
 /*******************************************************************************************/
 
 import { EntityAction, RoleType } from "./enum";
+import { IServicesEntity } from "./Service";
 
 export interface IAddressesEntity {
 	IdAddress: string; 
@@ -162,10 +163,13 @@ export interface IWorkshopServicesEntity {
 	IdWorkshop: string; 
 	IdService: string; 
 	Price: number; 
+	Service: IServicesEntity; 
 	Action: EntityAction; 
 }
 
 export interface IWorkshopServicesFilter {
+	IdWorkshop?: string; 
+	IdWorkshopService?: string; 
 	Key?: string; 
 	Keys?: Array<string>; 
 	PageNumber?: number; 

@@ -1,17 +1,19 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
+using eWorkshop.Business.Register;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Serialization;
+using Swashbuckle.AspNetCore.Swagger;
 using XCommon.Application;
 using XCommon.Extensions.Util;
 using XCommon.Patterns.Ioc;
-using Swashbuckle.AspNetCore.Swagger;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 namespace eWorkshop.Web
 {
@@ -35,6 +37,9 @@ namespace eWorkshop.Web
 
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+			
+
 			services
 				.AddMvc()
 				.AddJsonOptions(options =>
@@ -68,11 +73,15 @@ namespace eWorkshop.Web
 					Type = "apiKey"
 				});
 			});
+
 		}
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 		{
+			var httpContextAccessor = app.ApplicationServices.GetRequiredService<IHttpContextAccessor>();
 			Kernel.Map<IApplicationSettings>().To(ApplicationSettings);
+			Kernel.Map<ITicketInfo>().To<TicketInfo>(httpContextAccessor);
+
 			Business.Factory.Register.Do();
 
 			if (env.IsDevelopment())

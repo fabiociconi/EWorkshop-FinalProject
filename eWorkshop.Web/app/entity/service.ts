@@ -63,6 +63,7 @@ export interface IServicesEntity {
 }
 
 export interface IServicesFilter {
+	IdService?: string; 
 	Key?: string; 
 	Keys?: Array<string>; 
 	PageNumber?: number; 

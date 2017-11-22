@@ -20,7 +20,6 @@ export class WorkshopPriceTableComponent implements OnInit {
         this.workshopService.GetWorkshopServices()
             .subscribe(res => {
                 this.Services = res;
-                console.log(res);
             });   
     }
 
@@ -29,7 +28,6 @@ export class WorkshopPriceTableComponent implements OnInit {
         this.workshopService.GetService(serviceId)
             .subscribe(res => {
                 this.Service = res;
-                console.log(res);
             });
         return this.Service;
     }

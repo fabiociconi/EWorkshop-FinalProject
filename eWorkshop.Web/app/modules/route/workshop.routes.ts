@@ -16,8 +16,8 @@ export const WORKSHOP_ROUTES: Routes = [
 	{ path: "profile", component: WorkshopProfileDetailComponent },
 	{ path: "address", component: WorkshopAddressListComponent },
 	{ path: "address/:id", component: WorkshopAddressDetailComponent },
-    { path: "profile/pricetable", component: WorkshopPriceTableComponent },
-    { path: "profile/pricetable/:id", component: WorkshopPriceDetailComponent },
+    { path: "pricetable", component: WorkshopPriceTableComponent },
+    { path: "pricetable/:id", component: WorkshopPriceDetailComponent },
 	{ path: "appointment", component: WorkshopAppointmentListComponent },
 	{ path: "appointment/:id", component: WorkshopProfileDetailComponent }
 ];

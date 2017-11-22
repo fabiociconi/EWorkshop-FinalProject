@@ -9,151 +9,130 @@ import { IWorkshopServicesEntity, IServicesEntity, EntityAction } from "../../..
 import { Guid } from "../../../entity/entity-util";
 
 @Component({
-    selector: "workshop-price-detail",
-    templateUrl: "./workshop-price-detail.html",
-    styleUrls: ["./workshop-price-detail.scss"]
+	selector: "workshop-price-detail",
+	templateUrl: "./workshop-price-detail.html",
+	styleUrls: ["./workshop-price-detail.scss"]
 })
 export class WorkshopPriceDetailComponent implements OnInit {
 
-    public Ready = false;
-    public idPerson = "";
-    public selectedService = "";
-    public ServiceDetailForm: FormGroup;
-    private Entity: IWorkshopServicesEntity;
-    public Services: IServicesEntity[];
+	public Ready = false;
+	public ServiceDetailForm: FormGroup;
+	private Entity: IWorkshopServicesEntity;
+	public Services: IServicesEntity[];
 
+	constructor(
+		private workshopService: WorkshopService,
+		private activatedRoute: ActivatedRoute,
+		private router: Router,
+		private dialogService: DialogService,
+		private snackBar: MatSnackBar,
+		private autoFormService: AutoFormService) { }
 
-    constructor(
-        private workshopService: WorkshopService,
-        private activatedRoute: ActivatedRoute,
-        private router: Router,
-        private dialogService: DialogService,
-        private snackBar: MatSnackBar,
-        private autoFormService: AutoFormService) { }
+	public ngOnInit(): void {
 
-    public ngOnInit(): void {
-        this.workshopService.GetProfile()
-            .subscribe(res => {
-                console.log(res.IdPerson);
-                this.GetIdPerson(res.IdPerson);
-            });
+		this.LoadServices();
 
-        this.LoadServices();
+		
+		this.activatedRoute.params.subscribe(p => {
+			const id = p.id;
+			if (id == "newservice") {
+				this.New();
+				return;
+			}
 
-        const id = this.activatedRoute.snapshot.params.id;
-        if (id == "newservice") {
-            this.New();
-            return;
-        }
+			if (id) {
+				this.Load(id);
+				return;
+			}
+		});
 
-        if (id) {
-            this.Load(id);
-            return;
-        }
+		
+	}
 
+	public Save(entity: IWorkshopServicesEntity): void {
 
-    }
+		this.workshopService.SetWorkshopService(entity)
+			.subscribe(res => {
 
-    private GetIdPerson(idPerson: string): void {
-        this.idPerson = idPerson;
-    }
+				if (res.HasErro) {
+					this.snackBar.open("A problem has occurred. Please, try again!", "", {
+						duration: 2000,
+					});
 
-    private getDescription(description: string): void {
-        debugger;
-        console.log(description);
-    }
+					return;
+				}
 
-    private BuildForm(entity: IWorkshopServicesEntity): void {
-        this.ServiceDetailForm = this.autoFormService.createNew<IWorkshopServicesEntity>()
-            .AddValidator(c => c.IdService, Validators.required)
-            .AddValidator(c => c.Price, Validators.required)
-            .AddValidator(c => c.Price, Validators.maxLength(18.2))
-            .Build(entity);
-        this.Entity = entity;
-        this.Ready = true;
-    }
+				if (entity.Action === EntityAction.Delete) {
+					this.snackBar.open("Service deleted successfully!", "", {
+						duration: 2000,
+					});
 
-    private Load(id: string): void {
-        this.workshopService.GetWorkshopService(id)
-            .subscribe(res => this.BuildForm(res));
-    }
+					this.Back();
+					return;
+				}
 
-    public LoadServices(): void {
+				if (entity.Action === EntityAction.New) {
+					this.snackBar.open("Service added successfully!", "", {
+						duration: 2000,
+					});
 
-        this.workshopService.GetServices()
-            .subscribe(res => {
-                this.Services = res;
-                console.log(res);
-            });
-    }
+					this.router.navigate(["/workshop/pricetable/", entity.IdWorkshopService]);
+					return;
+				}
+			});
+	}
 
+	public Delete(): void {
+		if (this.Entity.Action === EntityAction.New) {
+			return;
+		}
 
+		this.dialogService.confirm("Warning", "Would you like to delete this service?")
+			.subscribe(res => {
+				if (res) {
+					this.Entity.Action = EntityAction.Delete;
+					this.Save(this.Entity);
+				}
+			});
 
-    public Save(entity: IWorkshopServicesEntity): void {
+	}
 
-        entity.IdWorkshop = this.idPerson;
+	private New(): void {
+		this.BuildForm({
+			Action: EntityAction.New,
+			IdWorkshopService: Guid.NewGuid(),
+			IdWorkshop: Guid.Empty(),
+			IdService: null,
+			Price: 0
+		});
+	}
 
-        this.workshopService.SetWorkshopService(entity)
-            .subscribe(res => {
+	private Back(): void {
+		this.router.navigate(["/workshop/pricetable"]);
+		return;
+	}
 
-                if (res.HasErro) {
-                    this.snackBar.open("A problem has occurred. Please, try again!", "", {
-                        duration: 2000,
-                    });
+	private BuildForm(entity: IWorkshopServicesEntity): void {
+		this.ServiceDetailForm = this.autoFormService.createNew<IWorkshopServicesEntity>()
+			.AddValidator(c => c.IdService, Validators.required)
+			.AddValidator(c => c.Price, Validators.required)
+			.Build(entity);
 
-                    return;
-                }
+		this.Entity = entity;
+		this.Ready = true;
+	}
 
-                if (entity.Action === EntityAction.Delete) {
-                    this.snackBar.open("Service deleted successfully!", "", {
-                        duration: 2000,
-                    });
-                    this.Back();
-                    return;
-                }
+	private Load(id: string): void {
+		this.workshopService.GetWorkshopService(id)
+			.subscribe(res => this.BuildForm(res));
+	}
 
-                if (entity.Action === EntityAction.New) {
-                    this.snackBar.open("Service added successfully!", "", {
-                        duration: 2000,
-                    });
-                    this.BuildForm(res.Entity);
-                    return;
-                }
+	private LoadServices(): void {
 
-                this.snackBar.open("Service saved successfully!", "", {
-                    duration: 2000,
-                });
-                this.BuildForm(res.Entity);
-            });
-    }
-
-    public Delete(): void {
-        if (this.Entity.Action === EntityAction.New) {
-            return;
-        }
-
-        this.dialogService.confirm("Warning", "Would you like to delete this service?")
-            .subscribe(res => {
-                if (res) {
-                    this.Entity.Action = EntityAction.Delete;
-                    this.Save(this.Entity);
-                }
-            });
-
-    }
-
-    private New(): void {
-        this.BuildForm({
-            Action: EntityAction.New,
-            IdWorkshopService: Guid.NewGuid(),
-            IdWorkshop: this.idPerson,
-            IdService: "",
-            Price: 0
-        });
-    }
-
-    private Back(): void {
-        this.router.navigate(["/workshop/profile/pricetable"]);
-        return;
-    }
+		this.workshopService.GetServices()
+			.subscribe(res => {
+				this.Services = res;
+			});
+	}
 }
+
