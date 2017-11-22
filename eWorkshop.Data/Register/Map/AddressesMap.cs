@@ -52,6 +52,14 @@ namespace eWorkshop.Data.Register.Map
 				entity.Property(e => e.Latitude)
 					.IsRequired();
 
+				entity.Property(e => e.Province)
+					.IsRequired()
+					.HasMaxLength(30);
+
+				entity.Property(e => e.Country)
+					.IsRequired()
+					.HasMaxLength(100);
+
 				entity
 					.HasOne(d => d.People)
 					.WithMany(p => p.Addresses)

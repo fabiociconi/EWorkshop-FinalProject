@@ -16,9 +16,9 @@ namespace eWorkshop.Data.Service
 
 		public string Description { get; set; }
 
-		public virtual ICollection<WorkshopServices> WorkshopServices { get; set; }
-
 		public virtual ICollection<AppointmentsServices> AppointmentsServices { get; set; }
+
+		public virtual ICollection<WorkshopServices> WorkshopServices { get; set; }
 
 	}
 }

@@ -15,6 +15,8 @@ export interface IAddressesEntity {
 	Type: number; 
 	Longitude: number; 
 	Latitude: number; 
+	Province: string; 
+	Country: string; 
 	Action: EntityAction; 
 }
 

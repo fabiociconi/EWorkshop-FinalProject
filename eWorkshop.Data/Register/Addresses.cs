@@ -27,6 +27,10 @@ namespace eWorkshop.Data.Register
 
 		public decimal Latitude { get; set; }
 
+		public string Province { get; set; }
+
+		public string Country { get; set; }
+
 		public virtual People People { get; set; }
 
 	}

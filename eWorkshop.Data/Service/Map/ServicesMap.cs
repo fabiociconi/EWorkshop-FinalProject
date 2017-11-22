@@ -29,8 +29,7 @@ namespace eWorkshop.Data.Service.Map
 					.HasMaxLength(50);
 
 				entity.Property(e => e.Description)
-					.IsRequired()
-					.HasMaxLength(50);
+					.IsRequired();
 
 			});
 		}

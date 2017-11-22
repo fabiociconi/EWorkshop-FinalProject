@@ -3,26 +3,43 @@
 	<form *ngIf="Ready" [formGroup]="WorkshopAddressForm" (ngSubmit)="SaveChanges(WorkshopAddressForm.value)" layout="column">
 
 		<div class="form-viewer">
-			<mat-form-field>
-				<input matInput formControlName="StreetNumber" placeholder="Street Number">
-			</mat-form-field>
+			<div layout="row">
+				<mat-form-field>
+					<input matInput formControlName="StreetNumber" placeholder="Street Number">
+				</mat-form-field>
+				<mat-form-field>
+					<input matInput formControlName="Street" placeholder="Street">
+				</mat-form-field>
+			</div>
 
-			<mat-form-field>
-				<input matInput formControlName="Street" placeholder="Street">
-			</mat-form-field>
+			<div layout="row">
+				<mat-form-field>
+					<input matInput formControlName="City" placeholder="City">
+				</mat-form-field>
+				<mat-form-field>
+					<input matInput formControlName="PostalCode" placeholder="PostalCode">
+				</mat-form-field>
+			</div>
 
-			<mat-form-field>
-				<input matInput formControlName="City" placeholder="City">
-			</mat-form-field>
+			<div layout="row">
+				<mat-form-field>
+					<input matInput formControlName="Province" placeholder="Province">
+				</mat-form-field>
+				<mat-form-field>
+					<input matInput formControlName="Country" placeholder="Country">
+				</mat-form-field>
+			</div>
 
-			<mat-form-field>
-				<input matInput formControlName="Longitude" placeholder="Longitude" value="{{lng}}">
-			</mat-form-field>
+			<div layout="row">
+				<mat-form-field>
+					<input matInput formControlName="Longitude" placeholder="Longitude" value="{{lng}}">
+				</mat-form-field>
+				<mat-form-field>
+					<input matInput formControlName="Latitude" placeholder="Latitude" value="{{lat}}">
+				</mat-form-field>
+			</div>
 
-			<mat-form-field>
-				<input matInput formControlName="Latitude" placeholder="Latitude" value="{{lat}}">
-			</mat-form-field>
-			
+
 			<div class="form-footer">
 				<div class="bt-signup">
 					<button mat-raised-button color="primary" type="submit" [disabled]="!WorkshopAddressForm.valid">Save</button>
@@ -42,13 +59,8 @@
 
 		</div>
 	</form>
-	<!-- this creates a google map on the page with the given lat/lng from -->
-	<!-- the component as the initial center of the map: -->
-	<!-- <agm-map [latitude]="lat" [longitude]="lng">
-		<agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-	</agm-map> -->
-
+	<input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search>
 	<agm-map [latitude]="lat" [longitude]="lng">
-		<agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true" (dragEnd)="markerDragEnd(m, $event)"></agm-marker>
-	  </agm-map>
+		<agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true" (dragEnd)="MarkerDragEnd($event)"></agm-marker>
+	</agm-map>
 </div>

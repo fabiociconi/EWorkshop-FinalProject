@@ -28,6 +28,10 @@ namespace eWorkshop.Entity.Register
 
 		public decimal Latitude { get; set; }
 
+		public string Province { get; set; }
+
+		public string Country { get; set; }
+
 
 		[IgnoreDataMember]
 		public override Guid Key

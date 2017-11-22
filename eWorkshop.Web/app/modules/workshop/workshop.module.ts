@@ -16,11 +16,7 @@ import { MaterialModule, SharedModule } from "../shared";
 		ReactiveFormsModule,
 		RouterModule,
 		MaterialModule,
-		SharedModule,
-		AgmCoreModule.forRoot({
-			apiKey: "AIzaSyCRrpXHG-pFw0Aj0d1clbtqFX8SQlDauYo",
-			libraries: ["places"]
-		})
+		SharedModule
 	],
 	declarations: [
 		WorkshopComponents
