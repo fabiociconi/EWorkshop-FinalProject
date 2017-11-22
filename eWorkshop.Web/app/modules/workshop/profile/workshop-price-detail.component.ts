@@ -131,10 +131,11 @@ export class WorkshopPriceDetailComponent implements OnInit {
 			.subscribe(res => this.BuildForm(res));
 	}
 
-	private LoadServices(): void {
+    private LoadServices(): void {
 
-		this.workshopService.GetServices()
-			.subscribe(res => {
-				this.Services = res;
-			});    
+        this.workshopService.GetServices()
+            .subscribe(res => {
+                this.Services = res;
+            });
+    }
 }
