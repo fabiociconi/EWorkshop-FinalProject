@@ -5,7 +5,7 @@
 	<div *ngIf="!Ready">
 		Loading...
 	</div>
-	<form *ngIf="Ready" [formGroup]="WorkShopProfileForm" (ngSubmit)="SaveChanges(WorkshopProfileForm.value)" layout="column">
+	<form *ngIf="Ready" [formGroup]="WorkShopProfileForm" (ngSubmit)="SaveChanges(WorkShopProfileForm.value)" layout="column">
 		<div layout="row" flex>
 			<mat-form-field flex>
 				<input matInput formControlName="FirstName" placeholder="First name">
