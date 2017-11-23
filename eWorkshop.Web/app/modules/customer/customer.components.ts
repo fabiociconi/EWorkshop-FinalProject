@@ -1,6 +1,6 @@
 import { LayoutCustomerComponent } from "./layout";
 import { HomeCustomerComponent } from "./home";
-import { CustomerCarDetailComponent, CustomerCarListComponent, CustomerProfileDetailComponent } from "./profile";
+import { CustomerCarDetailComponent, CustomerCarListComponent, CustomerProfileDetailComponent, CustomerAddressListComponent, CustomerAddressDetailComponent } from "./profile";
 import { CustomerAppointmentDetailComponent, CustomerAppointmentListComponent, SearchComponent } from "./service";
 
 export const CustomerComponents = [
@@ -11,5 +11,7 @@ export const CustomerComponents = [
 	CustomerProfileDetailComponent,
 	CustomerAppointmentDetailComponent,
 	CustomerAppointmentListComponent,
-	SearchComponent
+	SearchComponent,
+	CustomerAddressListComponent,
+	CustomerAddressDetailComponent
 ];
