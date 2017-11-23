@@ -103,6 +103,7 @@ export class WorkshopPriceDetailComponent implements OnInit {
 			IdWorkshopService: Guid.NewGuid(),
 			IdWorkshop: Guid.Empty(),
 			IdService: null,
+			Service: null,
 			Price: 0
 		});
 	}

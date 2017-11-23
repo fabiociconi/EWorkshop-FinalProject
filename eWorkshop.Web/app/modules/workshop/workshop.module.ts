@@ -2,11 +2,11 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
-import { AgmCoreModule } from "@agm/core";
 
 
 import { WorkshopComponents } from "./workshop.components";
 import { MaterialModule, SharedModule } from "../shared";
+import { GoogleMaps } from "../shared/components/googleMaps.component";
 
 
 @NgModule({
@@ -17,6 +17,9 @@ import { MaterialModule, SharedModule } from "../shared";
 		RouterModule,
 		MaterialModule,
 		SharedModule
+	],
+	entryComponents: [
+		GoogleMaps
 	],
 	declarations: [
 		WorkshopComponents

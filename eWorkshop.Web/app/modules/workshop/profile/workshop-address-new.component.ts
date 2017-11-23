@@ -73,7 +73,9 @@ export class WorkshopAddressNewComponent implements OnInit {
             PostalCode: "",
             Type: AddressType.WorkShop,
             Longitude: 0,
-            Latitude: 0,
+			Latitude: 0,
+			Province: "",
+			Country: "",
             Action: EntityAction.New
         });
     }

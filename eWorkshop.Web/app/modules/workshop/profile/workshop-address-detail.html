@@ -1,56 +1,49 @@
 <div class="workshop-address-detail" layout="column" flex>
 
+	<googleMaps *ngIf="Ready" [addressIn]="Workshop" (addressOut)="UpdateAddress($event)"></googleMaps>
+
 	<form *ngIf="Ready" [formGroup]="WorkshopAddressForm" (ngSubmit)="SaveChanges(WorkshopAddressForm.value)" layout="column">
 
 		<div class="form-viewer">
 			<div layout="row">
 				<mat-form-field>
-					<input matInput formControlName="StreetNumber" placeholder="Street Number">
+					<input matInput formControlName="StreetNumber" placeholder="Street Number" [readonly]="true">
 				</mat-form-field>
 				<mat-form-field>
-					<input matInput formControlName="Street" placeholder="Street">
-				</mat-form-field>
-			</div>
-
-			<div layout="row">
-				<mat-form-field>
-					<input matInput formControlName="City" placeholder="City">
-				</mat-form-field>
-				<mat-form-field>
-					<input matInput formControlName="PostalCode" placeholder="PostalCode">
+					<input matInput formControlName="Street" placeholder="Street" [readonly]="true">
 				</mat-form-field>
 			</div>
 
 			<div layout="row">
 				<mat-form-field>
-					<input matInput formControlName="Province" placeholder="Province">
+					<input matInput formControlName="City" placeholder="City" [readonly]="true">
 				</mat-form-field>
 				<mat-form-field>
-					<input matInput formControlName="Country" placeholder="Country">
+					<input matInput formControlName="Province" placeholder="Province" [readonly]="true">
+				</mat-form-field>
+				<mat-form-field>
+					<input matInput formControlName="Country" placeholder="Country" [readonly]="true">
+				</mat-form-field>
+				<mat-form-field>
+					<input matInput formControlName="PostalCode" placeholder="PostalCode" [readonly]="true">
 				</mat-form-field>
 			</div>
 
 			<div layout="row">
 				<mat-form-field>
-					<input matInput formControlName="Longitude" placeholder="Longitude" value="{{lng}}">
+					<input matInput formControlName="Longitude" placeholder="Longitude" [readonly]="true">
 				</mat-form-field>
 				<mat-form-field>
-					<input matInput formControlName="Latitude" placeholder="Latitude" value="{{lat}}">
+					<input matInput formControlName="Latitude" placeholder="Latitude" [readonly]="true">
 				</mat-form-field>
 			</div>
 
 
 			<div class="form-footer">
-				<div class="bt-signup">
+				<div>
 					<button mat-raised-button color="primary" type="submit" [disabled]="!WorkshopAddressForm.valid">Save</button>
-				</div>
-				<div class="bt-reset">
-					<button mat-raised-button color="warn" type="reset">
-						Reset
-					</button>
-					<button mat-raised-button color="secundary" type="button" (click)="Back()">
-						Back
-					</button>
+					<button mat-raised-button color="warn" type="button" (click)="DeleteAddress()">Delete</button>
+					<button mat-raised-button color="secundary" type="button" (click)="Back()">Back</button>
 				</div>
 			</div>
 			<div *ngIf="ShowMessage" class="error-message">
@@ -59,8 +52,4 @@
 
 		</div>
 	</form>
-	<input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search>
-	<agm-map [latitude]="lat" [longitude]="lng">
-		<agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true" (dragEnd)="MarkerDragEnd($event)"></agm-marker>
-	</agm-map>
 </div>

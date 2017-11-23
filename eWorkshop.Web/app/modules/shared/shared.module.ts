@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { ConfirmDialog } from "./components/confirm-dialog.component";
+import { GoogleMaps } from "./components/googleMaps.component";
 import { Icon } from "./components/icon.component";
 import { AgmCoreModule } from "@agm/core";
 
@@ -11,10 +12,12 @@ import { AgmCoreModule } from "@agm/core";
 		})
 	],
 	declarations: [
+		GoogleMaps,
 		ConfirmDialog,
 		Icon
 	],
 	exports: [
+		GoogleMaps,
 		AgmCoreModule,
 		Icon
 	]
