@@ -1,40 +1,51 @@
-<div class="sign-up" layout="column" flex>
+<div class="sign-up" layout="column" flex content="center start">
 	<form *ngIf="Ready" [formGroup]="SignUpForm" (ngSubmit)="SignUp(SignUpForm.value)" layout="column">
-		<div class="form-viewer">
-			<mat-form-field>
-				<input matInput formControlName="FirstName" placeholder="First name">
-			</mat-form-field>
+		<div class="logo" layout="column" content="center start">
+			<img src="/assets/carBlack.png" />
+			<span>
+				eWorkshop
+			</span>
+		</div>
+		<div>
+			<div layout="row">
+				<mat-form-field>
+					<input matInput formControlName="FirstName" placeholder="First name">
+				</mat-form-field>
 
-			<mat-form-field>
-				<input matInput formControlName="LastName" placeholder="Last Name">
-			</mat-form-field>
-
-			<mat-form-field>
-				<input matInput formControlName="Telephone" placeholder="Telephone">
-			</mat-form-field>
-
-			<mat-form-field>
-				<input matInput formControlName="Email" placeholder="Email">
-			</mat-form-field>
-
-			<mat-form-field>
-				<input matInput formControlName="Password" type="password" placeholder="Password">
-			</mat-form-field>
-
-			<mat-form-field>
-				<input matInput formControlName="PasswordConfirm" type="password" placeholder="Confirm password">
-			</mat-form-field>
-
-			<div class="form-footer">
-				<div>
-					<button mat-raised-button color="primary" type="submit" [disabled]="!SignUpForm.valid">Sign Up</button>
-				</div>
-				<div>
-					<button mat-raised-button color="warn" type="reset">
-						Clear
-					</button>
-				</div>
+				<mat-form-field>
+					<input matInput formControlName="LastName" placeholder="Last Name">
+				</mat-form-field>
 			</div>
+
+			<div layout="row">
+				<mat-form-field>
+					<input matInput formControlName="Telephone" placeholder="Telephone">
+				</mat-form-field>
+			</div>
+			<div layout="row">
+				<mat-form-field>
+					<input matInput formControlName="Email" placeholder="Email">
+				</mat-form-field>
+			</div>
+			<div layout="row">
+				<mat-form-field>
+					<input matInput formControlName="Password" type="password" placeholder="Password">
+				</mat-form-field>
+
+				<mat-form-field>
+					<input matInput formControlName="PasswordConfirm" type="password" placeholder="Confirm password">
+				</mat-form-field>
+			</div>
+
+			<div layout="row" content="end">
+				<button mat-raised-button color="primary" type="submit" [disabled]="!SignUpForm.valid">Sign Up</button>
+			</div>
+
+			<div class="links" layout="column" content="center">
+				<a routerLink="/account/sign-in">Do you have an account?</a>
+				<a routerLink="/account/sign-up-workshop">Create your account as Workshop</a>
+			</div>
+
 			<div *ngIf="ShowMessage" class="error-message">
 				{{Message}}
 			</div>

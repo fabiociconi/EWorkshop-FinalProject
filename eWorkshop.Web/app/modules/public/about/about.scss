@@ -1,56 +1,20 @@
-*, *:before, *:after {
-	box-sizing: border-box;
-}
+@import "~xcommon/styles/functions.scss";
+@import "../../../styles/app-constants.scss";
 
-.floatContent {
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: 0;
-	padding: 1px 0;
-	color: #fff;
-	font-family: "Comfortaa", "Helvetica", sans-serif;
-	margin: 30px auto;
-	background-color: rgba(10,10,10,.68);
-}
+.about {
+	.content {
+		margin-top: 20px;
+		width: 750px;
+		padding: 10px;
+		border-top: $bordertop;
+		background-color: $backcolor;
 
-a{
-	display: inline-block;
-	height: 30px;
-	width : 130px;
-	text-align: center;
-	margin-top: 10px;
-	font-weight: 600;
-}
+		@include respond-to($device-small) {
+			width: calc(100% - 30px);
+		}
 
-.menu{
-	width: 400px;
-	margin: 0 auto;
-}
-
-.content{
-	margin: 200px auto;
-	width: 700px;
-	text-align: left;
-}
-
-button {
-	display: block;
-	width: 240px;
-	height: 40px;
-	padding: 0;
-	margin: 10px auto;
-	font-weight: 700;
-	color: #fff;
-	background-color: #22c08a;
-	border: none;
-	border-radius: 20px;
-}
-
-button:hover {
-	background-color: #26d69a;
-}
-
-button:active {
-	background-color: #1eaa7a;
+		p:nth-child(n+1) {
+			margin-top: 10px;
+		}
+	}
 }

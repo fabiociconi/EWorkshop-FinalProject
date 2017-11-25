@@ -1,59 +1,13 @@
-*, *:before, *:after {
-	box-sizing: border-box;
-}
+@import "~xcommon/styles/functions.scss";
 
-.floatContent {
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: 0;
-	padding: 1px 0;
-	color: #fff;
-	font-family: "Comfortaa", "Helvetica", sans-serif;
-	margin: 30px auto;
-	background-color: rgba(10,10,10,.68);
-}
+.home-public {
+	.title-name {
+		background-color: transparent;
+		font-size: 200px;
+		color: rgba(244, 244, 244, 0.80);
 
-a{
-	display: inline-block;
-	height: 30px;
-	width : 130px;
-	text-align: center;
-	margin-top: 10px;
-	font-weight: 600;
-}
-
-.menu{
-	width: 400px;
-	margin: 0 auto;
-}
-
-.title {
-	background-color: transparent;
-	bottom: 0;
-	margin: 300px auto;
-	font-size: 200px;
-	text-align: center;
-	color: rgba(10,10,10,.80);
-}
-
-button {
-	display: block;
-	width: 240px;
-	height: 40px;
-	padding: 0;
-	margin: 10px auto;
-	font-weight: 700;
-	color: #fff;
-	background-color: #22c08a;
-	border: none;
-	border-radius: 20px;
-}
-
-button:hover {
-	background-color: #26d69a;
-}
-
-button:active {
-	background-color: #1eaa7a;
+		@include respond-to($device-small) {
+			font-size: 50px;
+		}
+	}
 }

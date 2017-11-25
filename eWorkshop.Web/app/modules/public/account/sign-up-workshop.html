@@ -1,46 +1,56 @@
-<div class="sign-up-workshop"  layout="column" flex>
+<div class="sign-up-workshop" layout="column" flex content="center start">
 	<form *ngIf="Ready" [formGroup]="SignUpWorkshopForm" (ngSubmit)="SignUp(SignUpWorkshopForm.value)" layout="column">
-		
-			<div class="form-viewer">
+		<div class="logo" layout="column" content="center start">
+			<img src="/assets/carBlack.png" />
+			<span>
+				eWorkshop
+			</span>
+		</div>
+		<div>
+			<div layout="row">
 				<mat-form-field>
 					<input matInput formControlName="FirstName" placeholder="First name">
-
 				</mat-form-field>
-
 				<mat-form-field>
 					<input matInput formControlName="LastName" placeholder="Last Name">
 				</mat-form-field>
+			</div>
 
+			<div layout="row">
 				<mat-form-field>
 					<input matInput formControlName="Telephone" placeholder="Telephone">
 				</mat-form-field>
+			</div>
 
+			<div layout="row">
 				<mat-form-field>
 					<input matInput formControlName="Email" placeholder="Email">
 				</mat-form-field>
+			</div>
 
+			<div layout="row">
 				<mat-form-field>
 					<input matInput formControlName="Password" type="password" placeholder="Password">
 				</mat-form-field>
 
 				<mat-form-field>
-					<input matInput formControlName="PasswordConfirm" type="password" placeholder="Password">
+					<input matInput formControlName="PasswordConfirm" type="password" placeholder="Confirm Password">
 				</mat-form-field>
-				<!--<span *ngIf="SignUpForm.errors?.mismatchedFields">Passwords do not match</span>-->
-				<div class="form-footer">
-					<div class="bt-signup">
-						<button mat-raised-button color="primary" type="submit" [disabled]="!SignUpWorkshopForm.valid">Sign Up</button>
-					</div>
-					<div class="bt-reset">
-						<button mat-raised-button color="warn" type="reset">
-							Reset
-						</button>
-					</div>
-				</div>
-				<div *ngIf="ShowMessage" class="error-message">
-					{{Message}}
-				</div>
-
 			</div>
-		</form>
+
+			<div layout="row" content="end">
+				<button mat-raised-button color="primary" type="submit" [disabled]="!SignUpWorkshopForm.valid">Sign Up</button>
+			</div>
+
+			<div class="links" layout="column" content="center">
+				<a routerLink="/account/sign-in">Do you have an account?</a>
+				<a routerLink="/account/sign-up">Create your account as Costumer</a>
+			</div>
+
+			<div *ngIf="ShowMessage" class="error-message">
+				{{Message}}
+			</div>
+
+		</div>
+	</form>
 </div>

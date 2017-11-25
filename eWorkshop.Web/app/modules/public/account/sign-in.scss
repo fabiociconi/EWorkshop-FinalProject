@@ -1,66 +1,31 @@
-//Page CSS
+@import "../../../styles/app-constants.scss";
 
-.login-icon-field {
-	height: 250px;
-	width: 100%;
-}
+.sign-in {
+	margin-top: 20px;
 
-.login-icon {
-	margin: 50px 65px;
-}
+	form {
+		border-top: $bordertop;
+		padding: 10px;
+		width: 450px;
+		background-color: $backcolor;
 
-.login-form {
-	padding: 8px 20px 20px;
-	height: 120px;
-	width: 100%;
-	/*background-color: green;*/
-}
+		.logo {
+			img {
+				height: 250px;
+			}
 
-//Forms
+			span {
+				font-size: 65px;
+				margin: 15px;
+			}
+		}
 
-*, *:before, *:after {
-	box-sizing: border-box;
-}
+		.links {
+			margin-top: 10px;
 
-form {
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: 0;
-	padding: 1px 0;
-	color: #fff;
-	font-family: "Comfortaa", "Helvetica", sans-serif;
-	max-width: 280px;
-	min-height: 600px;
-	margin: 30px auto;
-	background-color: rgba(255,255,255,.68);
-	border-radius: 20px;
-}
-
-form span{
-	font-weight: 900;
-	font-size: 30px;
-	color: black;
-	text-align: center;
-}
-
-button {
-	display: block;
-	width: 240px;
-	height: 40px;
-	padding: 0;
-	margin: 10px 20px 10px;
-	font-weight: 700;
-	color: #fff;
-	background-color: #22c08a;
-	border: none;
-	border-radius: 20px;
-}
-
-button:hover {
-	background-color: #26d69a;
-}
-
-button:active {
-	background-color: #1eaa7a;
+			a {
+				margin-top: 8px;
+			}
+		}
+	}
 }

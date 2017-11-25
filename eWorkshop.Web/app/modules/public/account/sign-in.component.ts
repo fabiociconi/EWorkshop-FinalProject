@@ -31,6 +31,11 @@ export class SignInComponent implements OnInit {
 
 	public ngOnInit(): void	{
 
+		if (this.authService.IsAuthenticated()) {
+			this.authService.InitialRedirect();
+			return;
+		}
+
 		const autoForm = this.autoFormService.createNew<ISignInEntity>();
 
 		this.SignInForm = autoForm

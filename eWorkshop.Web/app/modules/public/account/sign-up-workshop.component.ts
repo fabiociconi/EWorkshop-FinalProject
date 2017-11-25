@@ -24,6 +24,11 @@ export class SignUpWorkshopComponent implements OnInit {
 		private snackBar: MatSnackBar) { }
 
 	public ngOnInit(): void {
+		if (this.authService.IsAuthenticated()) {
+			this.authService.InitialRedirect();
+			return;
+		}
+
 		this.NewSignUpWorkshopForm();
 	}
 

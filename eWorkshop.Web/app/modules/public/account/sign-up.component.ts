@@ -24,8 +24,15 @@ export class SignUpComponent implements OnInit {
 		private snackBar: MatSnackBar) { }
 
 	public ngOnInit(): void {
+
+		if (this.authService.IsAuthenticated()) {
+			this.authService.InitialRedirect();
+			return;
+		}
+
 		this.NewSignUpForm();
 	}
+
 	private SignUp(entity: ISignUpEntity): void {
 		this.authService.SignUp(entity)
 			.subscribe(res => {
@@ -36,6 +43,7 @@ export class SignUpComponent implements OnInit {
 				this.snackBar.open("Thank you! You are now registred in our system ", "", { duration: 3000 });
 			});
 	}
+
 	private BuildForm(entity: ISignUpEntity): void {
 
 		const autoForm = this.autoFormService.createNew<ISignUpEntity>();
