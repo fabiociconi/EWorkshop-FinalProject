@@ -10,7 +10,7 @@ import { Guid } from "../../../entity/entity-util";
 	templateUrl: "./googleMaps.html"
 })
 export class GoogleMaps {
-	@Input('addressIn')
+	@Input()
 	private addressIn: IAddressesEntity;
 
 	@Output() addressOut: EventEmitter<IAddressesEntity> = new EventEmitter();
