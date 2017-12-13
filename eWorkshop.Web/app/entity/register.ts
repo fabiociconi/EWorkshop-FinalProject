@@ -1,9 +1,10 @@
-﻿/***************************************** WARNING *****************************************/
+/***************************************** WARNING *****************************************/
 /* Don't write any code in this file, because it will be rewritten on the next generation. */
 /*******************************************************************************************/
 
 import { EntityAction, RoleType } from "./enum";
 import { IServicesEntity } from "./Service";
+import { ICoordinates } from "./util";
 
 export interface IAddressesEntity {
 	IdAddress: string; 
@@ -14,7 +15,8 @@ export interface IAddressesEntity {
 	PostalCode: string; 
 	Type: number; 
 	Longitude: number; 
-	Latitude: number; 
+	Latitude: number;
+	Distance?: number;
 	Province: string; 
 	Country: string; 
 	Action: EntityAction; 
@@ -22,6 +24,7 @@ export interface IAddressesEntity {
 
 export interface IAddressesFilter {
 	IdPerson?: string; 
+	IdPeople?: Array<string>; 
 	Key?: string; 
 	Keys?: Array<string>; 
 	PageNumber?: number; 
@@ -157,6 +160,9 @@ export interface IWorkshopsEntity {
 	IdWorkshop: string; 
 	IdPerson: string; 
 	Description: string; 
+	Person: IPeopleEntity; 
+	Addresses: Array<IAddressesEntity>; 
+	Services: Array<IWorkshopServicesEntity>; 
 	Action: EntityAction; 
 }
 
@@ -171,6 +177,7 @@ export interface IWorkshopServicesEntity {
 
 export interface IWorkshopServicesFilter {
 	IdWorkshop?: string; 
+	IdWorkshops?: Array<string>; 
 	IdWorkshopService?: string; 
 	Key?: string; 
 	Keys?: Array<string>; 
@@ -179,6 +186,14 @@ export interface IWorkshopServicesFilter {
 }
 
 export interface IWorkshopsFilter {
+	Name?: string; 
+	ServiceName?: string; 
+	Street?: string; 
+	City?: string; 
+	Province?: string; 
+	ClientLatitude?: number;
+	ClientLongitude?: number; 
+	MaximumDistance: number; 
 	Key?: string; 
 	Keys?: Array<string>; 
 	PageNumber?: number; 

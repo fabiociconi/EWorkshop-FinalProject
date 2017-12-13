@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/observable";
 import { HttpUtilService } from "xcommon";
 
-import { IPeopleEntity, IAddressesEntity, ICarsEntity, IExecute } from "../../entity";
+import { IPeopleEntity, IAddressesEntity, ICarsEntity, IExecute, IWorkshopsEntity, IWorkshopsFilter } from "../../entity";
 
 @Injectable()
 export class CustomerService {
@@ -49,5 +49,11 @@ export class CustomerService {
 	public SetCar(entity: ICarsEntity): Observable<IExecute<ICarsEntity>> {
 		const url = this.utilService.BuidlUrl(this.ServiceUrl, "car");
 		return this.http.post<IExecute<ICarsEntity>>(url, entity);
+	}
+
+	public Search(filter: IWorkshopsFilter): Observable<IWorkshopsEntity[]> {
+		const url = this.utilService.BuidlUrl(this.ServiceUrl, "search");
+		const params = this.utilService.BuildGetParams(filter);
+		return this.http.get<IWorkshopsEntity[]>(url, { params: params });
 	}
 }

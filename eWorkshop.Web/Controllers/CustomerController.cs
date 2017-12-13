@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using eWorkshop.Business.Register;
 using eWorkshop.Entity.Enum;
@@ -14,7 +13,6 @@ using XCommon.Patterns.Ioc;
 namespace eWorkshop.Web.Controllers
 {
 	[Route("api/[controller]")]
-	[Authorize(Roles = AppConstants.Customer)]
 	public class CustomerController : BaseController
 	{
 		[Inject]
@@ -25,6 +23,9 @@ namespace eWorkshop.Web.Controllers
 
 		[Inject]
 		private CarsBusiness CarsBusiness { get; set; }
+
+		[Inject]
+		private WorkshopsBusiness WorkshopsBusiness { get; set; }
 
 		[HttpGet]
 		public async Task<PeopleEntity> GetProfile()
@@ -74,6 +75,12 @@ namespace eWorkshop.Web.Controllers
 		public async Task<CarsEntity> GetCar(Guid id)
 		{
 			return await CarsBusiness.GetFirstByFilterAsync(new CarsFilter { IdPerson = UserKey, Key = id });
+		}
+
+		[HttpGet("search")]
+		public async Task<List<WorkshopsEntity>> Search([FromQuery] WorkshopsFilter filter)
+		{
+			return await WorkshopsBusiness.GetByFilterAsync(filter);
 		}
 	}
 }

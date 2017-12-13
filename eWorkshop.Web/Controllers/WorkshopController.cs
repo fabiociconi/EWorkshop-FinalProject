@@ -16,6 +16,7 @@ using XCommon.Patterns.Ioc;
 namespace eWorkshop.Web.Controllers
 {
 	[Route("api/[controller]")]
+	[Authorize(Roles = AppConstants.Workshop)]
 	public class WorkshopController : BaseController
     {
 		[Inject]
@@ -34,28 +35,24 @@ namespace eWorkshop.Web.Controllers
 		private ServicesBusiness ServicesBusiness { get; set; }
 		
 		[HttpGet]
-		[Authorize(Roles = AppConstants.Workshop)]
 		public async Task<PeopleEntity> GetProfile()
 		{
 			return await PeopleBusiness.GetFirstByFilterAsync(new PeopleFilter { Key = UserKey, RoleType = RoleType.Workshop, LoadDetails = true });
 		}
 
 		[HttpPost]
-		[Authorize(Roles = AppConstants.Workshop)]
 		public async Task<Execute<PeopleEntity>> SetProfile([FromBody] PeopleEntity entity)
 		{
 			return await PeopleBusiness.SaveAsync(entity);
 		}
 
 		[HttpGet("address")]
-		[Authorize(Roles = AppConstants.Workshop)]
 		public async Task<List<AddressesEntity>> GetAddresses()
 		{
 			return await AddressesBusiness.GetByFilterAsync(new AddressesFilter { IdPerson = UserKey });
 		}
 
 		[HttpPost("address")]
-		[Authorize(Roles = AppConstants.Workshop)]
 		public async Task<Execute<AddressesEntity>> SetAddress([FromBody] AddressesEntity entity)
 		{
 			entity.IdPerson = UserKey;
@@ -63,21 +60,18 @@ namespace eWorkshop.Web.Controllers
 		}
 
 		[HttpGet("address/{id}")]
-		[Authorize(Roles = AppConstants.Workshop)]
 		public async Task<AddressesEntity> GetAddress(Guid id)
 		{
 			return await AddressesBusiness.GetFirstByFilterAsync(new AddressesFilter { IdPerson = UserKey, Key = id });
 		}
 
 		[HttpGet("workshopservice")]
-		[Authorize(Roles = AppConstants.Workshop)]
 		public async Task<List<WorkshopServicesEntity>> GetWorkshopServices()
 		{
 			return await WorkshopServicesBusiness.GetByFilterAsync(new WorkshopServicesFilter { IdWorkshop = UserKey });
 		}
 
 		[HttpGet("workshopservice/{id}")]
-		[Authorize(Roles = AppConstants.Workshop)]
 		public async Task<WorkshopServicesEntity> GetWorkshopService(Guid id)
 		{
 			return await WorkshopServicesBusiness.GetFirstByFilterAsync(new WorkshopServicesFilter { IdWorkshopService = UserKey, Key = id });
@@ -85,7 +79,6 @@ namespace eWorkshop.Web.Controllers
 
 
 		[HttpPost("workshopservice")]
-		[Authorize(Roles = AppConstants.Workshop)]
 		public async Task<Execute<WorkshopServicesEntity>> SetWorkshopService([FromBody] WorkshopServicesEntity entity)
 		{
 			entity.IdWorkshop = UserKey;
@@ -93,21 +86,15 @@ namespace eWorkshop.Web.Controllers
 		}
 
 		[HttpGet("service")]
-		[Authorize(Roles = AppConstants.Workshop)]
 		public async Task<List<ServicesEntity>> GetServices()
 		{
 			return await ServicesBusiness.GetByFilterAsync(new ServicesFilter { IdService = UserKey });
 		}
 
 		[HttpGet("service/{id}")]
-		[Authorize(Roles = AppConstants.Workshop)]
 		public async Task<ServicesEntity> GetService(Guid id)
 		{
 			return await ServicesBusiness.GetFirstByFilterAsync(new ServicesFilter { IdService = UserKey, Key = id });
 		}
-
-
-
-
 	}
 }

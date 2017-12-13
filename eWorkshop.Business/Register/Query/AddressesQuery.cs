@@ -14,6 +14,7 @@ namespace eWorkshop.Business.Register.Query
 			var spefications = NewSpecificationList()
 				.And(e => e.IdAddress == filter.Key, f => f.Key.HasValue)
 				.And(e => filter.Keys.Contains(e.IdAddress), f => f.Keys.IsValidList())
+				.And(e => filter.IdPeople.Contains(e.IdPerson), f => f.IdPeople.IsValidList())
 				.And(e => e.IdPerson == filter.IdPerson, f => f.IdPerson.HasValue)
 				.OrderBy(e => e.IdAddress)
 				.Take(filter.PageNumber, filter.PageSize);

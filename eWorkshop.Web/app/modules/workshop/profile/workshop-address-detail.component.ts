@@ -107,6 +107,11 @@ export class WorkshopAddressDetailComponent implements OnInit {
 	}
 
 	private UpdateAddress(address: IAddressesEntity) {
+
+		if (this.Workshop.Action === EntityAction.None) {
+			this.Workshop.Action = EntityAction.Update;
+		}
+
 		this.Workshop.StreetNumber = address.StreetNumber;
 		this.Workshop.Street = address.Street;
 		this.Workshop.City = address.City;

@@ -40,13 +40,13 @@ export class CustomerAddressListComponent implements OnInit {
 		return;
 	}
 
-	private Back(): void {
+	public Back(): void {
 		this.router.navigate(["/customer"]);
 		return;
 
 	}
 
-	private NewAddress(): void {
+	public NewAddress(): void {
 		this.router.navigate(["/customer/address/new"]);
 		return;
 	}

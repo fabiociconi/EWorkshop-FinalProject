@@ -28,16 +28,15 @@ namespace eWorkshop.Data.Register.Map
 					.IsRequired();
 
 				entity.Property(e => e.Street)
-					.IsRequired()
-					.HasMaxLength(50);
+					.IsRequired();
 
 				entity.Property(e => e.StreetNumber)
 					.IsRequired()
-					.HasMaxLength(10);
+					.HasMaxLength(300);
 
 				entity.Property(e => e.City)
 					.IsRequired()
-					.HasMaxLength(50);
+					.HasMaxLength(300);
 
 				entity.Property(e => e.PostalCode)
 					.IsRequired()
@@ -54,11 +53,11 @@ namespace eWorkshop.Data.Register.Map
 
 				entity.Property(e => e.Province)
 					.IsRequired()
-					.HasMaxLength(30);
+					.HasMaxLength(300);
 
 				entity.Property(e => e.Country)
 					.IsRequired()
-					.HasMaxLength(100);
+					.HasMaxLength(300);
 
 				entity
 					.HasOne(d => d.People)

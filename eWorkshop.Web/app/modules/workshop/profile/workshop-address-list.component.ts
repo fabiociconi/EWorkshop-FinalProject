@@ -40,13 +40,13 @@ export class WorkshopAddressListComponent implements OnInit {
 		return;
 	}
 
-	private Back(): void {
+	public Back(): void {
 		this.router.navigate(["/workshop"]);
 		return;
 
 	}
 
-	private NewAddress(): void {
+	public NewAddress(): void {
 		this.router.navigate(["/workshop/address/new"]);
 		return;
 

@@ -1,4 +1,4 @@
-﻿using eWorkshop.Data.Register;
+using eWorkshop.Data.Register;
 using eWorkshop.Entity.Register.Filter;
 using System;
 using System.Collections.Generic;
@@ -17,6 +17,7 @@ namespace eWorkshop.Business.Register.Query
 			var spefications = NewSpecificationList()
 				.And(e => e.IdWorkshopService == filter.Key, f => f.Key.HasValue)
 				.And(e => filter.Keys.Contains(e.IdWorkshopService), f => f.Keys.IsValidList())
+				.And(e => filter.IdWorkshops.Contains(e.IdWorkshop), f => f.IdWorkshops.IsValidList())
 				.OrderBy(e => e.IdWorkshopService)
 				.Take(filter.PageNumber, filter.PageSize);
 
