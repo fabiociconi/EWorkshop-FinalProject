@@ -77,8 +77,8 @@ namespace eWorkshop.Web.Controllers
 			return await CarsBusiness.GetFirstByFilterAsync(new CarsFilter { IdPerson = UserKey, Key = id });
 		}
 
-		[HttpGet("search")]
-		public async Task<List<WorkshopsEntity>> Search([FromQuery] WorkshopsFilter filter)
+		[HttpPost("search")]
+		public async Task<List<WorkshopsEntity>> Search([FromBody] WorkshopsFilter filter)
 		{
 			return await WorkshopsBusiness.GetByFilterAsync(filter);
 		}

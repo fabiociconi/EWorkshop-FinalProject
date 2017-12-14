@@ -53,7 +53,6 @@ export class CustomerService {
 
 	public Search(filter: IWorkshopsFilter): Observable<IWorkshopsEntity[]> {
 		const url = this.utilService.BuidlUrl(this.ServiceUrl, "search");
-		const params = this.utilService.BuildGetParams(filter);
-		return this.http.get<IWorkshopsEntity[]>(url, { params: params });
+		return this.http.post<IWorkshopsEntity[]>(url, filter);
 	}
 }

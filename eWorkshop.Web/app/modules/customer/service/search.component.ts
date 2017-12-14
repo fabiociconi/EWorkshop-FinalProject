@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, HostListener } from "@angular/core";
-import { CustomerService } from "../../service";
-import { IWorkshopsEntity, IWorkshopsFilter, ICoordinates } from "../../../entity";
+import { CustomerService, WorkshopService } from "../../service";
+import { IWorkshopsEntity, IWorkshopsFilter, ICoordinates, IServicesEntity } from "../../../entity";
 
 @Component({
 	selector: "search",
@@ -10,19 +10,24 @@ import { IWorkshopsEntity, IWorkshopsFilter, ICoordinates } from "../../../entit
 export class SearchComponent implements OnInit {
 
 	public Workshops: IWorkshopsEntity[] = [];
+	public Services: IServicesEntity[] = [];
 
-	public lat: number = 0;
-	public lng: number = 0;
-	public zoom: number = 4;
-	public MapSize: number = 0;
+	public lat = 0;
+	public lng = 0;
+	public zoom = 4;
+	public MapSize = 0;
+	public MaximumDistance = 30;
 
 	@ViewChild('divMap') public DivMap: ElementRef;
 
-	constructor(private customerService: CustomerService) { }
+	constructor(private customerService: CustomerService, private workshopService: WorkshopService) { }
 
 	public ngOnInit(): void {
 
 		setTimeout(() => this.OnResize(null), 100);
+		this.workshopService.GetServices()
+			.subscribe(res => this.Services = res);
+
 		this.SetCurrentPosition();
 	}
 
@@ -46,11 +51,24 @@ export class SearchComponent implements OnInit {
 		}
 	}
 
-	private Filter(): void {
+	private GetServices(): string[] {
+		const result: string[] = [];
+
+		this.Services.forEach(item => {
+			if (item.Selected === true) {
+				result.push(item.IdService);
+			}
+		});
+
+		return result;
+	}
+
+	public Filter(): void {
 		const filter: IWorkshopsFilter = {
-			MaximumDistance: 134,
+			MaximumDistance: this.MaximumDistance,
 			ClientLatitude: this.lat,
-			ClientLongitude: this.lng
+			ClientLongitude: this.lng,
+			IdServices: this.GetServices()
 		};
 
 		this.customerService.Search(filter)

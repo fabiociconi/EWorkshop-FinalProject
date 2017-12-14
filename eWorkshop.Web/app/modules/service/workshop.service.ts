@@ -53,12 +53,12 @@ export class WorkshopService {
     }
 
     public GetServices(): Observable<IServicesEntity[]> {
-        const url = this.utilService.BuidlUrl(this.ServiceUrl, "service");
+		const url = this.utilService.BuidlUrl("common", "service");
         return this.http.get<IServicesEntity[]>(url);
     }
 
     public GetService(id: string): Observable<IServicesEntity> {
-        const url = this.utilService.BuidlUrl(this.ServiceUrl, "service", id);
+		const url = this.utilService.BuidlUrl("common", "service", id);
         return this.http.get<IServicesEntity>(url);
     }
 

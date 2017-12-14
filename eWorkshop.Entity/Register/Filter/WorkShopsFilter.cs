@@ -1,10 +1,16 @@
-using eWorkshop.Entity.Util;
+using System;
+using System.Collections.Generic;
 using XCommon.Patterns.Repository.Entity;
 
 namespace eWorkshop.Entity.Register.Filter
 {
 	public class WorkshopsFilter: FilterBase
     {
+		public WorkshopsFilter()
+		{
+			IdServices = new List<Guid>();
+		}
+
 		public string Name { get; set; }
 
 		public string ServiceName { get; set; }
@@ -20,5 +26,7 @@ namespace eWorkshop.Entity.Register.Filter
 		public double? ClientLongitude { get; set; }
 
 		public int MaximumDistance { get; set; }
+
+		public List<Guid> IdServices { get; set; }
 	}
 }

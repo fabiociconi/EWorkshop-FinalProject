@@ -1,4 +1,4 @@
-﻿/***************************************** WARNING *****************************************/
+/***************************************** WARNING *****************************************/
 /* Don't write any code in this file, because it will be rewritten on the next generation. */
 /*******************************************************************************************/
 
@@ -57,7 +57,8 @@ export interface IAppointmentsServicesFilter {
 
 export interface IServicesEntity {
 	IdService: string; 
-	Name: string; 
+	Name: string;
+	Selected: boolean;
 	Description: string; 
 	Action: EntityAction; 
 }

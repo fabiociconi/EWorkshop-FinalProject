@@ -195,7 +195,8 @@ export interface IWorkshopsFilter {
 	ClientLongitude?: number; 
 	MaximumDistance: number; 
 	Key?: string; 
-	Keys?: Array<string>; 
+	Keys?: Array<string>;
+	IdServices?: Array<string>;
 	PageNumber?: number; 
 	PageSize?: number; 
 }
