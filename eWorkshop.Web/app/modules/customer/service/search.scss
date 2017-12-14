@@ -1,2 +1,21 @@
-﻿.search {
+.search {
+	padding: 10px;
+
+	.search-box {
+		height: 55px;
+	}
+
+	.search-result {
+		margin-top: 10px;
+		min-height: 100%;
+
+		.search-map {
+			flex-grow: 1 !important;
+		}
+
+		.search-filter {
+			background-color: blue;
+			width: 250px;
+		}
+	}
 }

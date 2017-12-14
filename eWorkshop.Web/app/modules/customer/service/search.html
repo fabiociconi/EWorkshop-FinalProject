@@ -1,3 +1,15 @@
-﻿<div class="search">
-	<h1>Hey! I"m search</h1>
+<div class="search" layout="column" flex>
+	<div layout="row" class="search-box" shadow="1">
+
+	</div>
+	<div layout="row" flex class="search-result" shadow="1">
+		<div flex class="search-map" #divMap>
+			<agm-map [latitude]="lat" [longitude]="lng" [style.height.px]="MapSize">
+				<ng-container *ngFor="let workshop of Workshops">
+					<agm-marker *ngFor="let address of workshop.Addresses" [latitude]="address.Latitude" [longitude]="address.Longitude"></agm-marker>
+				</ng-container>
+			</agm-map>
+		</div>
+		<div layout="column" class="search-filter"></div>
+	</div>
 </div>
