@@ -4,9 +4,14 @@
 		<div *ngIf="Ready">
 			<ul class="addresses" *ngFor="let item of CustomerAddress; let i = index">
 				<li>
-					<span class="badge">{{i + 1}}</span>
-					{{item.StreetNumber}} {{item.Street}} {{item.PostalCode}} {{item.City}}
-					<button mat-raised-button color="accent" [routerLink]="['/customer/address/', item.IdAddress]" type="button">Edit</button>
+					<div style="display: inline-block; width: 500px; height: 45px;">
+						<div style="display:inline-block; float:left;">
+							<span class="badge">{{item.StreetNumber}} {{item.Street}} {{item.PostalCode}} {{item.City}}</span>
+						</div>
+						<div style="display:inline-block; float:right;">
+							<button mat-raised-button color="accent" [routerLink]="['/customer/address/', item.IdAddress]" type="button">Edit</button>
+						</div>
+					</div>
 				</li>
 			</ul>
 		</div>
