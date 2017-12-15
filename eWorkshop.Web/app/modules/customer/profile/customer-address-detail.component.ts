@@ -79,7 +79,7 @@ export class CustomerAddressDetailComponent implements OnInit {
 	}
 
 	private DeleteAddress(): void {
-		this.dialogService.confirm("Warnning", "Do you like to delete this Address ?")
+		this.dialogService.confirm("Warning", "Do you like to delete this Address?")
 			.subscribe(res => {
 				if (res) {
 					this.Customer.Action = EntityAction.Delete;
@@ -90,13 +90,13 @@ export class CustomerAddressDetailComponent implements OnInit {
 
 	private SaveChanges(entity: IAddressesEntity): void {
 		this.customerService.SetAddress(entity)
-			.subscribe(res => {
+            .subscribe(res => {
 				if (res.HasErro) {
-					this.snackBar.open("Your browser did something unexpected.Please contact us if the problem persists.", "", { duration: 3000 });
+					this.snackBar.open("Your browser did something unexpected. Please contact us if the problem persists.", "", { duration: 3000 });
 					return;
 				}
 
-				this.snackBar.open("Thank you! You are address was Updated", "", { duration: 3000 });
+				this.snackBar.open("Thank you! Your address was updated", "", { duration: 3000 });
 
 				if (entity.Action === EntityAction.Delete) {
 					this.router.navigate(["/customer/address"]);
@@ -106,7 +106,12 @@ export class CustomerAddressDetailComponent implements OnInit {
 			});
 	}
 
-	private UpdateAddress(address: IAddressesEntity) {
+    private UpdateAddress(address: IAddressesEntity) {
+
+        if (this.Customer.Action === EntityAction.None) {
+            this.Customer.Action = EntityAction.Update;
+        }
+
 		this.Customer.StreetNumber = address.StreetNumber;
 		this.Customer.Street = address.Street;
 		this.Customer.City = address.City;
