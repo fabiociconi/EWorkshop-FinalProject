@@ -3,8 +3,11 @@ import { FormGroup, Validators } from "@angular/forms";
 import { AutoFormService } from "xcommon";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
+import { CustomValidators } from "ng2-validation";
+
 import { ISignUpEntity, Guid, RoleType, EntityAction } from "../../../entity";
 import { AuthService } from "../../service";
+
 
 @Component({
 	selector: "sign-up-workshop",
@@ -53,6 +56,8 @@ export class SignUpWorkshopComponent implements OnInit {
 			.AddValidator(c => c.FirstName, Validators.required)
 			.AddValidator(c => c.LastName, Validators.required)
 			.AddValidator(c => c.Telephone, Validators.required)
+			.AddValidator(c	=> c.Telephone, CustomValidators.phone("CA"))
+			.AddValidator(c => c.Telephone, Validators.maxLength(10))
 			.AddValidator(c => c.Email, Validators.email)
 			.AddValidator(c => c.Email, Validators.required)
 			.AddValidator(c => c.Password, Validators.required)
@@ -61,7 +66,7 @@ export class SignUpWorkshopComponent implements OnInit {
 
 		this.Ready = true;
 	}
-
+	
 	private NewSignUpWorkshopForm(): void {
 
 		const today = new Date();

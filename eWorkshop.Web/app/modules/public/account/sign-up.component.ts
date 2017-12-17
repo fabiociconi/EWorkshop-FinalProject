@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators } from "@angular/forms";
 import { AutoFormService } from "xcommon";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { CustomValidators } from "ng2-validation";
 
 import { ISignUpEntity, Guid, RoleType, EntityAction } from "../../../entity";
 import { AuthService } from "../../service";
@@ -51,6 +52,8 @@ export class SignUpComponent implements OnInit {
 		this.SignUpForm = autoForm
 			.AddValidator(c => c.FirstName, Validators.required)
 			.AddValidator(c => c.LastName, Validators.required)
+			.AddValidator(c	=> c.Telephone, CustomValidators.phone("CA"))
+			.AddValidator(c => c.Telephone, Validators.maxLength(10))
 			.AddValidator(c => c.Telephone, Validators.required)
 			.AddValidator(c => c.Email, Validators.email)
 			.AddValidator(c => c.Email, Validators.required)

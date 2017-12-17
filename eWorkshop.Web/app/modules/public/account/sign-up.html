@@ -19,12 +19,17 @@
 
 			<div layout="row">
 				<mat-form-field>
-					<input matInput formControlName="Telephone" placeholder="Telephone">
+					<input matInput formControlName="Telephone" placeholder="Telephone" >			
+
+					<small style="font-size:small;color:red" [hidden]="SignUpForm.controls.Telephone.valid || (SignUpForm.controls.Telephone.pristine && !submitted)">
+						Insert a valid Canadian Number (ex.6476741898).
+					</small>
 				</mat-form-field>
 			</div>
 			<div layout="row">
 				<mat-form-field>
-					<input matInput formControlName="Email" placeholder="Email">
+					<input matInput formControlName="Email" placeholder="Email">				
+
 				</mat-form-field>
 			</div>
 			<div layout="row">
