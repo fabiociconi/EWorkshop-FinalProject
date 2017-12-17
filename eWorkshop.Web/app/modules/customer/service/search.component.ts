@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, HostListener } from "@angular/core";
 import { CustomerService, WorkshopService } from "../../service";
-import { IWorkshopsEntity, IWorkshopsFilter, ICoordinates, IServicesEntity } from "../../../entity";
+import { IWorkshopsEntity, IWorkshopsFilter, ICoordinates, IServicesEntity, IAddressesEntity } from "../../../entity";
+
+
 
 @Component({
 	selector: "search",
@@ -11,6 +13,12 @@ export class SearchComponent implements OnInit {
 
 	public Workshops: IWorkshopsEntity[] = [];
 	public Services: IServicesEntity[] = [];
+	public UserAddresses: IAddressesEntity[] = [];
+	public Filter: IWorkshopsFilter = { MaximumDistance: 0 };
+	public BaseLocation = "0";
+
+	public CurrentLat = 0;
+	public CurrentLng = 0;
 
 	public lat = 0;
 	public lng = 0;
@@ -28,6 +36,7 @@ export class SearchComponent implements OnInit {
 		this.workshopService.GetServices()
 			.subscribe(res => this.Services = res);
 
+		this.GetAddresses();
 		this.SetCurrentPosition();
 	}
 
@@ -40,13 +49,15 @@ export class SearchComponent implements OnInit {
 		if ("geolocation" in navigator) {
 			navigator.geolocation.getCurrentPosition(
 				position => {
-					this.lat = position.coords.latitude;
-					this.lng = position.coords.longitude;
+					this.CurrentLat = position.coords.latitude;
+					this.CurrentLng = position.coords.longitude;
 					this.zoom = 4;
-					this.Filter();
+					this.UpdateLocation();
+					this.GetWorkshop();
 				},
 				error => {
-					this.Filter();
+					this.UpdateLocation();
+					this.GetWorkshop();
 				});
 		}
 	}
@@ -63,15 +74,33 @@ export class SearchComponent implements OnInit {
 		return result;
 	}
 
-	public Filter(): void {
-		const filter: IWorkshopsFilter = {
-			MaximumDistance: this.MaximumDistance,
-			ClientLatitude: this.lat,
-			ClientLongitude: this.lng,
-			IdServices: this.GetServices()
-		};
+	public GetAddresses(): void {
+		this.customerService.GetAddresses()
+			.subscribe(res => {
+				this.UserAddresses = res;
+			});
+	}
 
-		this.customerService.Search(filter)
+	public UpdateLocation(): void {
+		this.lat = this.CurrentLat;
+		this.lng = this.CurrentLng;
+
+		const address = this.UserAddresses.find(a => a.IdAddress === this.BaseLocation);
+
+		if (address) {
+			this.lat = address.Latitude;
+			this.lng = address.Longitude;
+		}
+	}
+
+	public GetWorkshop(): void {
+		this.Filter.MaximumDistance = this.MaximumDistance;
+		this.Filter.ClientLatitude = this.lat;
+		this.Filter.ClientLongitude = this.lng;
+
+		this.Filter.IdServices = this.GetServices();
+
+		this.customerService.Search(this.Filter)
 			.subscribe(res => {
 				this.Workshops = res;
 				console.log(res);

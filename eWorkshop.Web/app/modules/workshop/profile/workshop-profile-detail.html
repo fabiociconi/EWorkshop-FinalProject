@@ -8,13 +8,13 @@
 	<form *ngIf="Ready" [formGroup]="WorkShopProfileForm" (ngSubmit)="SaveChanges(WorkShopProfileForm.value)" layout="column">
 		<div layout="row" flex>
 			<mat-form-field flex>
-				<input matInput formControlName="FirstName" placeholder="First name">
+				<input matInput formControlName="FirstName" placeholder="Display Name">
 			</mat-form-field>
 		</div>
 
 		<div layout="row" flex>
 			<mat-form-field flex>
-				<input matInput formControlName="LastName" placeholder="Last Name">
+				<input matInput formControlName="LastName" placeholder="Legal Name">
 			</mat-form-field>
 		</div>
 
@@ -27,6 +27,12 @@
 		<div layout="row" flex>
 			<mat-form-field flex>
 				<input matInput formControlName="Email" placeholder="Email">
+			</mat-form-field>
+		</div>
+
+		<div layout="row" formGroupName="Workshop">
+			<mat-form-field flex>
+				<textarea rows="8" matInput formControlName="Description" placeholder="Description"></textarea>
 			</mat-form-field>
 		</div>
 

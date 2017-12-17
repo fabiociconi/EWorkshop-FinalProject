@@ -44,6 +44,7 @@ export class CustomerAddressDetailComponent implements OnInit {
 		this.BuildForm({
 			Action: EntityAction.New,
 			IdAddress: Guid.NewGuid(),
+			Name: "",
 			IdPerson: Guid.Empty(),
 			City: "",
 			Latitude: 0,
