@@ -3,6 +3,11 @@
 
 	.search-box {
 		height: 55px;
+
+		.mat-input-underline,
+		.mat-form-field-underline {
+			background-color: none !important;
+		}
 	}
 
 	.search-result {
@@ -15,6 +20,28 @@
 
 		.search-filter {
 			width: 250px;
+			padding: 10px;
+
+			.search-filter-location {
+			}
+
+			.search-filter-services {
+
+				ul {
+					li {
+						max-width: 230px;
+						overflow: hidden;
+					}
+				}
+			}
+
+			.search-filter-distance {
+				width: 100%;
+
+				mat-slider {
+					width: 100%;
+				}
+			}
 		}
 	}
 }

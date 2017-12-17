@@ -40,7 +40,7 @@ namespace eWorkshop.Data.Register.Map
 
 				entity.Property(e => e.PostalCode)
 					.IsRequired()
-					.HasMaxLength(6);
+					.HasMaxLength(300);
 
 				entity.Property(e => e.Type)
 					.IsRequired();

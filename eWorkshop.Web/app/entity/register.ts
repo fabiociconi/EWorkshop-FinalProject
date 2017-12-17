@@ -8,7 +8,8 @@ import { ICoordinates } from "./util";
 
 export interface IAddressesEntity {
 	IdAddress: string; 
-	IdPerson: string; 
+	IdPerson: string;
+	Name?: string;
 	Street: string; 
 	StreetNumber: string; 
 	City: string; 

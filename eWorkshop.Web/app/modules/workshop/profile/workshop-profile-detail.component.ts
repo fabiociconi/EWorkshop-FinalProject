@@ -36,6 +36,7 @@ export class WorkshopProfileDetailComponent implements OnInit {
 
 		this.WorkShopProfileForm = autoForm
 			.Build(entity);
+
 		this.Workshop = entity;
 		this.Ready = true;
 	}

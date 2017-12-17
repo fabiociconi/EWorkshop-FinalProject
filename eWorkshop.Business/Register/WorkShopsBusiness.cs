@@ -20,7 +20,6 @@ namespace eWorkshop.Business.Register
 
 		private WorkshopServicesBusiness WorkshopServicesBusiness => Kernel.Resolve<WorkshopServicesBusiness>();
 
-
 		public async override Task<List<WorkshopsEntity>> GetByFilterAsync(WorkshopsFilter filter)
 		{
 			var result = await base.GetByFilterAsync(filter);
