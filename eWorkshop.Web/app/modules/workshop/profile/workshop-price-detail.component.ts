@@ -18,8 +18,13 @@ export class WorkshopPriceDetailComponent implements OnInit {
 	public Ready = false;
 	public ServiceDetailForm: FormGroup;
 	private Entity: IWorkshopServicesEntity;
-    public Services: IServicesEntity[];
+    public Services: IServicesEntity[] = [];
+    public FilteredServices: IServicesEntity[] = [];
+    public WorkshopServices: IWorkshopServicesEntity[] = [];
     public Service: IServicesEntity;
+    public arrayServices: string[] = [];
+    public arrayWorkshopServices: string[] = [];
+    public TempServiceId: string;
 
 	constructor(
 		private workshopService: WorkshopService,
@@ -29,27 +34,26 @@ export class WorkshopPriceDetailComponent implements OnInit {
 		private snackBar: MatSnackBar,
 		private autoFormService: AutoFormService) { }
 
-	public ngOnInit(): void {
+    public ngOnInit(): void {
 
-		this.LoadServices();
-
-		
 		this.activatedRoute.params.subscribe(p => {
-			const id = p.id;
-			if (id == "newservice") {
-				this.New();
+            const id = p.id;
+            if (id == "newservice") {
+                this.LoadServicesFiltered(id);
+                this.New();
 				return;
 			}
 
-			if (id) {
-				this.Load(id);
+            if (id) {
+                this.LoadServicesFiltered(id);
+                this.Load(id);
 				return;
 			}
-		});
-
+        });
 		
-	}
-
+		
+    }  
+	    
 	public Save(entity: IWorkshopServicesEntity): void {
 
 		this.workshopService.SetWorkshopService(entity)
@@ -77,6 +81,7 @@ export class WorkshopPriceDetailComponent implements OnInit {
                         duration: 2000,
                     });
                     this.BuildForm(res.Entity);
+                    this.Back();
                     return;
                 }
 
@@ -84,6 +89,7 @@ export class WorkshopPriceDetailComponent implements OnInit {
                     duration: 2000,
                 });
                 this.BuildForm(res.Entity);
+                this.Back();
 			});
 	}
 
@@ -102,7 +108,8 @@ export class WorkshopPriceDetailComponent implements OnInit {
 
 	}
 
-	private New(): void {
+    private New(): void {
+		
 		this.BuildForm({
 			Action: EntityAction.New,
 			IdWorkshopService: Guid.NewGuid(),
@@ -113,11 +120,12 @@ export class WorkshopPriceDetailComponent implements OnInit {
 		});
 	}
 
-	private Back(): void {
-		this.router.navigate(["/workshop/pricetable"]);
-		return;
-	}
+    private Back(): void {	
 
+        this.router.navigate(["/workshop/pricetable"]);
+		return;
+    }
+	
     private BuildForm(entity: IWorkshopServicesEntity): void {
 		this.ServiceDetailForm = this.autoFormService.createNew<IWorkshopServicesEntity>()
 			.Build(entity);
@@ -131,11 +139,69 @@ export class WorkshopPriceDetailComponent implements OnInit {
 			.subscribe(res => this.BuildForm(res));
 	}
 
-    private LoadServices(): void {
 
+    private LoadServicesFiltered(id: string): void {	
+		
         this.workshopService.GetServices()
             .subscribe(res => {
-                this.Services = res;
+                this.GetServices(res);
             });
+
+        this.workshopService.GetWorkshopServices()
+            .subscribe(res => {
+                this.GetWorkshopServices(res, id);
+            });
+    }
+	
+    private GetServices(services: IServicesEntity[]): void {
+        this.Services = services;
+    }
+
+    private GetService(serviceId: string): void {
+        this.TempServiceId = serviceId;
+    }
+
+    private GetWorkshopServices(workshopservices: IWorkshopServicesEntity[], id: string): void {
+        this.WorkshopServices = workshopservices;
+		this.ArrayService(this.Services);
+        this.ArrayWorkshopService(this.WorkshopServices);
+        let missing = this.arrayServices.filter(item => this.arrayWorkshopServices.indexOf(item) < 0);
+
+        for (var i = 0; i < missing.length; i++) {
+            this.workshopService.GetService(missing[i])
+				.subscribe(res => {
+                    this.FilteredServices.push(res);
+			    });
+        }        
+        
+        if (id != "newservice") {
+
+            this.workshopService.GetWorkshopService(id)
+                .subscribe(res => {
+                    this.workshopService.GetService(res.IdService)
+                        .subscribe(response => {
+                            this.FilteredServices.push(response);
+                        });					
+                });
+        }
+
+        if ((id == "newservice") && (missing.length == 0)) {
+            this.snackBar.open("All Services are already added in your Workshop!", "", {
+                duration: 4000,
+            });
+            this.Back();
+        }
+    }
+	
+    private ArrayService(services: IServicesEntity[]): void {
+        for (var i = 0; i < services.length; i++) {
+            this.arrayServices.push(services[i].IdService);
+        }
+    }
+
+    private ArrayWorkshopService(workshopservices: IWorkshopServicesEntity[]): void {
+        for (var i = 0; i < workshopservices.length; i++) {
+            this.arrayWorkshopServices.push(workshopservices[i].IdService);
+        }
     }
 }

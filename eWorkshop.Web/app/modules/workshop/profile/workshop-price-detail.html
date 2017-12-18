@@ -10,7 +10,7 @@
 		<div layout="row" flex>
 			<mat-form-field flex>
 				<mat-select formControlName="IdService" placeholder="Service Name">
-					<mat-option *ngFor="let service of Services" [value]="service.IdService">
+					<mat-option *ngFor="let service of FilteredServices" [value]="service.IdService">
 						{{service.Name}}
 					</mat-option>
 				</mat-select>
