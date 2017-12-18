@@ -25,6 +25,7 @@ export class WorkshopPriceDetailComponent implements OnInit {
     public arrayServices: string[] = [];
     public arrayWorkshopServices: string[] = [];
     public TempServiceId: string;
+    public missing: string[] = [];
 
 	constructor(
 		private workshopService: WorkshopService,
@@ -141,32 +142,27 @@ export class WorkshopPriceDetailComponent implements OnInit {
 
 
     private LoadServicesFiltered(id: string): void {	
-		
-        this.workshopService.GetServices()
-            .subscribe(res => {
-                this.GetServices(res);
-            });
 
         this.workshopService.GetWorkshopServices()
             .subscribe(res => {
-                this.GetWorkshopServices(res, id);
+                this.workshopService.GetServices()
+                    .subscribe(response => {
+                        this.GetBothServices(res, response, id);
+                    });
             });
-    }
-	
-    private GetServices(services: IServicesEntity[]): void {
-        this.Services = services;
     }
 
     private GetService(serviceId: string): void {
         this.TempServiceId = serviceId;
     }
 
-    private GetWorkshopServices(workshopservices: IWorkshopServicesEntity[], id: string): void {
-        this.WorkshopServices = workshopservices;
-		this.ArrayService(this.Services);
+    private GetBothServices(workshopservices: IWorkshopServicesEntity[], services: IServicesEntity[], id: string): void {
+        this.Services = services;
+        this.WorkshopServices = workshopservices;		
+        this.ArrayService(this.Services);        
         this.ArrayWorkshopService(this.WorkshopServices);
+		
         let missing = this.arrayServices.filter(item => this.arrayWorkshopServices.indexOf(item) < 0);
-
         for (var i = 0; i < missing.length; i++) {
             this.workshopService.GetService(missing[i])
 				.subscribe(res => {
@@ -191,6 +187,7 @@ export class WorkshopPriceDetailComponent implements OnInit {
             });
             this.Back();
         }
+		
     }
 	
     private ArrayService(services: IServicesEntity[]): void {
