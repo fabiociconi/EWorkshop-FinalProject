@@ -13,8 +13,8 @@ const CommonConfig: webpack.Configuration = {
     },
     output: {
         path: PathHelper.GetPath(["wwwroot"]),
-        filename: "dist/[name].js",
-        chunkFilename: "dist/[name].[id].chunk.js",
+		filename: "dist/[name].[hash].js",
+		chunkFilename: "dist/[name].[id].[hash].chunk.js",
         publicPath: "/"
     },
     resolve: {

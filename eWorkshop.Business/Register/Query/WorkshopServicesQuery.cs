@@ -18,6 +18,7 @@ namespace eWorkshop.Business.Register.Query
 				.And(e => e.IdWorkshopService == filter.Key, f => f.Key.HasValue)
 				.And(e => filter.Keys.Contains(e.IdWorkshopService), f => f.Keys.IsValidList())
 				.And(e => filter.IdWorkshops.Contains(e.IdWorkshop), f => f.IdWorkshops.IsValidList())
+				.And(e => e.IdWorkshop == filter.IdWorkshop, f => f.IdWorkshop.HasValue)
 				.OrderBy(e => e.IdWorkshopService)
 				.Take(filter.PageNumber, filter.PageSize);
 
