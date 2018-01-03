@@ -11,6 +11,8 @@ namespace eWorkshop.Entity.Register.Filter
 			IdServices = new List<Guid>();
 		}
 
+		public Guid? IdAddress { get; set; }
+
 		public string Name { get; set; }
 
 		public string ServiceName { get; set; }

@@ -1,3 +1,17 @@
-﻿<div class="customer-appointment-detail">
-	<h1>Hey! I"m customer-appointment-detail</h1>
+<div class="customer-appointment-detail">
+	<div class="workshop" *ngIf="Workshop">
+		<div class="info">
+			{{Workshop.Person.FirstName}} {{Workshop.Person.LastName}}
+		</div>
+		<div class="address" *ngFor="let address of Workshop.Addresses">
+			{{address.StreetNumber}}, {{address.Street}} - {{address.City}}/{{address.PostalCode}}
+		</div>
+		<div class="services">
+			<ul>
+				<li *ngFor="let service of Workshop.Services">
+					{{service.Service.Name}} - {{service.Price}}
+				</li>
+			</ul>
+		</div>
+	</div>
 </div>

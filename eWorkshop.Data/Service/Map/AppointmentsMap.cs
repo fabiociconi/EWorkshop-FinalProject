@@ -45,6 +45,9 @@ namespace eWorkshop.Data.Service.Map
 				entity.Property(e => e.Date)
 					.IsRequired();
 
+				entity.Property(e => e.IdAddress)
+					.IsRequired();
+
 				entity
 					.HasOne(d => d.Workshops)
 					.WithMany(p => p.Appointments)
@@ -54,6 +57,11 @@ namespace eWorkshop.Data.Service.Map
 					.HasOne(d => d.Cars)
 					.WithMany(p => p.Appointments)
 					.HasForeignKey(d => d.IdCar);
+
+				entity
+					.HasOne(d => d.Addresses)
+					.WithMany(p => p.Appointments)
+					.HasForeignKey(d => d.IdAddress);
 
 			});
 		}

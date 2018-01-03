@@ -26,9 +26,13 @@ namespace eWorkshop.Data.Service
 
 		public DateTime Date { get; set; }
 
+		public Guid IdAddress { get; set; }
+
 		public virtual Workshops Workshops { get; set; }
 
 		public virtual Cars Cars { get; set; }
+
+		public virtual Addresses Addresses { get; set; }
 
 		public virtual ICollection<AppointmentsServices> AppointmentsServices { get; set; }
 

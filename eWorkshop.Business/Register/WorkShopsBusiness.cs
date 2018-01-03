@@ -32,7 +32,7 @@ namespace eWorkshop.Business.Register
 			var idPeople = result.Select(c => c.IdPerson).ToList();
 
 			var people = await PeopleBusiness.GetByFilterAsync(new PeopleFilter { Keys = idPeople });
-			var addresses = await AddressesBusiness.GetByFilterAsync(new AddressesFilter { IdPeople = idPeople });
+			var addresses = await AddressesBusiness.GetByFilterAsync(new AddressesFilter { IdPeople = idPeople, Key = filter.IdAddress });
 			var services = await WorkshopServicesBusiness.GetByFilterAsync(new WorkshopServicesFilter { IdWorkshops = idPeople });
 
 			if (filter.ClientLongitude.HasValue && filter.ClientLatitude.HasValue && filter.MaximumDistance > 0)

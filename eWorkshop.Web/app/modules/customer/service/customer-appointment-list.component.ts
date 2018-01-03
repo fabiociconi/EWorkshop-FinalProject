@@ -1,4 +1,6 @@
-﻿import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { CustomerService } from "../../service";
+import { IAppointmentsEntity } from "../../../entity";
 
 @Component({
 	selector: "customer-appointment-list",
@@ -6,7 +8,13 @@
 	styleUrls: ["./customer-appointment-list.scss"]
 })
 export class CustomerAppointmentListComponent implements OnInit {
-	constructor() { }
 
-	public ngOnInit(): void { }
+	public Appointments: IAppointmentsEntity[];
+
+	constructor(private customerService: CustomerService) { }
+
+	public ngOnInit(): void {
+		this.customerService.GetAppointments()
+			.subscribe(res => this.Appointments = res);
+	}
 }

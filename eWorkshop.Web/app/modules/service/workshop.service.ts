@@ -4,6 +4,7 @@ import { Observable } from "rxjs/observable";
 import { HttpUtilService } from "xcommon";
 
 import { IPeopleEntity, IAddressesEntity, ICarsEntity, IExecute, IWorkshopsEntity, IWorkshopServicesEntity, IServicesEntity } from "../../entity";
+import { IAppointmentsEntity, IAppointmentsFilter } from "../../entity";
 
 @Injectable()
 export class WorkshopService {
@@ -62,4 +63,18 @@ export class WorkshopService {
         return this.http.get<IServicesEntity>(url);
     }
 
+	public GetAppointments(): Observable<IAppointmentsEntity[]> {
+		const url = this.utilService.BuidlUrl(this.ServiceUrl, "appointment");
+		return this.http.get<IAppointmentsEntity[]>(url);
+	}
+
+	public GetAppointment(id: string): Observable<IAppointmentsEntity> {
+		const url = this.utilService.BuidlUrl(this.ServiceUrl, "appointment", id);
+		return this.http.get<IAppointmentsEntity>(url);
+	}
+
+	public SetAppointment(entity: IAppointmentsEntity): Observable<IExecute<IAppointmentsEntity>> {
+		const url = this.utilService.BuidlUrl(this.ServiceUrl, "appointment");
+		return this.http.post<IExecute<IAppointmentsEntity>>(url, entity);
+	}
 }

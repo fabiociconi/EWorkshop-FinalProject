@@ -30,7 +30,10 @@ namespace eWorkshop.Web.Controllers
 
 		[Inject]
 		private CarsBusiness CarsBusiness { get; set; }
-		
+
+		[Inject]
+		private AppointmentsBusiness AppointmentsBusiness { get; set; }
+
 		[HttpGet]
 		public async Task<PeopleEntity> GetProfile()
 		{
@@ -79,6 +82,24 @@ namespace eWorkshop.Web.Controllers
 		{
 			entity.IdWorkshop = UserKey;
 			return await WorkshopServicesBusiness.SaveAsync(entity);
+		}
+
+		[HttpGet("appointment")]
+		public async Task<List<AppointmentsEntity>> GetAppointments()
+		{
+			return await AppointmentsBusiness.GetByFilterAsync(new AppointmentsFilter { IdPerson = UserKey });
+		}
+
+		[HttpGet("appointment/{id}")]
+		public async Task<AppointmentsEntity> GetAppointment(Guid id)
+		{
+			return await AppointmentsBusiness.GetFirstByFilterAsync(new AppointmentsFilter { IdPerson = UserKey, Key = id });
+		}
+
+		[HttpPost("appointment")]
+		public async Task<Execute<AppointmentsEntity>> SetAppointment([FromBody] AppointmentsEntity entity)
+		{
+			return await AppointmentsBusiness.SaveAsync(entity);
 		}
 	}
 }

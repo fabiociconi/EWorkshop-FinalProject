@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using eWorkshop.Business.Register;
+using eWorkshop.Business.Service;
 using eWorkshop.Entity.Enum;
 using eWorkshop.Entity.Register;
 using eWorkshop.Entity.Register.Filter;
+using eWorkshop.Entity.Service;
+using eWorkshop.Entity.Service.Filter;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using XCommon.Application.Executes;
@@ -26,6 +29,9 @@ namespace eWorkshop.Web.Controllers
 
 		[Inject]
 		private WorkshopsBusiness WorkshopsBusiness { get; set; }
+
+		[Inject]
+		private AppointmentsBusiness AppointmentsBusiness { get; set; }
 
 		[HttpGet]
 		public async Task<PeopleEntity> GetProfile()
@@ -77,10 +83,40 @@ namespace eWorkshop.Web.Controllers
 			return await CarsBusiness.GetFirstByFilterAsync(new CarsFilter { IdPerson = UserKey, Key = id });
 		}
 
+		[HttpGet("car/{id}/appointment")]
+		public async Task<List<AppointmentsEntity>> GetCarAppointmentsEntity(Guid id)
+		{
+			return await AppointmentsBusiness.GetByFilterAsync(new AppointmentsFilter { IdCar = id, IdPerson = UserKey });
+		}
+
 		[HttpPost("search")]
 		public async Task<List<WorkshopsEntity>> Search([FromBody] WorkshopsFilter filter)
 		{
 			return await WorkshopsBusiness.GetByFilterAsync(filter);
+		}
+
+		[HttpPost("search/one")]
+		public async Task<WorkshopsEntity> SearchOne([FromBody] WorkshopsFilter filter)
+		{
+			return await WorkshopsBusiness.GetFirstByFilterAsync(filter);
+		}
+
+		[HttpGet("appointment")]
+		public async Task<List<AppointmentsEntity>> GetAppointments()
+		{
+			return await AppointmentsBusiness.GetByFilterAsync(new AppointmentsFilter { IdPerson = UserKey });
+		}
+
+		[HttpGet("appointment/{id}")]
+		public async Task<AppointmentsEntity> GetAppointment(Guid id)
+		{
+			return await AppointmentsBusiness.GetFirstByFilterAsync(new AppointmentsFilter { IdPerson = UserKey, Key = id });
+		}
+
+		[HttpPost("appointment")]
+		public async Task<Execute<AppointmentsEntity>> SetAppointment([FromBody] AppointmentsEntity entity)
+		{
+			return await AppointmentsBusiness.SaveAsync(entity);
 		}
 	}
 }

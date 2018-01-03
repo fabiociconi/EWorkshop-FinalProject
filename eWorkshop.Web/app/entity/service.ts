@@ -7,13 +7,15 @@ import { EntityAction } from "./enum";
 export interface IAppointmentsEntity {
 	IdAppointment: string; 
 	IdWorkshop: string; 
-	IdCar: string; 
+	IdCar: string;
+	IdAddress: string;
 	AppointmentDate: Date; 
 	Status: number; 
 	CreateDate: Date; 
 	ChangeDate: Date; 
 	Date: Date; 
-	Action: EntityAction; 
+	Action: EntityAction;
+	Services: IAppointmentsServicesEntity[];
 }
 
 export interface IAppointmentsFilter {
@@ -46,6 +48,7 @@ export interface IAppointmentsServicesEntity {
 	IdService: string; 
 	Price: number; 
 	Action: EntityAction; 
+	Service: IServicesEntity;
 }
 
 export interface IAppointmentsServicesFilter {

@@ -26,6 +26,8 @@ namespace eWorkshop.Entity.Service
 
 		public DateTime Date { get; set; }
 
+		public Guid IdAddress { get; set; }
+
 
 		[IgnoreDataMember]
 		public override Guid Key

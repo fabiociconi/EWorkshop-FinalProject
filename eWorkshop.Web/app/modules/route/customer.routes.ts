@@ -13,5 +13,6 @@ export const CUSTOMER_ROUTES: Routes = [
 	{ path: "profile/car/:id", component: CustomerCarDetailComponent },
 	{ path: "search", component: SearchComponent },
 	{ path: "appointment", component: CustomerAppointmentListComponent },
-	{ path: "appointment/:id", component: CustomerAppointmentDetailComponent }
+	{ path: "appointment/:id", component: CustomerAppointmentDetailComponent },
+	{ path: "appointment/:id/:idWorkshop/:idAddress", component: CustomerAppointmentDetailComponent }
 ];

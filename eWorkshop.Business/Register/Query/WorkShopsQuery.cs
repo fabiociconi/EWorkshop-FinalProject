@@ -16,6 +16,7 @@ namespace eWorkshop.Business.Register.Query
                 .And(e => e.IdWorkshop == filter.Key, f => f.Key.HasValue)
                 .And(e => filter.Keys.Contains(e.IdWorkshop), f => f.Keys.IsValidList())
 				.And(e => e.People.FirstName.Contains(filter.Name), f => f.Name.IsNotEmpty())
+				.And(e => e.People.Addresses.Any(a => a.IdAddress == filter.IdAddress), f => f.IdAddress.HasValue)
 				.And(e => e.People.Addresses.Any(a => a.Street.Contains(filter.Street)), f => f.Street.IsNotEmpty())
 				.And(e => e.People.Addresses.Any(a => a.Province.Contains(filter.Province)), f => f.Province.IsNotEmpty())
 				.And(e => e.People.Addresses.Any(a => a.City.Contains(filter.City)), f => f.City.IsNotEmpty())

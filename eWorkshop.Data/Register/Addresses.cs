@@ -2,6 +2,7 @@
 /* Don't write any code in this file, because it will be rewritten on the next generation. */
 /*******************************************************************************************/
 
+using eWorkshop.Data.Service;
 using System;
 using System.Collections.Generic;
 
@@ -32,6 +33,8 @@ namespace eWorkshop.Data.Register
 		public string Country { get; set; }
 
 		public virtual People People { get; set; }
+
+		public virtual ICollection<Appointments> Appointments { get; set; }
 
 	}
 }

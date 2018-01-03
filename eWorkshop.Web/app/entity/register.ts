@@ -159,7 +159,8 @@ export interface IUsersFilter {
 
 export interface IWorkshopsEntity {
 	IdWorkshop: string; 
-	IdPerson: string; 
+	IdPerson: string;
+	IdAddress: string;
 	Description: string; 
 	Person: IPeopleEntity; 
 	Addresses: Array<IAddressesEntity>; 
@@ -187,7 +188,8 @@ export interface IWorkshopServicesFilter {
 }
 
 export interface IWorkshopsFilter {
-	Name?: string; 
+	Name?: string;
+	IdAddress?: string;
 	ServiceName?: string; 
 	Street?: string; 
 	City?: string; 

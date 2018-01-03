@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace eWorkshop.Entity.Register
 {
-    public partial class WorkshopsEntity
+	public partial class WorkshopsEntity
     {
 		public WorkshopsEntity()
 		{
