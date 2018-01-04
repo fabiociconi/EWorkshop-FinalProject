@@ -42,13 +42,19 @@ export class CustomerAppointmentDetailComponent implements OnInit {
 		}
 	}
 
-	private BuildForm(appointment: IAppointmentsEntity): void {
+	private Back(): void {
+		this.router.navigate(["/customer/appointment/"]);
+		return;
+	}
 
+	private BuildForm(appointment: IAppointmentsEntity): void {
 		this.customerService.GetWorkshop(appointment.IdWorkshop, appointment.IdAddress)
 			.subscribe(res => this.Workshop = res);
 
 		this.AppointmentForm = this.autoFormService.createNew<IAppointmentsEntity>()
 			.Build(appointment);
+
+		this.Ready = true;
 	}
 
 	private New(idWorkshop: string, idAddress: string): void {

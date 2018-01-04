@@ -1,17 +1,51 @@
 <div class="customer-appointment-detail">
-	<div class="workshop" *ngIf="Workshop">
-		<div class="info">
-			{{Workshop.Person.FirstName}} {{Workshop.Person.LastName}}
-		</div>
-		<div class="address" *ngFor="let address of Workshop.Addresses">
-			{{address.StreetNumber}}, {{address.Street}} - {{address.City}}/{{address.PostalCode}}
-		</div>
-		<div class="services">
-			<ul>
-				<li *ngFor="let service of Workshop.Services">
-					{{service.Service.Name}} - {{service.Price}}
-				</li>
-			</ul>
-		</div>
+	<div class="title">
+		Appointment Detail
 	</div>
+	<div *ngIf="!Ready">
+		Loading...
+	</div>
+	<form *ngIf="Ready" class="form-viewer" [formGroup]="AppointmentForm" (ngSubmit)="Save(AppointmentForm.value)" layout="column">
+		<div layout="row" flex>
+			<mat-form-field flex>
+				<input matInput formControlName="AppointmentDate" placeholder="Appointment Date">
+			</mat-form-field>
+		</div>
+		<div layout="row" flex>
+			<mat-form-field flex>
+				<mat-select formControlName="Status" placeholder="Status">
+					<mat-option [value]="0">Aberto</mat-option>
+					<mat-option [value]="1">Encerrado</mat-option>
+					<mat-option [value]="2">Cancelado</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+		<div class="workshop" *ngIf="Workshop">
+			<div layout="row" flex>
+				<mat-form-field flex>
+					<input matInput placeholder="Client Name" value="{{Workshop.Person.FirstName}} {{Workshop.Person.LastName}}" readonly>
+				</mat-form-field>
+			</div>
+			<div layout="row" flex>
+				<mat-form-field flex>
+					<div class="address" *ngFor="let address of Workshop.Addresses">
+						<input matInput placeholder="Workshop Address" value="{{address.StreetNumber}}, {{address.Street}} - {{address.City}}/{{address.PostalCode}}" readonly>
+					</div>
+				</mat-form-field>
+			</div>
+			<div class="services">
+				<ul>
+					<li *ngFor="let service of Workshop.Services">
+						{{service.Service.Name}} - {{service.Price}}
+					</li>
+				</ul>
+			</div>
+		</div>
+
+			<div layout="row" flex content="end">
+				<button mat-raised-button color="secundary" type="button" (click)="Back()">Back</button>
+				<button mat-raised-button color="warn" type="button" (click)="Delete()">Delete</button>
+				<button mat-raised-button color="primary" type="submit" [disabled]="!AppointmentForm.valid">Save</button>
+			</div>
+</form>
 </div>
