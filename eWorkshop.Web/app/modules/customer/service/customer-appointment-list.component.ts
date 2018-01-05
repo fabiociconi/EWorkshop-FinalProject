@@ -10,11 +10,14 @@ import { IAppointmentsEntity } from "../../../entity";
 export class CustomerAppointmentListComponent implements OnInit {
 
 	public Appointments: IAppointmentsEntity[];
+	public Ready = false;
 
 	constructor(private customerService: CustomerService) { }
 
 	public ngOnInit(): void {
 		this.customerService.GetAppointments()
 			.subscribe(res => this.Appointments = res);
+
+		this.Ready = true;
 	}
 }

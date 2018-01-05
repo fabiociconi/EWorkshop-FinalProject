@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
+import { MatSnackBar, MatDatepickerModule, MatNativeDateModule } from "@angular/material";
 import { AutoFormService } from "xcommon";
 
 import { CustomerService } from "../../service";
-import { IAppointmentsEntity, IWorkshopsEntity, EntityAction } from "../../../entity";
+import { IAppointmentsEntity, IWorkshopsEntity, EntityAction, IAppointmentsServicesEntity, ICarsEntity } from "../../../entity";
 import { Guid } from "../../../entity/entity-util";
 
 @Component({
@@ -19,9 +20,11 @@ export class CustomerAppointmentDetailComponent implements OnInit {
 	public AppointmentForm: FormGroup;
 	public Ready: boolean = false;
 	public ShowMessage: boolean = false;
+	public Cars: Array<ICarsEntity>;
 
 	constructor(
 		private customerService: CustomerService,
+		private snackBar: MatSnackBar,
 		private autoFormService: AutoFormService,
 		private activatedRoute: ActivatedRoute,
 		private router: Router) { }
@@ -47,12 +50,34 @@ export class CustomerAppointmentDetailComponent implements OnInit {
 		return;
 	}
 
+	private SaveChanges(entity: IAppointmentsEntity): void {
+		this.customerService.SetAppointment(entity)
+			.subscribe(res => {
+				if (res.HasErro) {
+					this.snackBar.open("Your browser did something unexpected. Please contact us if the problem persists.", "", { duration: 3000 });
+					return;
+				}
+
+				this.snackBar.open("Thank you! Your appointment was saved", "", { duration: 3000 });
+
+				if (entity.Action === EntityAction.Delete) {
+					this.router.navigate(["/customer/appointment"]);
+					return;
+				}
+				this.BuildForm(res.Entity);
+			});
+	}
+
 	private BuildForm(appointment: IAppointmentsEntity): void {
 		this.customerService.GetWorkshop(appointment.IdWorkshop, appointment.IdAddress)
 			.subscribe(res => this.Workshop = res);
 
 		this.AppointmentForm = this.autoFormService.createNew<IAppointmentsEntity>()
 			.Build(appointment);
+
+		this.customerService.GetCars().subscribe(res => this.Cars = res);
+
+		console.log(this.Cars);
 
 		this.Ready = true;
 	}

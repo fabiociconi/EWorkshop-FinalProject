@@ -5,10 +5,12 @@
 	<div *ngIf="!Ready">
 		Loading...
 	</div>
-	<form *ngIf="Ready" class="form-viewer" [formGroup]="AppointmentForm" (ngSubmit)="Save(AppointmentForm.value)" layout="column">
+	<form *ngIf="Ready" class="form-viewer" [formGroup]="AppointmentForm" (ngSubmit)="SaveChanges(AppointmentForm.value)" layout="column">
 		<div layout="row" flex>
 			<mat-form-field flex>
-				<input matInput formControlName="AppointmentDate" placeholder="Appointment Date">
+				<input formControlName="AppointmentDate" matInput [matDatepicker]="picker" placeholder="Choose a date">
+				<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+				<mat-datepicker #picker></mat-datepicker>
 			</mat-form-field>
 		</div>
 		<div layout="row" flex>
@@ -23,7 +25,14 @@
 		<div class="workshop" *ngIf="Workshop">
 			<div layout="row" flex>
 				<mat-form-field flex>
-					<input matInput placeholder="Client Name" value="{{Workshop.Person.FirstName}} {{Workshop.Person.LastName}}" readonly>
+					<mat-select formControlName="IdCar" placeholder="Car">
+						<mat-option *ngFor="let car of Cars" [value]="car.IdCar">{{car.Brand}} {{car.Model}} {{car.Year}}</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+			<div layout="row" flex>
+				<mat-form-field flex>
+					<input matInput placeholder="Workshop employee" value="{{Workshop.Person.FirstName}} {{Workshop.Person.LastName}}" readonly>
 				</mat-form-field>
 			</div>
 			<div layout="row" flex>
