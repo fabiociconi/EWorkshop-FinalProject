@@ -6,10 +6,10 @@
 				<li>
 					<div style="display: inline-block; width: 500px; height: 45px;">
 						<div style="display:inline-block; float:left;">
-							<span class="badge">{{item.AppointmentDate}}</span>
+							<span class="badge">{{item.AppointmentDate | date:'longDate'}}</span>
 						</div>
 						<div style="display:inline-block; float:right;">
-							<button mat-raised-button color="accent" [routerLink]="['/customer/appoitment/edit/', item.IdAppointment]" type="button">Edit</button>
+							<button mat-raised-button color="accent" [routerLink]="['/customer/appoitment/', item.IdAppointment]" type="button">Edit</button>
 						</div>
 					</div>
 				</li>
