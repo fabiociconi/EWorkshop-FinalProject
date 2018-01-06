@@ -5,6 +5,11 @@ namespace eWorkshop.Entity.Service.Filter
 {
 	public class AppointmentsFilter: FilterBase
 	{
+		public AppointmentsFilter()
+		{
+			LoadServices = true;
+		}
+
 		public Guid? IdCar { get; set; }
 
 		public Guid? IdPerson { get; set; }
@@ -16,5 +21,7 @@ namespace eWorkshop.Entity.Service.Filter
 		public DateTime? EndDate { get; set; }
 
 		public int? Status { get; set; }
+
+		public bool LoadServices { get; set; }
 	}
 }

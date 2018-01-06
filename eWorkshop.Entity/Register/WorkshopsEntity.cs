@@ -10,7 +10,7 @@ namespace eWorkshop.Entity.Register
 			Services = new List<WorkshopServicesEntity>();
 		}
 
-		public PeopleEntity Person { get; set; }
+		public object Person { get; set; }
 
 		public List<AddressesEntity> Addresses { get; set; }
 
