@@ -32,7 +32,6 @@ export class WorkshopAppointmentListComponent implements OnInit {
 			.subscribe(res =>
 			{
 				this.Appointments = res;
-				console.log(res);
 			});
 		this.Ready = true;
 		return;
