@@ -1,39 +1,40 @@
+<div class="workshop-appointment-list">
 	<div class="title">WorkShop Appointments </div>
 	<div layout="row">
 		<div *ngIf="Ready">
-			<div layout="row" flex>
-			
+			<!--<div layout="row" flex>
 				<mat-form-field>
 					<mat-select placeholder="Status" [(ngModel)]="BaseLocation" (change)="UpdateList()">
-						<mat-option value="0">Aberto</mat-option>
-						<mat-option value="1">Encerrado</mat-option>
-						<mat-option value="2">Cancelado</mat-option>			
+						<mat-option value="0">All</mat-option>
+						<mat-option value="1">Open</mat-option>
+						<mat-option value="2">Finished</mat-option>
+						<mat-option value="3">Canceled</mat-option>
 					</mat-select>
 				</mat-form-field>
-			</div>
+			</div>-->
 			<ul class="appointments" *ngFor="let item of Appointments; let i = index">
 				<li>
 					<div style="display: inline-block; width: 500px; height: 45px;">
 						<div style="display:inline-block; float:left;">
-							<span class="badge">{{item.IdAppointment}}</span>
+							<span class="badge">{{item.AppointmentDate}}</span>
 						</div>
 						<div style="display:inline-block; float:right;">
-					<button mat-raised-button color="accent" [routerLink]="['/workshop/appoitment/edit/', item.IdAppointment]" type="button">Edit</button>
-				</div>
+							<button mat-raised-button color="accent" [routerLink]="['/workshop/appoitment/edit/', item.IdAppointment]" type="button">Edit</button>
+						</div>
 					</div>
 				</li>
 			</ul>
 		</div>
 		<div flex> </div>
-		 <div layout="row" content="end">
-			<button mat-raised-button color="primary" type="button" [routerLink]="['/customer/search/']"> New Appointment </button>
+		<div layout="row" content="end">
+			<button mat-raised-button color="primary" type="button" [routerLink]="['/workshop/search/']"> New Appointment </button>
 		</div>
 		<div layout="row" content="end">
 			<button mat-raised-button color="secundary" (click)="Back()" type="button"> Back </button>
-		</div> 
+		</div>
 		<div *ngIf="ShowMessage" class="error-message">
 			{{Message}}
 		</div>
 	</div>
-
+</div>
 

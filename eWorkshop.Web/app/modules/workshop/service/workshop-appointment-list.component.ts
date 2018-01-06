@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router/src";
+import { Router } from "@angular/router";
+
 import { WorkshopService } from "../../service";
 import { IAppointmentsEntity } from "../../../entity";
 
@@ -23,37 +24,24 @@ export class WorkshopAppointmentListComponent implements OnInit {
 
 	private LoadList(): void {
 		this.workshopService.GetAppointments()
-			.subscribe(res => {
-				this.Appointments = res;
-				this.Ready = true;
-			});
+			.subscribe(res => 
+				this.Appointments = res);
+		this.Ready = true;
 		return;
 	}
 
+	public UpdateLocation(): void {
 
-	public UpdateLocation(): void
-	{
-
-		//this.workshopService.GetAppointment(id)
-		//	.subscribe(res =>
-		//	{
-		//		this.Appointments = res;
-		//	});
-		//this.lat = this.CurrentLat;
-		//this.lng = this.CurrentLng;
-
-		//const address = this.UserAddresses.find(a => a.IdAddress === this.BaseLocation);
-
-		//if (address) {
-		//	this.lat = address.Latitude;
-		//	this.lng = address.Longitude;
-		//}
+		this.workshopService.GetAppointments()
+			.subscribe(res =>
+			{				
+				this.Appointments = res;
+			});
+		return;	
 	}
 
-	public Back(): void
-	{
+	public Back(): void	{
 		this.router.navigate(["/workshop"]);
 		return;
-
 	}
 }

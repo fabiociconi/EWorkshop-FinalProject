@@ -63,7 +63,8 @@ export class WorkshopService {
         return this.http.get<IServicesEntity>(url);
     }
 
-	public GetAppointments(): Observable<IAppointmentsEntity[]> {
+	public GetAppointments(): Observable<IAppointmentsEntity[]>
+	{
 		const url = this.utilService.BuidlUrl(this.ServiceUrl, "appointment");
 		return this.http.get<IAppointmentsEntity[]>(url);
 	}
