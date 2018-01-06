@@ -50,7 +50,8 @@ export class CustomerAppointmentDetailComponent implements OnInit {
 		return;
 	}
 
-	private SaveChanges(entity: IAppointmentsEntity): void {
+	public SaveChanges(entity: IAppointmentsEntity): void {
+
 		this.customerService.SetAppointment(entity)
 			.subscribe(res => {
 				if (res.HasErro) {
@@ -69,17 +70,38 @@ export class CustomerAppointmentDetailComponent implements OnInit {
 	}
 
 	private BuildForm(appointment: IAppointmentsEntity): void {
-		this.customerService.GetWorkshop(appointment.IdWorkshop, appointment.IdAddress)
-			.subscribe(res => this.Workshop = res);
 
-		this.AppointmentForm = this.autoFormService.createNew<IAppointmentsEntity>()
-			.Build(appointment);
+		this.customerService.GetWorkshop(appointment.IdWorkshop, appointment.IdAddress)
+			.subscribe(res => {
+				this.Workshop = res;
+
+				this.Workshop.Services.forEach(service => {
+
+					const serviceItem = appointment.Services.find(a => a.IdService == service.IdService);
+
+					if (!serviceItem) {
+
+						appointment.Services.push({
+							Action: EntityAction.New,
+							IdAppointment: appointment.IdAppointment,
+							IdAppointmentService: Guid.NewGuid(),
+							IdService: service.IdService,
+							Price: service.Price,
+							Service: service.Service
+						});
+					}
+				});
+
+				this.AppointmentForm = this.autoFormService.createNew<IAppointmentsEntity>()
+					.Build(appointment);
+
+				this.Ready = true;
+			});
+
+
 
 		this.customerService.GetCars().subscribe(res => this.Cars = res);
 
-		console.log(this.Cars);
-
-		this.Ready = true;
 	}
 
 	private New(idWorkshop: string, idAddress: string): void {
