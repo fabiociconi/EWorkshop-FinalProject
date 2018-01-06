@@ -5,6 +5,7 @@
 	<div *ngIf="!Ready">
 		Loading...
 	</div>
+	<div>
 	<form *ngIf="Ready" class="form-viewer" [formGroup]="CarDetailForm" (ngSubmit)="Save(CarDetailForm.value)" layout="column">
 		<div layout="row" flex>
 			<mat-form-field flex>
@@ -57,4 +58,19 @@
 			<button mat-raised-button color="primary" type="submit" [disabled]="!CarDetailForm.valid">Save</button>
 		</div>
 	</form>
+	</div>
+
+	<div class="form-viewer list" *ngIf="Ready">
+		<br />
+		<h2>Car History Appointments: {{Appointments.length}}</h2>
+		<br />
+		<ul class="appointmentList">
+			<li class="appointmentItem" *ngFor="let appointment of Appointments" layout="row">
+				<icon icon="car"></icon>
+				<span>{{appointment.AppointmentDate | date:'longDate'}} - {{appointment.Status}}</span>
+			</li>
+		</ul>
+	</div>
+
+
 </div>
