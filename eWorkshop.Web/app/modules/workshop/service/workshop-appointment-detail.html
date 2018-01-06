@@ -7,20 +7,20 @@
 		</div>
 		<form *ngIf="Ready" class="form-viewer" [formGroup]="AppointmentForm" (ngSubmit)="SaveChanges(AppointmentForm.value)" layout="column">
 			<div layout="row" flex>
-				<!--<mat-form-field flex>
+				<mat-form-field flex>
 					<input formControlName="AppointmentDate" matInput [matDatepicker]="picker" placeholder="Choose a date">
 					<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 					<mat-datepicker #picker></mat-datepicker>
-				</mat-form-field>-->
+				</mat-form-field>
 			</div>
 			<div layout="row" flex>
-				<!--<mat-form-field flex>
+				<mat-form-field flex>
 					<mat-select formControlName="Status"  placeholder="Status">
 						<mat-option [value]="0">Aberto</mat-option>
 						<mat-option [value]="1">Encerrado</mat-option>
 						<mat-option [value]="2">Cancelado</mat-option>
 					</mat-select>
-				</mat-form-field>-->
+				</mat-form-field>
 			</div>
 			<div class="workshop" *ngIf="Workshop">
 				<div layout="row" flex>
@@ -30,7 +30,7 @@
 						</mat-select>
 					</mat-form-field>
 				</div>
-				<div layout="row" flex>
+				<!--<div layout="row" flex>
 					<mat-form-field flex>
 						<input matInput placeholder="Workshop employee" value="{{Workshop.Person.FirstName}} {{Workshop.Person.LastName}}" readonly>
 					</mat-form-field>
@@ -41,7 +41,7 @@
 							<input matInput placeholder="Workshop Address" value="{{address.StreetNumber}}, {{address.Street}} - {{address.City}}/{{address.PostalCode}}" readonly>
 						</div>
 					</mat-form-field>
-				</div>
+				</div>-->
 				<div class="services">
 					<ul>
 						<li *ngFor="let service of Workshop.Services">

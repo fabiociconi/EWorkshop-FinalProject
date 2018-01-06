@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
-import { WorkshopService } from "../../service";
-import { IAppointmentsEntity } from "../../../entity";
+import { WorkshopService, CustomerService } from "../../service";
+import { IAppointmentsEntity, IPeopleEntity } from "../../../entity";
 
 
 @Component({
@@ -13,11 +13,13 @@ import { IAppointmentsEntity } from "../../../entity";
 export class WorkshopAppointmentListComponent implements OnInit {
 
 	public Appointments: IAppointmentsEntity[];
-	public Ready = false;
+	public Person: IPeopleEntity;
+	public Ready: boolean = false;
 	public Message: string = "";
-	public selected = "0";
+	public selected: string = "0";
 
-	constructor(private workshopService: WorkshopService, private router: Router) { }
+	constructor(private workshopService: WorkshopService, private router: Router,
+		private customerService: CustomerService) { }
 
 	public ngOnInit(): void
 	{		
@@ -35,16 +37,16 @@ export class WorkshopAppointmentListComponent implements OnInit {
 		this.Ready = true;
 		return;
 	}
-
-	public UpdateFilter(): void {
-		this.workshopService.GetAppointments()
-			.subscribe(res =>
-			{				
-				this.Appointments = res;
-				console.log(res);
-			});
-		return;	
-	}
+	
+	//public UpdateFilter(): void {
+	//	this.workshopService.GetAppointments()
+	//		.subscribe(res =>
+	//		{				
+	//			this.Appointments = res;
+	//			console.log(res);
+	//		});
+	//	return;	
+	//}
 
 	public Back(): void	{
 		this.router.navigate(["/workshop"]);

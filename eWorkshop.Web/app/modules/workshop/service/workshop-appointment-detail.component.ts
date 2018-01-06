@@ -7,7 +7,7 @@ import { AutoFormService } from "xcommon";
 
 
 import { WorkshopService } from "../../service";
-import { IAppointmentsEntity, IWorkshopsEntity, EntityAction, IAppointmentsServicesEntity, ICarsEntity } from "../../../entity";
+import { IAppointmentsEntity, IWorkshopsEntity, EntityAction, IAppointmentsServicesEntity, ICarsEntity, IPeopleEntity } from "../../../entity";
 import { Guid } from "../../../entity/entity-util";
 
 @Component({
@@ -18,6 +18,7 @@ import { Guid } from "../../../entity/entity-util";
 export class WorkshopAppointmentDetailComponent implements OnInit {
 
 	public Workshop: IWorkshopsEntity;
+	public Customer: IPeopleEntity;
 	public Message: string = "";
 	public AppointmentForm: FormGroup;
 	public Ready: boolean = false;
@@ -25,7 +26,9 @@ export class WorkshopAppointmentDetailComponent implements OnInit {
 	public Cars: Array<ICarsEntity>;
 
 
-	constructor(private workshopService: WorkshopService,
+	constructor(
+		private customerService: CustomerService,
+		private workshopService: WorkshopService,
 		private snackBar: MatSnackBar,
 		private autoFormService: AutoFormService,
 		private activatedRoute: ActivatedRoute,
@@ -34,8 +37,8 @@ export class WorkshopAppointmentDetailComponent implements OnInit {
 	public ngOnInit(): void
 	{
 		const id = this.activatedRoute.snapshot.params.id;
-		//const idWorkshop = this.activatedRoute.snapshot.params.idWorkshop;
-		//const idAddress = this.activatedRoute.snapshot.params.idAddress;
+		const idWorkshop = this.activatedRoute.snapshot.params.idWorkshop;
+		const idAddress = this.activatedRoute.snapshot.params.idAddress;
 
 		if (id) {
 			this.LoadAppointment(id);
@@ -45,22 +48,47 @@ export class WorkshopAppointmentDetailComponent implements OnInit {
 
 	private BuildForm(appointment: IAppointmentsEntity): void
 	{
-		//this.workshopService.GetWorkshop(appointment.IdWorkshop, appointment.IdAddress)
-		//	.subscribe(res => this.Workshop = res);
 
-		this.AppointmentForm = this.autoFormService.createNew<IAppointmentsEntity>()
-			.Build(appointment);
+		this.customerService.GetWorkshop(appointment.IdWorkshop, appointment.IdAddress)
+			.subscribe(res =>
+			{
+				this.Workshop = res;
 
-		//this.workshopService.GetCars().subscribe(res => this.Cars = res);
+				this.Workshop.Services.forEach(service =>
+				{
 
-		//console.log(this.Cars);
+					const serviceItem = appointment.Services.find(a => a.IdService == service.IdService);
 
-		this.Ready = true;
+					if (!serviceItem) {
+
+						appointment.Services.push({
+							Action: EntityAction.New,
+							IdAppointment: appointment.IdAppointment,
+							IdAppointmentService: Guid.NewGuid(),
+							IdService: service.IdService,
+							Price: service.Price,
+							Service: service.Service
+						});
+					}
+				});
+
+				this.AppointmentForm = this.autoFormService.createNew<IAppointmentsEntity>()
+					.Build(appointment);
+
+				this.Ready = true;
+			});
+
+
+
+		this.customerService.GetCars().subscribe(res => this.Cars = res);
+	
 	}
 	private LoadAppointment(id: string): void
 	{
 		this.workshopService.GetAppointment(id)
 			.subscribe(res => this.BuildForm(res));
+		
+
 	}
 
 	private Back(): void
