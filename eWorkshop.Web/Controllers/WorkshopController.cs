@@ -87,13 +87,13 @@ namespace eWorkshop.Web.Controllers
 		[HttpGet("appointment")]
 		public async Task<List<AppointmentsEntity>> GetAppointments()
 		{
-			return await AppointmentsBusiness.GetByFilterAsync(new AppointmentsFilter { IdPerson = UserKey });
+			return await AppointmentsBusiness.GetByFilterAsync(new AppointmentsFilter { IdWorkshop = UserKey });
 		}
 
 		[HttpGet("appointment/{id}")]
 		public async Task<AppointmentsEntity> GetAppointment(Guid id)
 		{
-			return await AppointmentsBusiness.GetFirstByFilterAsync(new AppointmentsFilter { IdPerson = UserKey, Key = id });
+			return await AppointmentsBusiness.GetFirstByFilterAsync(new AppointmentsFilter { IdWorkshop = UserKey, Key = id });
 		}
 
 		[HttpPost("appointment")]
