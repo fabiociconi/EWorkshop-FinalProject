@@ -5,7 +5,7 @@ import { MatSnackBar } from "@angular/material";
 import { AutoFormService } from "xcommon";
 
 import { CustomerService, DialogService } from "../../service";
-import { ICarsEntity, EntityAction } from "../../../entity";
+import { ICarsEntity, IAppointmentsEntity, EntityAction } from "../../../entity";
 import { Guid } from "../../../entity/entity-util";
 
 @Component({
@@ -19,6 +19,8 @@ export class CustomerCarDetailComponent implements OnInit {
 	public idPerson = "";
 	public CarDetailForm: FormGroup;
 	private Entity: ICarsEntity;
+	public Appointments: IAppointmentsEntity[] = [];
+
 
 	constructor(
 		private customerService: CustomerService,
@@ -126,6 +128,11 @@ export class CustomerCarDetailComponent implements OnInit {
 	private Load(id: string): void {
 		this.customerService.GetCar(id)
 			.subscribe(res => this.BuildForm(res));
+		this.customerService.GetCarHistory(id)
+			.subscribe(res => {
+				this.Appointments = res;
+				console.log(res);
+			});
 	}
 
 	private New(): void {

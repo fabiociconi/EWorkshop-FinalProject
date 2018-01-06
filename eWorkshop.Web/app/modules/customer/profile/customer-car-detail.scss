@@ -8,4 +8,16 @@
 	form {
 		max-width: 500px;
 	}
+
+	.appointmentList {
+		max-width: 500px;
+
+		.appointmentItem {
+			margin-top: 10px;
+
+			span {
+				margin: 8px 10px;
+			}
+		}
+	}
 }
