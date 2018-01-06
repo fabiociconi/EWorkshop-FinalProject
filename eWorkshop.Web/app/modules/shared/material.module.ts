@@ -14,7 +14,7 @@ import {
 	MatSidenavModule,
 	MatSliderModule,
 	MatFormFieldModule,
-	MatDatepickerModule.
+	MatDatepickerModule,
 	MatNativeDateModule
 } from "@angular/material";
 

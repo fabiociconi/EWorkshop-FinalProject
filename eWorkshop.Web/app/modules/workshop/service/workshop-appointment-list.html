@@ -1,3 +1,39 @@
-﻿<div class="workshop-appointment-list">
-	<h1>Hey! I"m workshop-appointment-list</h1>
-</div>
+	<div class="title">WorkShop Appointments </div>
+	<div layout="row">
+		<div *ngIf="Ready">
+			<div layout="row" flex>
+			
+				<mat-form-field>
+					<mat-select placeholder="Status" [(ngModel)]="BaseLocation" (change)="UpdateList()">
+						<mat-option value="0">Aberto</mat-option>
+						<mat-option value="1">Encerrado</mat-option>
+						<mat-option value="2">Cancelado</mat-option>			
+					</mat-select>
+				</mat-form-field>
+			</div>
+			<ul class="appointments" *ngFor="let item of Appointments; let i = index">
+				<li>
+					<div style="display: inline-block; width: 500px; height: 45px;">
+						<div style="display:inline-block; float:left;">
+							<span class="badge">{{item.IdAppointment}}</span>
+						</div>
+						<div style="display:inline-block; float:right;">
+					<button mat-raised-button color="accent" [routerLink]="['/workshop/appoitment/edit/', item.IdAppointment]" type="button">Edit</button>
+				</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div flex> </div>
+		 <div layout="row" content="end">
+			<button mat-raised-button color="primary" type="button" [routerLink]="['/customer/search/']"> New Appointment </button>
+		</div>
+		<div layout="row" content="end">
+			<button mat-raised-button color="secundary" (click)="Back()" type="button"> Back </button>
+		</div> 
+		<div *ngIf="ShowMessage" class="error-message">
+			{{Message}}
+		</div>
+	</div>
+
+
