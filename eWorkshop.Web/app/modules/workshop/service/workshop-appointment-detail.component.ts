@@ -34,8 +34,8 @@ export class WorkshopAppointmentDetailComponent implements OnInit {
 	public ngOnInit(): void
 	{
 		const id = this.activatedRoute.snapshot.params.id;
-		const idWorkshop = this.activatedRoute.snapshot.params.idWorkshop;
-		const idAddress = this.activatedRoute.snapshot.params.idAddress;
+		//const idWorkshop = this.activatedRoute.snapshot.params.idWorkshop;
+		//const idAddress = this.activatedRoute.snapshot.params.idAddress;
 
 		if (id) {
 			this.LoadAppointment(id);

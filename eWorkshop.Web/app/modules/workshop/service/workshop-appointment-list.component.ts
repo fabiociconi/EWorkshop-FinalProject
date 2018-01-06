@@ -15,27 +15,33 @@ export class WorkshopAppointmentListComponent implements OnInit {
 	public Appointments: IAppointmentsEntity[];
 	public Ready = false;
 	public Message: string = "";
+	public selected = "0";
+
 	constructor(private workshopService: WorkshopService, private router: Router) { }
 
-	public ngOnInit(): void {
+	public ngOnInit(): void
+	{		
 		this.LoadList();
 		return;
 	}
 
 	private LoadList(): void {
 		this.workshopService.GetAppointments()
-			.subscribe(res => 
-				this.Appointments = res);
+			.subscribe(res =>
+			{
+				this.Appointments = res;
+				console.log(res);
+			});
 		this.Ready = true;
 		return;
 	}
 
-	public UpdateLocation(): void {
-
+	public UpdateFilter(): void {
 		this.workshopService.GetAppointments()
 			.subscribe(res =>
 			{				
 				this.Appointments = res;
+				console.log(res);
 			});
 		return;	
 	}

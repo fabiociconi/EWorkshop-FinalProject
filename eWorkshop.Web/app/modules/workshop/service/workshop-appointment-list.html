@@ -2,16 +2,16 @@
 	<div class="title">WorkShop Appointments </div>
 	<div layout="row">
 		<div *ngIf="Ready">
-			<!--<div layout="row" flex>
+			<div layout="row" flex>
 				<mat-form-field>
-					<mat-select placeholder="Status" [(ngModel)]="BaseLocation" (change)="UpdateList()">
+					<mat-select placeholder="Status" [(ngModel)]="selected" (change)="UpdateFilter()">
 						<mat-option value="0">All</mat-option>
-						<mat-option value="1">Open</mat-option>
+						<mat-option value="1">Opened</mat-option>
 						<mat-option value="2">Finished</mat-option>
 						<mat-option value="3">Canceled</mat-option>
 					</mat-select>
 				</mat-form-field>
-			</div>-->
+			</div>
 			<ul class="appointments" *ngFor="let item of Appointments; let i = index">
 				<li>
 					<div style="display: inline-block; width: 500px; height: 45px;">
@@ -26,9 +26,9 @@
 			</ul>
 		</div>
 		<div flex> </div>
-		<div layout="row" content="end">
+		<!--<div layout="row" content="end">
 			<button mat-raised-button color="primary" type="button" [routerLink]="['/workshop/search/']"> New Appointment </button>
-		</div>
+		</div>-->
 		<div layout="row" content="end">
 			<button mat-raised-button color="secundary" (click)="Back()" type="button"> Back </button>
 		</div>
