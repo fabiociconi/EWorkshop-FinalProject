@@ -19,11 +19,5 @@
 		<div layout="row" content="end">
 			<button mat-raised-button color="primary" type="button" [routerLink]="['/customer/search/']"> New Appointment </button>
 		</div>
-		<div layout="row" content="end">
-			<button mat-raised-button color="secundary" (click)="Back()" type="button"> Back </button>
-		</div>
-		<div *ngIf="ShowMessage" class="error-message">
-			{{Message}}
-		</div>
 	</div>
 </div>
