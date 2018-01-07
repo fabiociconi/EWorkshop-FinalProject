@@ -130,9 +130,26 @@ export class CustomerCarDetailComponent implements OnInit {
 			.subscribe(res => this.BuildForm(res));
 		this.customerService.GetCarHistory(id)
 			.subscribe(res => {
-				this.Appointments = res;
+				this.AdjustStatus(res);
 				console.log(res);
 			});
+	}
+
+	private AdjustStatus(appointments: IAppointmentsEntity[]): void {
+		
+		this.Appointments = appointments;
+
+		for (var i = 0; i < appointments.length; i++) {
+			if (appointments[i].Status == 0) {
+				this.Appointments[i].IdWorkshop = "Open";
+			}
+			if (appointments[i].Status == 1) {
+				this.Appointments[i].IdWorkshop = "Concluded";
+			}
+			if (appointments[i].Status == 2) {
+				this.Appointments[i].IdWorkshop = "Cancelled";
+			}			
+		}		
 	}
 
 	private New(): void {
