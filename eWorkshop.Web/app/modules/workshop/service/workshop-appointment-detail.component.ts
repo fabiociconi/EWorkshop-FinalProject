@@ -6,7 +6,7 @@ import { MatSnackBar, MatDatepickerModule, MatNativeDateModule } from "@angular/
 import { AutoFormService } from "xcommon";
 
 
-import { WorkshopService } from "../../service";
+import { WorkshopService, CustomerService } from "../../service";
 import { IAppointmentsEntity, IWorkshopsEntity, EntityAction, IAppointmentsServicesEntity, ICarsEntity, IPeopleEntity } from "../../../entity";
 import { Guid } from "../../../entity/entity-util";
 
@@ -18,6 +18,7 @@ import { Guid } from "../../../entity/entity-util";
 export class WorkshopAppointmentDetailComponent implements OnInit {
 
 	public Workshop: IWorkshopsEntity;
+	public Appointment: IAppointmentsEntity;
 	public Customer: IPeopleEntity;
 	public Message: string = "";
 	public AppointmentForm: FormGroup;
@@ -37,8 +38,8 @@ export class WorkshopAppointmentDetailComponent implements OnInit {
 	public ngOnInit(): void
 	{
 		const id = this.activatedRoute.snapshot.params.id;
-		const idWorkshop = this.activatedRoute.snapshot.params.idWorkshop;
-		const idAddress = this.activatedRoute.snapshot.params.idAddress;
+		//const idWorkshop = this.activatedRoute.snapshot.params.idWorkshop;
+		//const idAddress = this.activatedRoute.snapshot.params.idAddress;
 
 		if (id) {
 			this.LoadAppointment(id);
@@ -48,6 +49,7 @@ export class WorkshopAppointmentDetailComponent implements OnInit {
 
 	private BuildForm(appointment: IAppointmentsEntity): void
 	{
+		this.Appointment = appointment;
 
 		this.customerService.GetWorkshop(appointment.IdWorkshop, appointment.IdAddress)
 			.subscribe(res =>
@@ -78,15 +80,14 @@ export class WorkshopAppointmentDetailComponent implements OnInit {
 				this.Ready = true;
 			});
 
-
-
-		this.customerService.GetCars().subscribe(res => this.Cars = res);
+		this.customerService.GetCars().subscribe(res => this.Cars = res);		
 	
 	}
+
 	private LoadAppointment(id: string): void
 	{
 		this.workshopService.GetAppointment(id)
-			.subscribe(res => this.BuildForm(res));
+		.subscribe(res => this.BuildForm(res));
 		
 
 	}

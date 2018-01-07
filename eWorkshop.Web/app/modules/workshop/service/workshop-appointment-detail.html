@@ -16,9 +16,9 @@
 			<div layout="row" flex>
 				<mat-form-field flex>
 					<mat-select formControlName="Status"  placeholder="Status">
-						<mat-option [value]="0">Aberto</mat-option>
-						<mat-option [value]="1">Encerrado</mat-option>
-						<mat-option [value]="2">Cancelado</mat-option>
+						<mat-option [value]="0">Open</mat-option>
+						<mat-option [value]="1">Closed</mat-option>
+						<mat-option [value]="2">Cancelled</mat-option>
 					</mat-select>
 				</mat-form-field>
 			</div>
@@ -32,22 +32,22 @@
 				</div>
 				<!--<div layout="row" flex>
 					<mat-form-field flex>
-						<input matInput placeholder="Workshop employee" value="{{Workshop.Person.FirstName}} {{Workshop.Person.LastName}}" readonly>
+						<input matInput placeholder="Customer Information" value="{{Workshop.Person.FirstName}} {{Workshop.Person.LastName}}" readonly>
 					</mat-form-field>
 				</div>
 				<div layout="row" flex>
 					<mat-form-field flex>
 						<div class="address" *ngFor="let address of Workshop.Addresses">
-							<input matInput placeholder="Workshop Address" value="{{address.StreetNumber}}, {{address.Street}} - {{address.City}}/{{address.PostalCode}}" readonly>
+							<input matInput placeholder="Customer Address" value="{{address.StreetNumber}}, {{address.Street}} - {{address.City}}/{{address.PostalCode}}" readonly>
 						</div>
 					</mat-form-field>
 				</div>-->
-				<div class="services">
-					<ul>
-						<li *ngFor="let service of Workshop.Services">
-							{{service.Service.Name}} - {{service.Price}}
-						</li>
-					</ul>
+				<div class="services" formArrayName="Services">
+					<div *ngFor="let service of AppointmentForm.get('Services').controls; let i=index" [formGroup]="service">
+						<div formGroupName="Service">
+							<mat-checkbox formControlName="Selected">{{service.controls.Service.controls.Name.value}}</mat-checkbox>
+						</div>
+					</div>
 				</div>
 			</div>
 

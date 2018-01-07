@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
 import { WorkshopService, CustomerService } from "../../service";
-import { IAppointmentsEntity, IPeopleEntity } from "../../../entity";
+import { IAppointmentsEntity, IPeopleEntity, ICarsEntity } from "../../../entity";
 
 
 @Component({
@@ -13,10 +13,11 @@ import { IAppointmentsEntity, IPeopleEntity } from "../../../entity";
 export class WorkshopAppointmentListComponent implements OnInit {
 
 	public Appointments: IAppointmentsEntity[];
-	public Person: IPeopleEntity;
+	//public Person: IPeopleEntity;
 	public Ready: boolean = false;
-	public Message: string = "";
+	public Message: string = " ";
 	public selected: string = "0";
+	
 
 	constructor(private workshopService: WorkshopService, private router: Router,
 		private customerService: CustomerService) { }
@@ -33,6 +34,7 @@ export class WorkshopAppointmentListComponent implements OnInit {
 			{
 				this.Appointments = res;
 			});
+
 		this.Ready = true;
 		return;
 	}

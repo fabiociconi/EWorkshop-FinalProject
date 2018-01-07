@@ -6,7 +6,7 @@
 				<mat-form-field>
 					<mat-select placeholder="Status" [(ngModel)]="selected" (change)="UpdateFilter()">
 						<mat-option value="0">All</mat-option>
-						<mat-option value="1">Opened</mat-option>
+						<mat-option value="1">Open</mat-option>
 						<mat-option value="2">Finished</mat-option>
 						<mat-option value="3">Canceled</mat-option>
 					</mat-select>
@@ -16,9 +16,9 @@
 				<li>
 					<div style="display: inline-block; width: 500px; height: 45px;">
 						<div style="display:inline-block; float:left;">
-							<span class="badge">{{item.IdAppointment}}</span>
-							<span class="badge">{{item.CreateDate}}</span>
-							<span class="badge">{{item.ChangeDate}}</span>
+							<span class="badge">{{item.AppointmentDate | date :  "dd.MM.yyyy" }}</span>
+							<span class="badge"> Customer : {{item.AppointmentDate | date :  "dd.MM.yyyy" }}</span>
+
 						</div>
 						<div style="display:inline-block; float:right;">
 							<button mat-raised-button color="accent" [routerLink]="['/workshop/appointment/', item.IdAppointment]" type="button">Edit</button>
@@ -28,9 +28,6 @@
 			</ul>
 		</div>
 		<div flex> </div>
-		<!--<div layout="row" content="end">
-			<button mat-raised-button color="primary" type="button" [routerLink]="['/workshop/search/']"> New Appointment </button>
-		</div>-->
 		<div layout="row" content="end">
 			<button mat-raised-button color="secundary" (click)="Back()" type="button"> Back </button>
 		</div>
