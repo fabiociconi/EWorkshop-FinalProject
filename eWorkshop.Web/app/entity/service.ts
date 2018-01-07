@@ -3,6 +3,7 @@
 /*******************************************************************************************/
 
 import { EntityAction } from "./enum";
+import { IAddressesEntity, IPeopleEntity, ICarsEntity } from "./register";
 
 export interface IAppointmentsEntity {
 	IdAppointment: string; 
@@ -15,6 +16,10 @@ export interface IAppointmentsEntity {
 	ChangeDate: Date; 
 	Date: Date; 
 	Action: EntityAction;
+	Workshop?: IPeopleEntity;
+	Customer?: IPeopleEntity;
+	Car?: ICarsEntity;
+	Address?: IAddressesEntity;
 	Services: IAppointmentsServicesEntity[];
 }
 

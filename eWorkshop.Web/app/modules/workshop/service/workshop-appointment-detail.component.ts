@@ -31,9 +31,9 @@ export class WorkshopAppointmentDetailComponent implements OnInit {
 		private activatedRoute: ActivatedRoute,
 		private router: Router) { }
 
-	public ngOnInit(): void
-	{
+	public ngOnInit(): void {
 		const id = this.activatedRoute.snapshot.params.id;
+		console.log(id);
 		//const idWorkshop = this.activatedRoute.snapshot.params.idWorkshop;
 		//const idAddress = this.activatedRoute.snapshot.params.idAddress;
 
@@ -43,8 +43,7 @@ export class WorkshopAppointmentDetailComponent implements OnInit {
 		}
 	}
 
-	private BuildForm(appointment: IAppointmentsEntity): void
-	{
+	private BuildForm(appointment: IAppointmentsEntity): void {
 		//this.workshopService.GetWorkshop(appointment.IdWorkshop, appointment.IdAddress)
 		//	.subscribe(res => this.Workshop = res);
 
@@ -57,14 +56,13 @@ export class WorkshopAppointmentDetailComponent implements OnInit {
 
 		this.Ready = true;
 	}
-	private LoadAppointment(id: string): void
-	{
+
+	private LoadAppointment(id: string): void {
 		this.workshopService.GetAppointment(id)
 			.subscribe(res => this.BuildForm(res));
 	}
 
-	private Back(): void
-	{
+	private Back(): void {
 		this.router.navigate(["/workshop/appointment/"]);
 		return;
 	}
