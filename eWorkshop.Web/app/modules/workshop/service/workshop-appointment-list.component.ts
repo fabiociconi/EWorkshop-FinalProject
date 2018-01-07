@@ -31,7 +31,6 @@ export class WorkshopAppointmentListComponent implements OnInit {
 			.subscribe(res =>
 			{
 				this.Appointments = res;
-				debugger
 				
 			});
 		
@@ -42,17 +41,16 @@ export class WorkshopAppointmentListComponent implements OnInit {
 	public UpdateFilter(): void
 	{
 		
-
 		//this.workshopService.GetAppointments()
 		//	.subscribe(res =>
 		//	{
-		//		debugger
-				const select = this.Appointments.filter(a => a.Status.toString() == this.selected);
-				if (select)
-				{
-		
-					this.Appointments = select;
-				}
+			//this.LoadList();
+			
+		this.Appointments = this.Appointments.filter(a => a.Status.toString() == this.selected);
+				//if (select)
+				//{		
+				//	this.Appointments = select;
+				//}
 			//});
 		return;	
 	}
