@@ -34,8 +34,6 @@ export class WorkshopAppointmentDetailComponent implements OnInit {
 	public ngOnInit(): void {
 		const id = this.activatedRoute.snapshot.params.id;
 		console.log(id);
-		//const idWorkshop = this.activatedRoute.snapshot.params.idWorkshop;
-		//const idAddress = this.activatedRoute.snapshot.params.idAddress;
 
 		if (id) {
 			this.LoadAppointment(id);
@@ -43,16 +41,15 @@ export class WorkshopAppointmentDetailComponent implements OnInit {
 		}
 	}
 
+
 	private BuildForm(appointment: IAppointmentsEntity): void {
-		//this.workshopService.GetWorkshop(appointment.IdWorkshop, appointment.IdAddress)
-		//	.subscribe(res => this.Workshop = res);
+		
 
-		this.AppointmentForm = this.autoFormService.createNew<IAppointmentsEntity>()
+		const autoForm = this.autoFormService.createNew<IAppointmentsEntity>()
+
+		this.AppointmentForm = autoForm
 			.Build(appointment);
-
-		//this.workshopService.GetCars().subscribe(res => this.Cars = res);
-
-		//console.log(this.Cars);
+		debugger
 
 		this.Ready = true;
 	}
@@ -60,6 +57,7 @@ export class WorkshopAppointmentDetailComponent implements OnInit {
 	private LoadAppointment(id: string): void {
 		this.workshopService.GetAppointment(id)
 			.subscribe(res => this.BuildForm(res));
+	
 	}
 
 	private Back(): void {

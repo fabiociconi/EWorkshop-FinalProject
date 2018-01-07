@@ -16,9 +16,9 @@
 				<li>
 					<div style="display: inline-block; width: 500px; height: 45px;">
 						<div style="display:inline-block; float:left;">
-							<span class="badge">{{item.AppointmentDate | date :  "dd.MM.yyyy" }}</span>
-							<span class="badge"> Customer : {{item.AppointmentDate | date :  "dd.MM.yyyy" }}</span>
-
+							<span class="badge"> Customer : {{item.Customer.LastName }}, {{item.Customer.FirstName }} </span>
+							<span class="badge">Date : {{item.AppointmentDate | date :  "dd.MM.yyyy" }}</span>							
+							<span class="badge"> Status : {{item.Status }}</span>
 						</div>
 						<div style="display:inline-block; float:right;">
 							<button mat-raised-button color="accent" [routerLink]="['/workshop/appointment/', item.IdAppointment]" type="button">Edit</button>

@@ -12,15 +12,13 @@ import { IAppointmentsEntity, IPeopleEntity, ICarsEntity } from "../../../entity
 })
 export class WorkshopAppointmentListComponent implements OnInit {
 
-	public Appointments: IAppointmentsEntity[];
-	//public Person: IPeopleEntity;
+	public Appointments: IAppointmentsEntity[] = [];
 	public Ready: boolean = false;
 	public Message: string = " ";
 	public selected: string = "0";
 	
 
-	constructor(private workshopService: WorkshopService, private router: Router,
-		private customerService: CustomerService) { }
+	constructor(private workshopService: WorkshopService, private router: Router) { }
 
 	public ngOnInit(): void
 	{		
@@ -33,21 +31,31 @@ export class WorkshopAppointmentListComponent implements OnInit {
 			.subscribe(res =>
 			{
 				this.Appointments = res;
+				debugger
+				
 			});
-
+		
 		this.Ready = true;
 		return;
 	}
 	
-	//public UpdateFilter(): void {
-	//	this.workshopService.GetAppointments()
-	//		.subscribe(res =>
-	//		{				
-	//			this.Appointments = res;
-	//			console.log(res);
-	//		});
-	//	return;	
-	//}
+	public UpdateFilter(): void
+	{
+		
+
+		//this.workshopService.GetAppointments()
+		//	.subscribe(res =>
+		//	{
+		//		debugger
+				const select = this.Appointments.filter(a => a.Status.toString() == this.selected);
+				if (select)
+				{
+		
+					this.Appointments = select;
+				}
+			//});
+		return;	
+	}
 
 	public Back(): void	{
 		this.router.navigate(["/workshop"]);
